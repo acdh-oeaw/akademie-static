@@ -31,6 +31,8 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">Titel</th>
+                                            <th scope="col">Sitzung</th>
+                                            <th scope="col">Datum</th>
                                             <th scope="col">Dateinname</th>
                                         </tr>
                                     </thead>
@@ -45,11 +47,22 @@
                                                         <xsl:attribute name="href">                                                
                                                             <xsl:value-of select="replace(tokenize($full_path, '/')[last()], '.xml', '.html')"/>
                                                         </xsl:attribute>
-                                                        <xsl:value-of select=".//tei:title[@type='main'][1]/text()"/>
+                                                        <xsl:value-of select=".//tei:title[@type='num'][1]/text()"/>
                                                     </a>
                                                 </td>
                                                 <td>
+                                                    <xsl:value-of select="normalize-space(string-join(.//tei:meeting//text()))"/>
+                                                </td>
+                                                <td>
+                                                    <xsl:value-of select="data(.//tei:date[1]/@when)"/>
+                                                </td>
+                                                <td>
+                                                    <a>
+                                                        <xsl:attribute name="href">                                                
+                                                            <xsl:value-of select="replace(tokenize($full_path, '/')[last()], '.xml', '.html')"/>
+                                                        </xsl:attribute>
                                                     <xsl:value-of select="tokenize($full_path, '/')[last()]"/>
+                                                    </a>
                                                 </td>  
                                             </tr>
                                         </xsl:for-each>

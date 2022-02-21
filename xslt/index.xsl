@@ -105,14 +105,14 @@
                                 </a>                                    
                             </div>
                             <div class="col-md-4">
-                                <a href="listorg.html" class="index-link">                                   
+                                <a href="toc.html" class="index-link">                                   
                                     <div class="card index-card">
                                         <div class="card-body">
-                                            <img src="dist/fundament/images/example-img-1.jpg" class="d-block w-100" alt="..."/>
+                                            <img src="dist/fundament/images/example-img-2.jpg" class="d-block w-100" alt="..."/>
                                         </div>
                                         <div class="card-header">                                            
                                             <h3>
-                                                <i class="fas fa-university"></i>  Institutionenregister
+                                                <i class="fas fa-bars"></i> Übersicht aller Protokolle
                                             </h3>                                            
                                         </div>
                                     </div>                                     
