@@ -16,7 +16,7 @@ search.addWidgets([
             empty: 'No results',
             item: `
                 <h4> {{ rec_id }}</h4>
-                <h5>{{ title }}</h5>
+                <h5><a href="{{ rec_id }}">{{ title }}</a></h5>
                 <p>{{#helpers.snippet}}{ "attribute": "full_text" }{{/helpers.snippet}}</p>
             `
         }
