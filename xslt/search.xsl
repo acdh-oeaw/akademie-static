@@ -33,11 +33,14 @@
                                             <div id="stats-container"></div>
                                             <div id="searchbox"></div>
                                             <div id="clear-refinements"></div>
+                                            <ul id="current-refinements"></ul>
                                             
                                             <h4>Personen</h4>
                                             <div id="refinement-list-persons"></div>
                                             <h4>Orte</h4>
                                             <div id="refinement-list-places"></div>
+                                            <h4>Jahr</h4>
+                                            <div id="range-input"></div>
                                         </div>
                                         <div class="col-md-8">
                                             <div id="hits"></div>
@@ -55,7 +58,7 @@
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
                     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
                 </script>
-                <script src="js/algolia_index.js"></script>
+                <script src="js/ts_index.js"></script>
             </body>
         </html>
     </xsl:template>

@@ -24,4 +24,4 @@ echo "denormalize indices"
 denormalize-indices -f "./data/editions/*.xml" -i "./data/indices/*.xml" -x ".//tei:title[@type='num']/text()"
 
 echo "build index.json"
-python make_index_json.py
+python make_typesense_index.py

@@ -1,4 +1,4 @@
 acdh-tei-pyutils
-algoliasearch==2.6.2
 beautifulsoup4==4.10.0
 python-slugify==6.0.1
+typesense==0.14.0

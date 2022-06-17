@@ -55,6 +55,18 @@
         <include name="*.html"/>
         <replacetoken> xmlns=""</replacetoken>
     </replace>
+    <replace dir="${target}" value="">
+        <include name="*.html"/>
+        <replacetoken>&lt;br &gt;</replacetoken>
+    </replace>
+    <replace dir="${target}" value="">
+        <include name="*.html"/>
+        <replacetoken>&lt;br&gt;</replacetoken>
+    </replace>
+    <replace dir="${target}" value="&lt;br /&gt;">
+        <include name="*.html"/>
+        <replacetoken>&lt;/br&gt;</replacetoken>
+    </replace>
     <copy todir="${target}" flatten="true">
         <fileset dir="./data/">
             <include name="**/*.xml"/>
