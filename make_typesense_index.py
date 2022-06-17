@@ -80,7 +80,7 @@ for x in tqdm(files, total=len(files)):
     doc = TeiReader(x)
     body = doc.any_xpath('.//tei:body')[0]
     record['rec_id'] = os.path.split(x)[-1]
-    record['rec_id'] = os.path.split(x)[-1].replace('.xml', '')
+    record['id'] = os.path.split(x)[-1].replace('.xml', '')
     record['title'] = " ".join(" ".join(doc.any_xpath('.//tei:meeting[1]//text()')).split())
     date_str = doc.any_xpath('.//tei:date[1]/@when')[0]
     try:
