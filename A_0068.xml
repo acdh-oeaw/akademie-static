@@ -779,33 +779,7 @@
                 </div>
             </div>
         </body>
-    <back><listPerson><person xml:id="grysar-karl-josef">
-<persName>
-<surname>Grysar</surname>
-<forename>Karl Josef</forename>
-</persName>
-<birth when="1801-01-02">02.01.1801<place key="place__51083">
-<placeName>Lendersdorf</placeName>
-<location>
-<geo>50.7672 6.47675</geo>
-</location>
-</place>
-</birth>
-<death when="1856-04-03">03.04.1856<place key="place__10950">
-<placeName>Wien</placeName>
-<placeName subtype="alternative name" type="alt" xml:lang="eng">Vienna</placeName>
-<location>
-<geo>48.20849 16.37208</geo>
-</location>
-</place>
-</death>
-<occupation code="#3624" scheme="#apis_vocabularies/professiontype/">Philologe</occupation>
-<occupation code="#3662" scheme="#apis_vocabularies/professiontype/">Oberlehrer</occupation>
-<idno type="URL">https://paas.acdh.oeaw.ac.at/entity/51082/</idno>
-<idno subtype="GND" type="URL">https://d-nb.info/gnd/116902582</idno>
-<idno type="paas">51082</idno>
-<listEvent><event type="mentioned"><p>erwähnt in <title>A_0068</title></p><linkGrp><link type="ARCHE" target="https://id.acdh.oeaw.ac.at/akademieprotokolle/A_0068.xml"/></linkGrp></event><event type="mentioned"><p>erwähnt in <title>A_0090</title></p><linkGrp><link type="ARCHE" target="https://id.acdh.oeaw.ac.at/akademieprotokolle/A_0090.xml"/></linkGrp></event></listEvent></person>
-<person xml:id="mac-guckin-de-slane-william">
+    <back><listPerson><person xml:id="mac-guckin-de-slane-william">
 <persName>
 <surname>Mac Guckin de Slane</surname>
 <addName>Baron von</addName>
@@ -832,5 +806,31 @@
 <idno type="URL">https://paas.acdh.oeaw.ac.at/entity/51067/</idno>
 <idno type="paas">51067</idno>
 <listEvent><event type="mentioned"><p>erwähnt in <title>A_0068</title></p><linkGrp><link type="ARCHE" target="https://id.acdh.oeaw.ac.at/akademieprotokolle/A_0068.xml"/></linkGrp></event></listEvent></person>
+<person xml:id="grysar-karl-josef">
+<persName>
+<surname>Grysar</surname>
+<forename>Karl Josef</forename>
+</persName>
+<birth when="1801-01-02">02.01.1801<place key="place__51083">
+<placeName>Lendersdorf</placeName>
+<location>
+<geo>50.7672 6.47675</geo>
+</location>
+</place>
+</birth>
+<death when="1856-04-03">03.04.1856<place key="place__10950">
+<placeName>Wien</placeName>
+<placeName subtype="alternative name" type="alt" xml:lang="eng">Vienna</placeName>
+<location>
+<geo>48.20849 16.37208</geo>
+</location>
+</place>
+</death>
+<occupation code="#3624" scheme="#apis_vocabularies/professiontype/">Philologe</occupation>
+<occupation code="#3662" scheme="#apis_vocabularies/professiontype/">Oberlehrer</occupation>
+<idno type="URL">https://paas.acdh.oeaw.ac.at/entity/51082/</idno>
+<idno subtype="GND" type="URL">https://d-nb.info/gnd/116902582</idno>
+<idno type="paas">51082</idno>
+<listEvent><event type="mentioned"><p>erwähnt in <title>A_0068</title></p><linkGrp><link type="ARCHE" target="https://id.acdh.oeaw.ac.at/akademieprotokolle/A_0068.xml"/></linkGrp></event><event type="mentioned"><p>erwähnt in <title>A_0090</title></p><linkGrp><link type="ARCHE" target="https://id.acdh.oeaw.ac.at/akademieprotokolle/A_0090.xml"/></linkGrp></event></listEvent></person>
 </listPerson></back></text>
 </TEI>
