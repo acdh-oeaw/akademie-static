@@ -2,25 +2,14 @@ import glob
 import os
 import ciso8601
 import time
-import typesense
 
 from typesense.api_call import ObjectNotFound
+from acdh_cfts_pyutils import TYPESENSE_CLIENT as client
+from acdh_cfts_pyutils import CFTS_COLLECTION
 from acdh_tei_pyutils.tei import TeiReader
 from tqdm import tqdm
 
 files = glob.glob('./data/editions/*.xml')
-TYPESENSE_API_KEY = os.environ.get("TYPESENSE_API_KEY")
-
-
-client = typesense.Client({
-  'nodes': [{
-    'host': os.environ.get('TYPESENSE_HOST','localhost'), # For Typesense Cloud use xxx.a1.typesense.net
-    'port': os.environ.get('TYPESENSE_PORT', '8108'),      # For Typesense Cloud use 443
-    'protocol': os.environ.get('TYPESENSE_PROTOCOL', 'http')   # For Typesense Cloud use https
-  }],
-  'api_key': TYPESENSE_API_KEY,
-  'connection_timeout_seconds': 120
-})
 
 try:
     client.collections['akademie-static'].delete()
@@ -75,13 +64,20 @@ akademie_schema = {
 client.collections.create(akademie_schema)
 
 records = []
+cfts_records = []
 for x in tqdm(files, total=len(files)):
     record = {}
+    cfts_record = {
+        'project': 'akademie-static',
+    }
     doc = TeiReader(x)
     body = doc.any_xpath('.//tei:body')[0]
     record['rec_id'] = os.path.split(x)[-1]
+    cfts_record['rec_id'] = record['rec_id']
     record['id'] = os.path.split(x)[-1].replace('.xml', '')
+    cfts_record['id'] = record['id']
     record['title'] = " ".join(" ".join(doc.any_xpath('.//tei:meeting[1]//text()')).split())
+    cfts_record['title'] = record['title']
     date_str = doc.any_xpath('.//tei:date[1]/@when')[0]
     try:
         ts = ciso8601.parse_datetime(date_str)
@@ -89,21 +85,27 @@ for x in tqdm(files, total=len(files)):
         ts = ciso8601.parse_datetime('1800-01-01')
     try:
         record['year'] = int(date_str[:4])
+        cfts_record['year'] = record['year']
     except ValueError:
         pass
     record['date'] = int(time.mktime(ts.timetuple()))
+    cfts_record['date'] = record['date']
     record['persons'] = [
         " ".join(" ".join(x.xpath('.//text()')).split()) for x in doc.any_xpath('.//tei:person/tei:persName')
     ]
+    cfts_record['persons'] = record['persons']
     record['places'] = [
          " ".join(" ".join(x.xpath('.//text()')).split()) for x in doc.any_xpath('.//tei:place[@xml:id]/tei:placeName')
     ]
+    cfts_record['places'] = record['places']
     record['full_text'] = " ".join(''.join(body.itertext()).split())
+    cfts_record['full_text'] = record['full_text']
     records.append(record)
+    cfts_records.append(cfts_record)
 
 make_index = client.collections['akademie-static'].documents.import_(records)
 print('done indexing')
-# print(make_index)
+print('done with indexing akademie-static')
 
-# with open('index.json', 'w', encoding="utf-8") as f:
-#     json.dump(records, f, ensure_ascii=False)
+make_index = CFTS_COLLECTION.documents.import_(cfts_records)
+print(make_index)
