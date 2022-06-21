@@ -76,6 +76,7 @@ for x in tqdm(files, total=len(files)):
     cfts_record['rec_id'] = record['rec_id']
     record['id'] = os.path.split(x)[-1].replace('.xml', '')
     cfts_record['id'] = record['id']
+    cfts_record['resolver'] = f"https://acdh-oeaw.github.io/akademie-static/{record['id']}.html"
     record['title'] = " ".join(" ".join(doc.any_xpath('.//tei:meeting[1]//text()')).split())
     cfts_record['title'] = record['title']
     date_str = doc.any_xpath('.//tei:date[1]/@when')[0]
@@ -105,7 +106,6 @@ for x in tqdm(files, total=len(files)):
 
 make_index = client.collections['akademie-static'].documents.import_(records)
 print('done indexing')
-print('done with indexing akademie-static')
 
 make_index = CFTS_COLLECTION.documents.import_(cfts_records)
-print(make_index)
+print('done indexing')
