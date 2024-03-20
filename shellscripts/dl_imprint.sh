@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# added commentary to change file permissions
 REDMINE_ID="18716?format=xhtml&locale="
 IMPRINT_XML=./data/imprint.xml
 rm ${IMPRINT_XML}

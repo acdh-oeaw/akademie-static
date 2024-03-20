@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# added commentary to change file permissions
 # hacky way to make shure the script 
 # gets allways run from parent-dir 
 # so relative paths get resolved the righ way
