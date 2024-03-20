@@ -21,7 +21,7 @@ jobs:
         ./fetch_data.sh
     - name: Install Saxon, Ant and Python
       run: |
-        sudo apt-get update && apt-get install openjdk-11-jre-headless ant -y --no-install-recommends
+        sudo apt-get update && sudo apt-get install openjdk-11-jre-headless ant -y --no-install-recommends
         ./shellscripts/script.sh
         pip install -r requirements.txt
     - name: Build
