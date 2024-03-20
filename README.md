@@ -18,3 +18,9 @@
 ### `peaceiris/actions-gh-pages@v3`
 
  - Can be found under the following address [peaceiris/actions-gh-pages](https://github.com/peaceiris/actions-gh-pages) with further documentation.
+ 
+### Errors and Problems
+
+#### Github Action can not access shellscripts
+
+Solution: Tbd.
