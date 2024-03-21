@@ -56,11 +56,11 @@
                         <div class="row">
                             <div class="col-md-2 col-lg-2 col-sm-12"/> 
                             <div class="col-md-8 col-lg-8 col-sm-12">
-                                <h1 style="align: center;">
+                                <h1 style="text-align: center;">
                                     <xsl:apply-templates select="tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:meeting"/>
                                 </h1>
                             </div>
-                            <div class="col-md-2 col-lg-2 col-sm-12"/>
+                            <div class="col-md-2 col-lg-2 col-sm-12" style="text-align: right;"/>
                         </div>
 
                         <div class="row">
@@ -139,8 +139,6 @@
                 <xsl:call-template name="html_footer"/>
                 <script src="https://unpkg.com/de-micro-editor@0.2.6/dist/de-editor.min.js"></script>
                 <script type="text/javascript" src="js/run.js"></script>
-                
-
                 <script type="text/javascript" src="js/osd_scroll.js"></script>
                 
             </body>

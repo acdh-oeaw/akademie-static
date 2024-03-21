@@ -4,7 +4,7 @@
     xmlns:tei="http://www.tei-c.org/ns/1.0"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:local="http://dse-static.foo.bar"
-    exclude-result-prefixes="xs"
+    exclude-result-prefixes="xs xsl tei local"
     version="2.0">
     <xsl:function name="local:makeId" as="xs:string">
         <xsl:param name="currentNode" as="node()"/>
@@ -195,7 +195,8 @@
             <xsl:otherwise>
                 <xsl:choose>
                     <xsl:when test="@type='person'">
-                        <span class="persons entity {substring-after(@rendition, '#')}" id="{@xml:id}" data-bs-toggle="modal" data-bs-target="{@ref}">
+                        <span class="persons entity {substring-after(@rendition, '#')}" data-bs-toggle="modal" data-bs-target="{@ref}">
+                            <xsl:attribute name="id" select="if (starts-with(@ref,'pers:')) then substring-after(@ref,'pers:') else substring-after(@ref,'#')"/>
                             <xsl:apply-templates/>
                         </span>
                     </xsl:when>
