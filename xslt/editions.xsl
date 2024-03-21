@@ -54,6 +54,16 @@
 
 
                         <div class="row">
+                            <div class="col-md-2 col-lg-2 col-sm-12"/> 
+                            <div class="col-md-8 col-lg-8 col-sm-12">
+                                <h1 style="align: center;">
+                                    <xsl:apply-templates select="tei:TEI/tei:teiHeader/tei:fileDesc/tei:titleStmt/tei:meeting"/>
+                                </h1>
+                            </div>
+                            <div class="col-md-2 col-lg-2 col-sm-12"/>
+                        </div>
+
+                        <div class="row">
                             <div class="col-md-2 col-lg-2 col-sm-12">
                                 <xsl:if test="ends-with($prev,'.html')">
                                     <h1>
@@ -67,9 +77,9 @@
                                 </xsl:if>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-12">
-                                <h1 align="center">
+                                <h2 align="center">
                                     <xsl:value-of select="$doc_title"/>
-                                </h1>
+                                </h2>
                                 <h3 align="center">
                                     <a href="{$teiSource}">
                                         <i class="bi bi-download" title="TEI/XML"/>
@@ -138,7 +148,7 @@
     </xsl:template>
 
     <xsl:template match="tei:p">
-        <p id="{local:makeId(.)}" class="yes-index">
+        <p id="{local:makeId(.)}" class="yes-index paragraph-main-text">
             <xsl:apply-templates/>
         </p>
     </xsl:template>
@@ -146,5 +156,38 @@
         <div id="{local:makeId(.)}">
             <xsl:apply-templates/>
         </div>
-    </xsl:template>  
+    </xsl:template>
+    
+    <xsl:template match="tei:date">
+        <xsl:value-of select="text()"/>
+    </xsl:template>
+    
+    <xsl:template match="tei:body">
+        <xsl:apply-templates/>
+    </xsl:template>
+    
+    <xsl:template match="tei:div[@type = 'page']">
+        <xsl:element name="div">
+            <xsl:attribute name="class" select="'make-box-for-page'"/>
+            <xsl:apply-templates select="child::tei:pb"/>
+            <xsl:apply-templates select="child::tei:div"/>
+        </xsl:element>
+    </xsl:template>
+    
+    <xsl:template match="tei:pb">
+        <xsl:element name="p">
+            <xsl:attribute name="class" select="'paragraph-for-page-break'"/>
+            <xsl:text>Seite </xsl:text>
+            <xsl:value-of select="@n"/>
+        </xsl:element>
+    </xsl:template>
+    
+    <xsl:template match="tei:div[parent::tei:div[@type = 'page']]">
+        <xsl:apply-templates/>
+    </xsl:template>
+    
+    <xsl:template match="tei:lb">
+        <xsl:text> | </xsl:text>
+    </xsl:template>
+    
 </xsl:stylesheet>

@@ -23,4 +23,10 @@
 
 #### Github Action can not access shellscripts
 
-Solution: Tbd.
+Solution: Set permissions on shellscripts (requires a Linux bash or something similar, e.g. MobaXTerm): ```chmod +x script.sh```. Furthermore it seems to be possible to set permissions via the _Eigenschaften_ dialogue on Windows (requires TortoiseGit). See following screenshot.
+
+![../2024-03-21_08h00_05.png](../2024-03-21_08h00_05.png "Set execute permission")
+
+#### Github Action can not execute ```apt```
+
+Solution: Add ```sudo``` in front of ```apt``` in ```build.yml```.
