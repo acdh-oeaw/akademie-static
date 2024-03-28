@@ -77,10 +77,10 @@
                                 </xsl:if>
                             </div>
                             <div class="col-md-8 col-lg-8 col-sm-12">
-                                <h2 align="center">
+                                <h2 style="text-align: center;">
                                     <xsl:value-of select="$doc_title"/>
                                 </h2>
-                                <h3 align="center">
+                                <h3 style="text-align: center;">
                                     <a href="{$teiSource}">
                                         <i class="bi bi-download" title="TEI/XML"/>
                                     </a>

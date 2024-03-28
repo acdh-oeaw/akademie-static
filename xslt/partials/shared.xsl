@@ -196,7 +196,8 @@
                 <xsl:choose>
                     <xsl:when test="@type='person'">
                         <span class="persons entity {substring-after(@rendition, '#')}" data-bs-toggle="modal" data-bs-target="{@ref}">
-                            <xsl:attribute name="id" select="if (starts-with(@ref,'pers:')) then substring-after(@ref,'pers:') else substring-after(@ref,'#')"/>
+                            <xsl:attribute name="id" select="@xml:id"/>
+                            <xsl:attribute name="data-bs-target" select="if (starts-with(@ref,'per:')) then concat('#',substring-after(@ref,'per:')) else @ref"/>
                             <xsl:apply-templates/>
                         </span>
                     </xsl:when>

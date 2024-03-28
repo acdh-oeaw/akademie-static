@@ -30,7 +30,7 @@
             <body class="d-flex flex-column h-100">
                 <xsl:call-template name="nav_bar" />
                 <main>
-                    <div class="container">
+                    <div class="container" style="margin-bottom: 5rem;">
                         <h1>Inhaltsverzeichnis</h1>
                         <table class="table"
                                id="myTable">

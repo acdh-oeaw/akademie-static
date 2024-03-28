@@ -1,3 +1,16 @@
 div.make-box-for-page { border-bottom: 1pt black solid; }
 p.paragraph-for-page-break { text-align: right; }
 p.paragraph-main-text { margin: 20pt; }
+a.helpdesk-button {
+	display: block;
+	background-color: #fff;
+	border: 1px solid black;;
+	border-radius: 20px;
+	padding: .25rem 1.25rem;
+	font-size: .8rem;
+	font-weight: 600;
+	color: black;
+	max-width: 16rem;
+	transition: background-color ease .2s,color ease .2s;
+}
+p.link-in-footer a:link { color:black; text-decoration: none; }
