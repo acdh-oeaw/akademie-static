@@ -19,10 +19,10 @@
             </a>                  
             <ul class="dropdown-menu">
                 <li class="dropdown-item">
-                    <full-size opt="fls"></full-size>
+                    <image-switch opt="es"></image-switch>
                 </li>
                 <li class="dropdown-item">
-                    <image-switch opt="es"></image-switch>
+                    <font-size opt="fs"></font-size>
                 </li>
                 <li class="dropdown-item">
                     <font-family opt="ff"></font-family>
