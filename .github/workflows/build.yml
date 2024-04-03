@@ -29,7 +29,11 @@ jobs:
         ant
     - name: Update Favicons
       run: python update_favicons.py
-
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: github-pages
+        path: html
   deploy:
     needs: build
     permissions:
