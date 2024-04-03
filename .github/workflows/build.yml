@@ -8,8 +8,8 @@ on:
 
 
 jobs:
-  build_pages:
-    name: Publish Edition as GitHub Pages Website
+  build:
+    name: Get data and build edition templates
     runs-on: ubuntu-latest
     env:
       ANT_OPTS: -Xmx5g
@@ -29,8 +29,18 @@ jobs:
         ant
     - name: Update Favicons
       run: python update_favicons.py
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{secrets.GITHUB_TOKEN}}
-        publish_dir: ./html
+
+  deploy:
+    needs: build
+    permissions:
+      contents: read
+      pages: write      
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
