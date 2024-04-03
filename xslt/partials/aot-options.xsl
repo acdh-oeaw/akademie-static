@@ -25,9 +25,6 @@
                     <image-switch opt="es"></image-switch>
                 </li>
                 <li class="dropdown-item">
-                    <font-size opt="fs"></font-size>
-                </li>
-                <li class="dropdown-item">
                     <font-family opt="ff"></font-family>
                 </li>
                 <li class="dropdown-item" style="border-top: 5px dashed lightgrey !important;">
@@ -38,12 +35,6 @@
                 </li>
                 <li class="dropdown-item">
                     <annotation-slider opt="plc"></annotation-slider>
-                </li>
-                <li class="dropdown-item">
-                    <annotation-slider opt="wrk"></annotation-slider>
-                </li>
-                <li class="dropdown-item">
-                    <annotation-slider opt="org"></annotation-slider>
                 </li>
             </ul>                                                    
         </div>
