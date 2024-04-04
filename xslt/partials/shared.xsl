@@ -276,22 +276,22 @@
                                     </td>
                                 </tr>
                                 </xsl:if>
-                                <xsl:if test="./tei:listEvent">
+                                <xsl:if test="./tei:noteGrp">
                                 <tr>
                                     <th>
                                         Erwähnungen
                                     </th>
                                     <td>
                                         <ul>
-                                            <xsl:for-each select=".//tei:event">
+                                            <xsl:for-each select=".//tei:note">
                                                 <xsl:variable name="linkToDocument">
                                                     <xsl:value-of select="replace(tokenize(data(.//@target), '/')[last()], '.xml', '.html')"/>
                                                 </xsl:variable>
                                                 <xsl:choose>
                                                     <xsl:when test="position() lt $showNumberOfMentions + 1">
                                                         <li>
-                                                            <xsl:value-of select=".//tei:title"/><xsl:text> </xsl:text>
-                                                            <a href="{$linkToDocument}">
+                                                            <xsl:value-of select=".//text()"/><xsl:text> </xsl:text>
+                                                            <a href="{concat('https://id.acdh.oeaw.ac.at/akademieprotokolle/', $linkToDocument)}">
                                                                 <i class="fas fa-external-link-alt"></i>
                                                             </a>
                                                         </li>
@@ -384,22 +384,22 @@
                                         </td>
                                     </tr>
                                 </xsl:if>
-                                <xsl:if test="./tei:listEvent">
+                                <xsl:if test="./tei:noteGrp">
                                 <tr>
                                     <th>
                                         Erwähnungen
                                     </th>
                                     <td>
                                         <ul>
-                                            <xsl:for-each select=".//tei:event">
+                                            <xsl:for-each select=".//tei:note">
                                                 <xsl:variable name="linkToDocument">
                                                     <xsl:value-of select="replace(tokenize(data(.//@target), '/')[last()], '.xml', '.html')"/>
                                                 </xsl:variable>
                                                 <xsl:choose>
                                                     <xsl:when test="position() lt $showNumberOfMentions + 1">
                                                         <li>
-                                                            <xsl:value-of select=".//tei:title"/><xsl:text> </xsl:text>
-                                                            <a href="{$linkToDocument}">
+                                                            <xsl:value-of select=".//text()"/><xsl:text> </xsl:text>
+                                                            <a href="{concat('https://id.acdh.oeaw.ac.at/akademieprotokolle/', $linkToDocument)}">
                                                                 <i class="fas fa-external-link-alt"></i>
                                                             </a>
                                                         </li>
