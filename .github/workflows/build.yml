@@ -26,7 +26,7 @@ jobs:
         pip install -r requirements.txt
     - name: Add attributes to root node and denormalize indices
       run: |
-       ./scripts/shellscripts/attributes_indices.sh
+       ./shellscripts/attributes_indices.sh
     - name: Build
       run: |
         ant
