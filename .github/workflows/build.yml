@@ -24,6 +24,9 @@ jobs:
         sudo apt-get update && sudo apt-get install openjdk-11-jre-headless ant -y --no-install-recommends
         ./shellscripts/script.sh
         pip install -r requirements.txt
+    - name: Add attributes to root node and denormalize indices
+      run: |
+       ./scripts/shellscripts/attributes_indices.sh
     - name: Build
       run: |
         ant
