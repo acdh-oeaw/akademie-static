@@ -42,11 +42,13 @@
                 <xsl:call-template name="html_head">
                     <xsl:with-param name="html_title" select="$doc_title"></xsl:with-param>
                 </xsl:call-template>
+                <!-- 
                 <style>
                     .navBarNavDropdown ul li:nth-child(2) {
                         display: none !important;
                     }
                 </style>
+                -->
             </head>
             <body class="d-flex flex-column h-100">
                 <xsl:call-template name="nav_bar"/>
@@ -65,6 +67,7 @@
                         </div>
 
                         <div class="row">
+                      
                             <div class="col-md-2 col-lg-2 col-sm-12">
                                 <xsl:if test="ends-with($prev,'.html')">
                                     <h1>
@@ -103,7 +106,16 @@
                                 <xsl:call-template name="annotation-options"></xsl:call-template>
                             </div>
                         </div>
-                        
+                        <div class="row">
+                         <div id="img-resize" class="col-md-6 col-lg-6 col-sm-12 facsimiles">
+                                    <div id="viewer">
+                                        <div id="container_facs_1">
+                                            <!-- container and facs handling in js -->
+                                        </div>
+                                    </div>
+                            </div>
+                        <div id="text-resize" lang="de"
+                                    class="col-md-6 col-lg-6 col-sm-12 text yes-index">
                             <xsl:apply-templates select=".//tei:body"></xsl:apply-templates>
                         
 
@@ -129,7 +141,8 @@
                                 </div>
                             </xsl:for-each>
                         </p>
-
+                    </div>
+                    </div>
                     </div>
                     <xsl:for-each select="//tei:back">
                         <div class="tei-back">
