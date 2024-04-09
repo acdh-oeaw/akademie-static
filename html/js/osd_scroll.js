@@ -229,7 +229,11 @@ window.onload = function() {
     var page = document.querySelector('.make-box-for-page:last-of-type');
     var pageHeight = page.offsetHeight;
     var viewportHeight = window.innerHeight;
-    var paddingBottom = viewportHeight - pageHeight;
+
+    var footer = document.querySelector('footer');
+    var footerHeight = footer.offsetHeight;
+
+    var paddingBottom = viewportHeight - pageHeight - footerHeight;
 
     var space = document.createElement('div');
     space.style.height = paddingBottom + 'px';
