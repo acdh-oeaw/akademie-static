@@ -154,12 +154,13 @@ accesses osd viewer prev and next button to switch image and
 scrolls to next or prev span element with class pb (pagebreak)
 ##################################################################
 */
-var element_a = document.getElementsByClassName('anchor-pb');
+var element_a = document.getElementsByClassName("pb");
 var prev = document.querySelector("div[title='Previous page']");
 var next = document.querySelector("div[title='Next page']");
 prev.style.opacity = 1;
 next.style.opacity = 1;
 prev.addEventListener("click", () => {
+    console.log(element_a)
     if (idx == 0) {
         element_a[idx].scrollIntoView();
     } else {
@@ -219,3 +220,20 @@ function isInViewportAll(element) {
         return false;
     }
 }
+/*
+##############################################################################
+  dynamically add padding after last page to ensure all pages are displayed
+##############################################################################
+*/
+window.onload = function() {
+    var page = document.querySelector('.make-box-for-page:last-of-type');
+    var pageHeight = page.offsetHeight;
+    var viewportHeight = window.innerHeight;
+    var paddingBottom = viewportHeight - pageHeight;
+
+    var space = document.createElement('div');
+    space.style.height = paddingBottom + 'px';
+
+    var container = document.querySelector('#text-resize');
+    container.appendChild(space);
+};
