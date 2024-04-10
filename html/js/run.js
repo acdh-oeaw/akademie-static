@@ -5,7 +5,7 @@ var editor = new LoadEditor({
         {
           opt: "ef",
           opt_slider: "entities-features-slider",
-          title: "All",
+          title: "Alle",
           color: "red",
           html_class: "undefined",
           css_class: "undefined",
@@ -22,7 +22,7 @@ var editor = new LoadEditor({
         {
           opt: "prs",
           color: "blue",
-          title: "Persons",
+          title: "Personen",
           html_class: "persons",
           css_class: "pers",
           hide: {
@@ -38,7 +38,7 @@ var editor = new LoadEditor({
         {
           opt: "plc",
           color: "green",
-          title: "Places",
+          title: "Orte",
           html_class: "places",
           css_class: "plc",
           hide: {
@@ -51,6 +51,22 @@ var editor = new LoadEditor({
             class: "features-1",
           },
         },
+        {
+          opt: "lbs",
+          color: "none",
+          title: "Zeilenumbrüche",
+          html_class: "lb",
+          css_class: "lbs",
+          chg_citation: "citation-url",
+          hide: {
+            hidden: true,
+            class: "lb",
+          },
+          features: {
+            all: false,
+            class: "features-2",
+          },
+        }
       ],
       span_element: {
         css_class: "badge-item",
@@ -62,11 +78,11 @@ var editor = new LoadEditor({
       },
     },
     ff: {
-      name: "Change font family",
+      name: "Change Font Family",
       variants: [
         {
           opt: "ff",
-          title: "Font Family",
+          title: "Schriftart",
           urlparam: "ff",
           chg_citation: "citation-url",
           fonts: {
@@ -103,11 +119,11 @@ var editor = new LoadEditor({
     },
     */
     fos: {
-      name: "Change font size",
+      name: "Change Font Size",
       variants: [
         {
           opt: "fs",
-          title: "Font Size",
+          title: "Schriftgröße",
           urlparam: "fs",
           chg_citation: "citation-url",
           sizes: {
@@ -130,7 +146,7 @@ var editor = new LoadEditor({
       variants: [
         {
           opt: "es",
-          title: "Facsimiles On/Off",
+          title: "Faksimile An/Aus",
           urlparam: "img",
           chg_citation: "citation-url",
           fade: "fade",
@@ -158,6 +174,7 @@ var editor = new LoadEditor({
         svg: "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-image' viewBox='0 0 16 16'><path d='M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z'/><path d='M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z'/></svg>",
       },
     },
+    
     wr: false,
     up: true,
   });

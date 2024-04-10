@@ -198,7 +198,9 @@
     </xsl:template>
 
     <xsl:template match="tei:lb">
+            <span class="lb">
         <xsl:text> | </xsl:text>
+    </span>
     </xsl:template>
 
 
