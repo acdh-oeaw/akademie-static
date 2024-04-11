@@ -34,7 +34,7 @@
                                         <div id="refinement-list-person"></div>
                                         <h4>Orte</h4>
                                         <div id="refinement-list-place"/>
-                                        <h4>Datum</h4>
+                                        <h4>Jahr</h4>
                                         <div id="refinement-range-year"></div>
                                     </div>
                                     <div class="col-md-8">

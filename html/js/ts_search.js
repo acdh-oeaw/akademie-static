@@ -44,9 +44,8 @@ search.addWidgets([
         templates: {
             empty: "Keine Resultate für <q>{{ query }}</q>",
             item: `
-              <h5><a href="{{ anchor_link }}">{{#helpers.snippet}}{ "attribute": "title", "highlightedTagName": "mark" }{{/helpers.snippet}}</a></h5>
+              <h5><a href="{{id}}.html">{{#helpers.snippet}}{ "attribute": "title", "highlightedTagName": "mark" }{{/helpers.snippet}}</a></h5>
               <p style="overflow:hidden;max-height:210px;">{{#helpers.snippet}}{ "attribute": "full_text", "highlightedTagName": "mark" }{{/helpers.snippet}}</p>
-              <h5><span class="badge badge-primary">{{ project }}</span></h5>
           `,
         },
     }),
@@ -71,9 +70,6 @@ search.addWidgets([
         cssClasses: {
             delete: "btn",
             label: "badge",
-        },
-        templates: {
-            item: '{{#label}}{{value}}{{/label}} ({{#count}}{{count}}{{/count}})',
         },
     }),
 
@@ -108,7 +104,7 @@ search.addWidgets([
             searchableReset: "d-none",
             showMore: "btn btn-secondary btn-sm align-content-center",
             list: "list-unstyled",
-            count: "badge m-2 badge-secondary hideme ",
+            count: "badge m-2 badge-secondary",
             label: "d-flex align-items-center text-capitalize",
             checkbox: "m-2",
         },
@@ -125,12 +121,25 @@ search.addWidgets([
             searchableReset: "d-none",
             showMore: "btn btn-secondary btn-sm align-content-center",
             list: "list-unstyled",
-            count: "badge m-2 badge-secondary hideme",
+            count: "badge m-2 badge-secondary",
             label: "d-flex align-items-center text-start",
             checkbox: "m-2",
         },
     }),
 
+    instantsearch.widgets.rangeInput({
+        container: "#refinement-range-year",
+        attribute: "year",
+        templates: {
+          separatorText: "to",
+          submitText: "Suchen",
+        },
+        cssClasses: {
+          form: "form-inline",
+          input: "form-control",
+          submit: "btn",
+        },
+      }),
 
     instantsearch.widgets.configure({
         hitsPerPage: 10,
