@@ -51,8 +51,6 @@
                 <xsl:call-template name="nav_bar"/>
                 <main class="flex-shrink-0">
                     <div class="container">
-
-
                         <div class="row">
                             <div class="col-md-2 col-lg-2 col-sm-12"/>
                             <div class="col-md-8 col-lg-8 col-sm-12">
@@ -116,7 +114,7 @@
 
 
                                 <p style="text-align:center;">
-                                    <xsl:for-each select=".//tei:note[not(./tei:p)]">
+                                    <xsl:for-each select="tei:body//tei:note[not(./tei:p)]">
                                         <div class="footnotes" id="{local:makeId(.)}">
                                             <xsl:element name="a">
                                                 <xsl:attribute name="name">
@@ -202,6 +200,4 @@
         <xsl:text> | </xsl:text>
     </span>
     </xsl:template>
-
-
 </xsl:stylesheet>
