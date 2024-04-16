@@ -97,6 +97,7 @@ search.addWidgets([
         container: "#refinement-list-place",
         attribute: "places",
         searchable: true,
+        showMore: true,
         searchablePlaceholder: "Suchen",
         cssClasses: {
             searchableInput: "form-control form-control-sm m-2 border-light-2",
@@ -114,6 +115,7 @@ search.addWidgets([
         container: "#refinement-list-person",
         attribute: "persons",
         searchable: true,
+        showMore: true,
         searchablePlaceholder: "Suchen",
         cssClasses: {
             searchableInput: "form-control form-control-sm m-2 border-light-2",

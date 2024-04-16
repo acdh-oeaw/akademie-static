@@ -4,7 +4,7 @@
 
 #stats-container, 
 #searchbox, 
-#current-refinements, 
+#current-refinements,
 #clear-refinements {
     padding: 1em 0 .5em 0;
 }
@@ -22,4 +22,8 @@
     background-color: var(--bv-main-bg-color);
     border-radius: .10rem;
 
+}
+
+.col-md-4 h4 {
+    margin-top: 1em;
 }
