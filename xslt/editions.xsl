@@ -195,9 +195,40 @@
         <xsl:apply-templates/>
     </xsl:template>
 
+
     <xsl:template match="tei:lb">
-            <span class="lb">
-        <xsl:text> | </xsl:text>
-    </span>
+        <span class="lb">
+            <xsl:text> | </xsl:text>
+        </span>
     </xsl:template>
+    <xsl:template match="tei:hi">
+        <span class="hi">
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
+
+    <xsl:template match="tei:choice">
+        <span class="choice">
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
+
+    <xsl:template match="tei:choice/tei:abbr">
+        <span class="abbr">
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
+
+    <xsl:template match="tei:choice/tei:expan">
+        <span class="expan">
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
+
+    <xsl:template match="tei:choice/*[not(self::tei:abbr or self::tei:expan)]">
+        <span class="other">
+            <xsl:apply-templates/>
+        </span>
+    </xsl:template>
+
 </xsl:stylesheet>

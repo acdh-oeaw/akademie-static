@@ -24,3 +24,18 @@ p.link-in-footer a:link { color:black; text-decoration: none; }
     max-width: 900px;
     margin-left: auto;
 }
+
+/*display abbreviation when slider is off, expansion when slider is on*/
+.choice:not(.choice-on) > .abbr{
+    display: inline;
+}
+.choice-on > .abbr{
+    display: none;
+}
+
+.choice-on > .expan {
+    display: inline;
+}
+.choice:not(.choice-on)> .expan {
+    display: none;
+}
