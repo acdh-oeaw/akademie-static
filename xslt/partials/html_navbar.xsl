@@ -52,7 +52,7 @@
             </nav>
             <div class="row">
                 <div class="col-md-4"/>
-                <div class="col-md-4"><img src="/images/header-logo.png" class="image" alt="Header Logo"/></div>
+                <div class="col-md-4"><img src="/akademie-static/images/header-logo.png" class="image" alt="Header Logo"/></div>
                 <div class="col-md-4"/>
             </div>
         </header>

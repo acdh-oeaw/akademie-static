@@ -37,8 +37,8 @@
                             </div>
                         </div>
                         <div class="footer-widget col-lg-4 col-md-3 col-sm-4">
-                            <div><img src="/images/oaw.png" class="image" alt="OEAW Logo"></img></div>
-                            <div><img src="/images/wienkultur.png" class="image" alt="Wien Kultur Logo"></img></div>
+                            <div><img src="/akademie-static/images/oaw.png" class="image" alt="OEAW Logo"></img></div>
+                            <div><img src="/akademie-static/images/wienkultur.png" class="image" alt="Wien Kultur Logo"></img></div>
                         </div>
                         <div class="footer-widget col-lg-3 col-md-4 col-sm-3 ml-auto">
                             <div class="row gy-2">
