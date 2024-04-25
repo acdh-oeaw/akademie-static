@@ -20,25 +20,25 @@
                             <div class="textwidget custom-html-widget">
                                 <p class="py-2">
                                     ACDH-CH OEAW
-                                    <br/>
+                                    <br></br>
                                         Austrian Centre for Digital Humanities and Cultural Heritage
-                                        <br/>
+                                        <br></br>
                                             Austrian Academy of Sciences
                                 </p>
                                 <p class="py-2">
                                     Bäckerstraße 13
-                                    <br/>
+                                    <br></br>
                                         1010 Vienna
                                 </p>
                                 <p class="py-2 link-in-footer">
                                     T: +43 1 51581-2200
-                                    <br/>
+                                    <br></br>
                                         E: <a href="mailto:acdh-ch-helpdesk@oeaw.ac.at">acdh-ch-helpdesk@oeaw.ac.at</a></p>
                             </div>
                         </div>
                         <div class="footer-widget col-lg-4 col-md-3 col-sm-4">
-                            <div><img src="/akademie-static/images/oaw.png" class="image" alt="OEAW Logo"></img></div>
-                            <div><img src="/akademie-static/images/wienkultur.png" class="image" alt="Wien Kultur Logo"></img></div>
+                            <div><img src="/akademie-static/images/oaw.png" class="image" alt="OEAW Logo" style="margin: 5pt;"></img></div>
+                            <div><img src="/akademie-static/images/wienkultur.png" class="image" alt="Wien Kultur Logo" style="margin: 5pt;"></img></div>
                         </div>
                         <div class="footer-widget col-lg-3 col-md-4 col-sm-3 ml-auto">
                             <div class="row gy-2">
