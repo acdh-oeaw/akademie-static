@@ -50,8 +50,8 @@
                     </div>
                 </div>
             </nav>
-            <div class="row">
-                <div class="col-md-12 center"><img src="/akademie-static/images/header-logo.png" class="image" alt="Header Logo"/></div>
+            <div class="container">
+                <div class="text-center"><img src="/akademie-static/images/header-logo.png" class="image" alt="Header Logo"/></div>
             </div>
         </header>
     </xsl:template>

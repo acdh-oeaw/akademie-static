@@ -18,22 +18,13 @@
                         </div>
                         <div class="footer-widget col-lg-4 col-md-3 col-sm-3">
                             <div class="textwidget custom-html-widget">
-                                <p class="py-2">
-                                    ACDH-CH OEAW
-                                    <br></br>
-                                        Austrian Centre for Digital Humanities and Cultural Heritage
-                                        <br></br>
-                                            Austrian Academy of Sciences
-                                </p>
-                                <p class="py-2">
-                                    Bäckerstraße 13
-                                    <br></br>
-                                        1010 Vienna
-                                </p>
-                                <p class="py-2 link-in-footer">
-                                    T: +43 1 51581-2200
-                                    <br></br>
-                                        E: <a href="mailto:acdh-ch-helpdesk@oeaw.ac.at">acdh-ch-helpdesk@oeaw.ac.at</a></p>
+                                <p class="py-2">ACDH-CH OEAW</p>
+                                <p style="margin: 0pt;">Austrian Centre for Digital Humanities and Cultural Heritage</p>
+                                <p style="margin: 0pt;">Austrian Academy of Sciences</p>
+                                <p style="margin: 0pt;">Bäckerstraße 13</p>
+                                <p style="margin: 0pt;">1010 Vienna</p>
+                                <p style="margin: 0pt;">T: +43 1 51581-2200</p>
+                                <p class="link-in-footer" style="margin: 0pt;">E: <a href="mailto:acdh-ch-helpdesk@oeaw.ac.at">acdh-ch-helpdesk@oeaw.ac.at</a></p>
                             </div>
                         </div>
                         <div class="footer-widget col-lg-4 col-md-3 col-sm-4">
