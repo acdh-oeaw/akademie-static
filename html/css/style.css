@@ -1,5 +1,5 @@
 #index-background {
-    background-image: url('akademie-static/images/header-logo.png');
+    background-image: url('/akademie-static/images/header-logo.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
