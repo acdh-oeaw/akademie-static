@@ -1,5 +1,5 @@
 #index-background {
-    background-image: url('/akademie-static/images/header-logo.png');
+    background-image: url('/images/header-logo.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -8,7 +8,9 @@
 #index-content {
     background-color: transparent;
     background-color: rgba(255, 255, 255, 0.8);
-    margin-top: 10rem;
+    margin-top: 4rem;
+    max-width: 85ch;
+    overflow-wrap: break-word;
 }
 
 div.make-box-for-page {

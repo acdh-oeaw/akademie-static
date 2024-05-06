@@ -28,9 +28,8 @@
             <body class="d-flex flex-column h-100">
                 <xsl:call-template name="nav_bar"/>
                 <main class="flex-shrink-0" id="index-background">
-                    <div class="container text-center" 
-                    >
-                        <h1>
+                    <div class="container text-center">
+                        <h1 >
                             <xsl:value-of select="$project_short_title"/>
                         </h1>
                         <h2>
