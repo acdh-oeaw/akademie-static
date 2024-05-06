@@ -1,5 +1,5 @@
 #index-background {
-    background-image: url('/images/header-logo.png');
+    background-image: url('akademie-static/images/header-logo.png');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -11,6 +11,10 @@
     margin-top: 4rem;
     max-width: 85ch;
     overflow-wrap: break-word;
+}
+
+#container-resize {
+    justify-content: center;
 }
 
 div.make-box-for-page {
