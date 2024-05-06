@@ -201,10 +201,11 @@
             <xsl:text> | </xsl:text>
         </span>
     </xsl:template>
-    <xsl:template match="tei:hi">
-        <span class="hi">
-            <xsl:apply-templates/>
-        </span>
+
+    <xsl:template match="tei:hi[@rend='super']">
+    <sup>
+        <xsl:apply-templates/>
+    </sup>
     </xsl:template>
 
     <xsl:template match="tei:choice">
