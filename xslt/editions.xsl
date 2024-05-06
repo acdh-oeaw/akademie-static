@@ -63,7 +63,7 @@
 
                         <div class="row">
 
-                            <div class="col-md-2 col-lg-2 col-sm-12">
+                            <div class="col-2">
                                 <xsl:if test="ends-with($prev,'.html')">
                                     <h1>
                                         <a>
@@ -75,17 +75,21 @@
                                     </h1>
                                 </xsl:if>
                             </div>
-                            <div class="col-md-8 col-lg-8 col-sm-12">
+                            <div class="col-8">
                                 <h2 style="text-align: center;">
                                     <xsl:value-of select="$doc_title"/>
                                 </h2>
                                 <h3 style="text-align: center;">
+
+                                    <div id="editor-widget">
+                                        <xsl:call-template name="annotation-options"></xsl:call-template>
+                                    </div>
                                     <a href="{$teiSource}">
                                         <i class="bi bi-download" title="TEI/XML"/>
                                     </a>
                                 </h3>
                             </div>
-                            <div class="col-md-2 col-lg-2 col-sm-12" style="text-align:right">
+                            <div class="col-2" style="text-align:right">
                                 <xsl:if test="ends-with($next, '.html')">
                                     <h1>
                                         <a>
@@ -97,11 +101,9 @@
                                     </h1>
                                 </xsl:if>
                             </div>
-                            <div id="editor-widget">
-                                <xsl:call-template name="annotation-options"></xsl:call-template>
-                            </div>
                         </div>
-                        <div class="row">
+                        <div id="container-resize" class="row transcript active">
+
                             <div id="img-resize" class="col-md-6 col-lg-6 col-sm-12 facsimiles">
                                 <div id="viewer">
                                     <div id="container_facs_1">
@@ -203,9 +205,9 @@
     </xsl:template>
 
     <xsl:template match="tei:hi[@rend='super']">
-    <sup>
-        <xsl:apply-templates/>
-    </sup>
+        <sup>
+            <xsl:apply-templates/>
+        </sup>
     </xsl:template>
 
     <xsl:template match="tei:choice">
