@@ -39,3 +39,7 @@ p.link-in-footer a:link { color:black; text-decoration: none; }
 .choice:not(.choice-on)> .expan {
     display: none;
 }
+
+.underline {
+    text-decoration: underline;
+}

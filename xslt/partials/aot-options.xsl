@@ -45,9 +45,6 @@
                 <li class="dropdown-item">
                     <annotation-slider opt="abbr"></annotation-slider>
                 </li>
-                <li class="dropdown-item">
-                    <annotation-slider opt="hi"></annotation-slider>
-                </li>
             </ul>
         </div>
 

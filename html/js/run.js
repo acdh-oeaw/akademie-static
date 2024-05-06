@@ -83,22 +83,6 @@ var editor = new LoadEditor({
           class: "features-2",
         },
       },
-      {
-        opt: "hi",
-        color: "yellow",
-        title: "Hervorhebungen",
-        html_class: "hi",
-        //css_class: "abbr",
-        chg_citation: "citation-url",
-        hide: {
-          hidden: false,
-          class: "hi",
-        },
-        features: {
-          all: false,
-          class: "features-2",
-        }
-      }
     ],
     span_element: {
       css_class: "badge-item",
