@@ -44,7 +44,7 @@
                                     <th scope="col"
                                         tabulator-headerFilter="input">Titel</th>
                                     <th scope="col"
-                                        tabulator-headerFilter="input">Dateinname</th>
+                                        tabulator-headerFilter="input">Dateiname</th>
                                     <th scope="col"
                                         tabulator-headerFilter="input">Datum</th>
                                 </tr>
