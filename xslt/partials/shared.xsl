@@ -190,18 +190,16 @@
                     <xsl:when test="@type='person' and @ref and starts-with(@ref, 'per:') and string-length(substring-after(@ref, 'per:')) > 0">
                         <span class="persons entity {substring-after(@rendition, '#')}" data-bs-toggle="modal" data-bs-target="{concat('#', substring-after(@ref, 'per:'))}">
                             <xsl:attribute name="id" select="@xml:id"/>
-                            <xsl:attribute name="data-bs-target" select="concat('#', substring-after(@ref, 'per:'))"/>
                             <xsl:apply-templates/>
                         </span>
                     </xsl:when>
                     <xsl:when test="@type='person' and @ref and starts-with(@ref, '#') and string-length(substring-after(@ref, '#')) > 0">
                         <span class="persons entity {substring-after(@rendition, '#')}" data-bs-toggle="modal" data-bs-target="{@ref}">
                             <xsl:attribute name="id" select="@xml:id"/>
-                            <xsl:attribute name="data-bs-target" select="@ref"/>
                             <xsl:apply-templates/>
                         </span>
                     </xsl:when>
-                    <xsl:when test="@type='place'">
+                    <xsl:when test="@type='place' and @ref and starts-with(@ref, '#') and string-length(substring-after(@ref, '#')) > 0">
                         <span class="places entity {substring-after(@rendition, '#')}" id="{@xml:id}" data-bs-toggle="modal" data-bs-target="{@ref}">
                             <xsl:apply-templates/>
                         </span>
@@ -341,15 +339,21 @@
                                         </td>
                                     </tr>
                                 </xsl:if>
-                                <xsl:if test="./tei:idno[@type='GND']/text()">
+                                <xsl:if test="./tei:idno[@subtype='GND']/text()">
                                     <tr>
                                         <th>
                                             GND
                                         </th>
                                         <td>
-                                            <a href="{./tei:idno[@type='GND']}" target="_blank">
-                                                <xsl:value-of select="tokenize(./tei:idno[@type='GND'], '/')[last()]"/>
-                                            </a>
+                                            <xsl:for-each select="./tei:idno[@subtype='GND']">
+
+                                                <a href="{.}" target="_blank">
+                                                    <xsl:value-of select="tokenize(., '/')[last()]"/>
+                                                </a>
+                                                <xsl:if test="position() != last()">
+                                                    <xsl:text>, </xsl:text>
+                                                </xsl:if>
+                                            </xsl:for-each>
                                         </td>
                                     </tr>
                                 </xsl:if>
@@ -365,15 +369,20 @@
                                         </td>
                                     </tr>
                                 </xsl:if>
-                                <xsl:if test="./tei:idno[@type='GEONAMES']/text()">
+                                <xsl:if test="count(./tei:idno[@type='URL' and starts-with(text(), 'https://sws.geonames.org')]) > 0">
                                     <tr>
                                         <th>
-                                            Geonames
+            Geonames
                                         </th>
                                         <td>
-                                            <a href="{./tei:idno[@type='GEONAMES']}" target="_blank">
-                                                <xsl:value-of select="tokenize(./tei:idno[@type='GEONAMES'], '/')[4]"/>
-                                            </a>
+                                            <xsl:for-each select="./tei:idno[@type='URL' and starts-with(text(), 'https://sws.geonames.org')]">
+                                                <a href="{.}" target="_blank">
+                                                    <xsl:value-of select="tokenize(substring-after(., 'https://sws.geonames.org/'), '/')[last()-1]"/>
+                                                </a>
+                                                <xsl:if test="position() != last()">
+                                                    <xsl:text>, </xsl:text>
+                                                </xsl:if>
+                                            </xsl:for-each>
                                         </td>
                                     </tr>
                                 </xsl:if>
@@ -385,16 +394,11 @@
                                         <td>
                                             <ul>
                                                 <xsl:for-each select=".//tei:note">
-                                                    <xsl:variable name="linkToDocument">
-                                                        <xsl:value-of select="replace(tokenize(data(.//@target), '/')[last()], '.xml', '.html')"/>
-                                                    </xsl:variable>
                                                     <xsl:choose>
                                                         <xsl:when test="position() lt $showNumberOfMentions + 1">
                                                             <li>
-                                                                <xsl:value-of select=".//text()"/>
-                                                                <xsl:text></xsl:text>
-                                                                <a href="{concat('https://id.acdh.oeaw.ac.at/akademieprotokolle/', $linkToDocument)}">
-                                                                    <i class="fas fa-external-link-alt"></i>
+                                                                <a href="{replace(@target, '.xml', '.html')}">
+                                                                    <xsl:value-of select="./text()"/>
                                                                 </a>
                                                             </li>
                                                         </xsl:when>
