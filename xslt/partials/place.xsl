@@ -64,7 +64,7 @@
                 <xsl:if test="count(./tei:idno[@type='URL' and starts-with(text(), 'https://sws.geonames.org')]) > 0">
                                     <tr>
                                         <th>
-                                        Geonames ID
+            Geonames
                                         </th>
                                         <td>
                                             <xsl:for-each select="./tei:idno[@type='URL' and starts-with(text(), 'https://sws.geonames.org')]">
@@ -90,18 +90,24 @@
                     </td>
                 </tr>
                 </xsl:if>
-                <xsl:if test="./tei:idno[@subtype='GND']/text()">
-                    <tr>
-                        <th>
-                            GND ID
-                        </th>
-                        <td>
-                            <a href="{./tei:idno[@subtype='GND']}" target="_blank">
-                                <xsl:value-of select="tokenize(./tei:idno[@subtype='GND'], '/')[last()]"/>
-                            </a>
-                        </td>
-                    </tr>
-                </xsl:if>
+                 <xsl:if test="./tei:idno[@subtype='GND']/text()">
+                                    <tr>
+                                        <th>
+                                            GND
+                                        </th>
+                                        <td>
+                                            <xsl:for-each select="./tei:idno[@subtype='GND']">
+
+                                                <a href="{.}" target="_blank">
+                                                    <xsl:value-of select="tokenize(., '/')[last()]"/>
+                                                </a>
+                                                <xsl:if test="position() != last()">
+                                                    <xsl:text>, </xsl:text>
+                                                </xsl:if>
+                                            </xsl:for-each>
+                                        </td>
+                                    </tr>
+                                </xsl:if>
                 <xsl:if test=".//tei:location">
                 <tr>
                     <th>
