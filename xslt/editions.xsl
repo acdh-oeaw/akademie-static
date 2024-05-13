@@ -189,7 +189,7 @@
         <xsl:element name="p">
             <xsl:attribute name="class" select="'paragraph-for-page-break'"/>
             <xsl:text>Seite </xsl:text>
-            <xsl:value-of select="@n"/>
+            <xsl:number level="any" count="tei:pb"/>
         </xsl:element>
     </xsl:template>
 
