@@ -19,8 +19,6 @@ function fetch_tabulatordata_and_build_table(
           table,
           map,
           map_cfg.on_row_click_zoom,
-          map_cfg.initial_coordinates,
-          map_cfg.initial_zoom,
           markers
         );
       })
@@ -33,8 +31,6 @@ function fetch_tabulatordata_and_build_table(
       table,
       map,
       map_cfg.on_row_click_zoom,
-      map_cfg.initial_coordinates,
-      map_cfg.initial_zoom,
       markers
     );
   }
@@ -49,7 +45,7 @@ function zoom_to_point_from_row_data(
   let coordinate_key = get_coordinate_key_from_row_data(row_data);
   let marker = existing_markers_by_coordinates[coordinate_key];
   marker.openPopup();
-  map.setView([row_data.lat, row_data.lng], zoom);
+  map.flyTo([row_data.lat, row_data.lng], zoom);
 }
 
 function get_coordinate_key_from_row_data(row_data) {
@@ -85,8 +81,6 @@ function populateMapFromTable(
   table,
   map,
   on_row_click_zoom,
-  initial_coordinates,
-  initial_zoom,
   markers
 ) {
   table.on("tableBuilt", function () {
@@ -96,26 +90,10 @@ function populateMapFromTable(
       all_rows,
       markers
     );
-    // every marker is displayed …
-    var keys_of_displayed_markers = Object.keys(
-      existing_markers_by_coordinates
-    );
     table.on("dataFiltered", function (filters, rows) {
-      if (rows.length < 4 && rows.length > 0) {
-        let row_data = rows[0].getData();
-        zoom_to_point_from_row_data(
-          row_data,
-          map,
-          on_row_click_zoom,
-          existing_markers_by_coordinates
-        );
-      } else {
-        map.fitBounds(markers.getBounds());
-      }
       init_map_from_rows(rows, markers)
       map.fitBounds(markers.getBounds());
-      // hide & display filtered markers
-     
+
     });
     //eventlistener for click on row
     table.on("rowClick", function (event, row) {
@@ -127,7 +105,11 @@ function populateMapFromTable(
         existing_markers_by_coordinates
       );
     });
-    // enable resizing for icons on map
+    try {
+      map.fitBounds(markers.getBounds());
+  } catch (err) {
+      console.log(err);
+  }
   });
 }
 
