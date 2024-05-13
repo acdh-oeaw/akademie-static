@@ -66,6 +66,13 @@ const columns = [
     resizable: false,
     visible: false,
   },
+  {
+    title: "linkToEntity",
+    field: "linkToEntity",
+    formatter: "plaintext",
+    resizable: false,
+    visible: false,
+  },
   /* for the following, provide a list of related Objects, 
   eg. documents referencing the place represented by the row.
   place a ul-item with one li-children for each entity in your html-table*/
@@ -176,7 +183,7 @@ const draw_icon = draw_cirlce_from_rowdata;
 /*define the way you want to created an popup lable on the map
 you have full acces to row data via row.getData() and can write html as in example below*/
 function get_bold_name(row) {
-  let label_string = `<b>${row.Ortsname}</b><br/>`;
+  let label_string = `<a href="${row.linkToEntity}.html">${row.Ortsname}</a>`;
   return label_string;
 }
 

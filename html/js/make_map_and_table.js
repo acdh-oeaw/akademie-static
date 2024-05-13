@@ -24,7 +24,8 @@ function fetch_tabulatordata_and_build_table(
   map_cfg,
   map,
   table_cfg,
-  marker_layer
+  marker_layer,
+  markers
 ) {
   console.log("loading table");
   if (map_cfg.json_url.length !== 0) {
@@ -43,7 +44,8 @@ function fetch_tabulatordata_and_build_table(
           map_cfg.on_row_click_zoom,
           marker_layer,
           map_cfg.initial_coordinates,
-          map_cfg.initial_zoom
+          map_cfg.initial_zoom,
+          markers
         );
       })
       .catch(function (err) {
@@ -57,7 +59,8 @@ function fetch_tabulatordata_and_build_table(
       map_cfg.on_row_click_zoom,
       marker_layer,
       map_cfg.initial_coordinates,
-      map_cfg.initial_zoom
+      map_cfg.initial_zoom,
+      markers
     );
   }
 }
@@ -78,9 +81,11 @@ function get_coordinate_key_from_row_data(row_data) {
   return row_data.lat + row_data.lng;
 }
 
-function init_map_from_rows(rows, marker_layer) {
+function init_map_from_rows(rows, marker_layer, markers) {
   console.log("populating map with icons");
   let existing_icons_by_coordinates = {};
+  console.log(marker_layer);
+  console.log(markers);
   rows.forEach((row) => {
     let row_data = row.getData();
     let coordinate_key = get_coordinate_key_from_row_data(row_data);
@@ -88,6 +93,9 @@ function init_map_from_rows(rows, marker_layer) {
     existing_icons_by_coordinates[coordinate_key] = new_icon;
     new_icon.bindPopup(get_popup_label_string_html(row_data));
     new_icon.addTo(marker_layer);
+    var marker = L.marker(new L.LatLng(row_data.lat, row_data.lng), { title: get_popup_label_string_html(row_data) });
+    marker.bindPopup(get_popup_label_string_html(row_data));
+    markers.addLayer(marker);
   });
   return existing_icons_by_coordinates;
 }
@@ -111,14 +119,16 @@ function populateMapFromTable(
   on_row_click_zoom,
   marker_layer,
   initial_coordinates,
-  initial_zoom
+  initial_zoom,
+  markers
 ) {
   table.on("tableBuilt", function () {
     console.log("built table");
     let all_rows = this.getRows();
     var existing_markers_by_coordinates = init_map_from_rows(
       all_rows,
-      marker_layer
+      marker_layer,
+      markers
     );
     // every marker is displayed …
     var keys_of_displayed_markers = Object.keys(
@@ -208,6 +218,7 @@ function build_map_and_table(map_cfg, table_cfg, wms_cfg = null, tms_cfg = null)
     attribution: map_cfg.attribution,
   });
   let marker_layer = L.layerGroup();
+  var markers = L.markerClusterGroup();
   let overlay_control = {};
   overlay_control[map_cfg.base_map_label] = tile_layer
 
@@ -232,6 +243,7 @@ function build_map_and_table(map_cfg, table_cfg, wms_cfg = null, tms_cfg = null)
   // this has to happen here, in case historical map gets added
   L.control.layers(null, overlay_control).addTo(map);
   marker_layer.addTo(map);
+  markers.addTo(map);
 
-  fetch_tabulatordata_and_build_table(map_cfg, map, table_cfg, marker_layer);
+  fetch_tabulatordata_and_build_table(map_cfg, map, table_cfg, marker_layer, markers);
 }
