@@ -154,7 +154,7 @@ function build_map_and_table(map_cfg, table_cfg, wms_cfg = null, tms_cfg = null)
   // if tms_cfg is provided tms map layer gets added
   if (tms_cfg !== null) {
     // this is for the page gui / switch for toggling overlays
-    let tms_layer = L.tileLayer('https://emt-project.github.io/mapserver/map_01/{z}/{x}/{y}.png', tms_cfg.layerOptions);
+    let tms_layer = L.tileLayer(tms_cfg.tms_url, tms_cfg.layerOptions);
     tms_layer.addTo(map);
     overlay_control[tms_cfg.label] = tms_layer;
   }
