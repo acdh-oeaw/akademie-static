@@ -152,34 +152,6 @@ let tms_cfg = {
 /* some functions to influence the visualization*/
 //////////////////////////////////////////////////
 
-function draw_cirlce_from_rowdata(latLng, row) {
-  /*provides a circular icon to be drawn on the map, radius is dermined by the amount
-    of child elements in the related_objects column first ul child*/
-  let row_data = Number(row.getData().mentions);
-  if (row_data > 100) {
-    row_data = 100 + row_data / 100
-  }
-  let radius_factor = row_data;
-  let radius = radius_factor * 0.2;
-  let border_width = 4;
-  let options = {
-    radius: radius,
-    weight: border_width,
-    fillOpacity: "0.5",
-    color: "#702963",
-    fillColor: "#702963",
-  }
-  let marker = L.circleMarker(latLng, options);
-  return marker;
-}
-
-/*define the way you wish to draw icons on the map in the make_map_and_table.js; 
-per default the function takes the coordinates as [lat, lng]
-from row.getData() and the row object as in the above example 
-(draw_cirlce_from_rowdata)*/
-const draw_icon = draw_cirlce_from_rowdata;
-
-
 /*define the way you want to created an popup lable on the map
 you have full acces to row data via row.getData() and can write html as in example below*/
 function get_bold_name(row) {
