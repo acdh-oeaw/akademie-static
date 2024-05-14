@@ -40,9 +40,6 @@
                     <annotation-slider opt="plc"></annotation-slider>
                 </li>
                 <li class="dropdown-item">
-                    <annotation-slider opt="lbs"></annotation-slider>
-                </li>
-                <li class="dropdown-item">
                     <annotation-slider opt="abbr"></annotation-slider>
                 </li>
             </ul>

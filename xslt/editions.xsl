@@ -156,11 +156,37 @@
         </html>
     </xsl:template>
 
+
     <xsl:template match="tei:p">
-        <p id="{local:makeId(.)}" class="yes-index paragraph-main-text">
-            <xsl:apply-templates/>
-        </p>
+        <xsl:choose>
+            <!-- add additional class for p elements that should be centered-->
+            <xsl:when test="@rendition='#fc'">
+                <p id="{local:makeId(.)}" class="fc yes-index paragraph-main-text">
+                    <xsl:apply-templates/>
+                </p>
+            </xsl:when>
+            <xsl:otherwise>
+                <p id="{local:makeId(.)}" class="yes-index paragraph-main-text">
+                    <xsl:apply-templates/>
+                </p>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
+
+    <!-- template to make header text in the transcription bold -->
+    <xsl:template match="tei:p[@rendition='#fc']/text()">
+        <xsl:analyze-string select="." regex="Kaiserliche Akademie der Wissenschaften.|Protokoll">
+            <xsl:matching-substring>
+                <b>
+                    <xsl:value-of select="."/>
+                </b>
+            </xsl:matching-substring>
+            <xsl:non-matching-substring>
+                <xsl:value-of select="."/>
+            </xsl:non-matching-substring>
+        </xsl:analyze-string>
+    </xsl:template>
+
     <xsl:template match="tei:div">
         <div id="{local:makeId(.)}">
             <xsl:apply-templates/>
@@ -199,16 +225,35 @@
 
 
     <xsl:template match="tei:lb">
-        <span class="lb">
-            <xsl:text> | </xsl:text>
-        </span>
+        <xsl:element name="br" />
     </xsl:template>
 
-    <xsl:template match="tei:hi[@rend='super']">
-        <sup>
-            <xsl:apply-templates/>
-        </sup>
+
+
+    <xsl:template match="tei:hi">
+        <xsl:choose>
+            <xsl:when test="@rend='super'">
+                <sup>
+                    <xsl:apply-templates/>
+                </sup>
+            </xsl:when>
+            <xsl:when test="@rend='strike'">
+                <strike>
+                    <xsl:apply-templates/>
+                </strike>
+            </xsl:when>
+            <xsl:when test="not(@rend)">
+                <u>
+                    <xsl:apply-templates/>
+                </u>
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- Do nothing -->
+                <xsl:apply-templates/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
+
 
     <xsl:template match="tei:choice">
         <span class="choice">

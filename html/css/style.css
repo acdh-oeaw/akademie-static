@@ -26,9 +26,11 @@ p.paragraph-for-page-break {
 }
 
 p.paragraph-main-text {
-    margin: 20pt;
+    margin: 1rem;
 }
-
+p.fc {
+    text-align: center;
+}
 a.helpdesk-button {
     display: block;
     background-color: #fff;
