@@ -6,6 +6,19 @@
     <xsl:template match="tei:person" name="person_detail">
         <table class="table entity-table">
             <tbody>
+                <xsl:if test ="./tei:persName/tei:addName/text()">
+                    <tr>
+                        <th>
+                        Namenszusätze
+                        </th>
+                        <td>
+                            <xsl:for-each select="./tei:persName/tei:addName/text()">
+                                <xsl:if test="position() != 1"> / </xsl:if>
+                                <xsl:value-of select="."/>
+                            </xsl:for-each>
+                        </td>
+                    </tr>
+                </xsl:if>
                 <xsl:if test="./tei:birth/text()">
                     <tr>
                         <th>
@@ -83,7 +96,7 @@
                         </td>
                     </tr>
                 </xsl:if>
-               
+
                 <xsl:if test="./tei:noteGrp">
                     <tr>
                         <th>
