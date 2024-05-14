@@ -52,22 +52,6 @@ var editor = new LoadEditor({
         },
       },
       {
-        opt: "lbs",
-        color: "none",
-        title: "Zeilenumbrüche",
-        html_class: "lb",
-        css_class: "lbs",
-        chg_citation: "citation-url",
-        hide: {
-          hidden: true,
-          class: "lb",
-        },
-        features: {
-          all: false,
-          class: "features-2",
-        },
-      },
-      {
         opt: "abbr",
         color: "none",
         title: "Abkürzungen auflösen",
