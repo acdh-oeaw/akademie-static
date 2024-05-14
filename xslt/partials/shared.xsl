@@ -187,19 +187,13 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:choose>
-                    <xsl:when test="@type='person' and @ref and starts-with(@ref, 'per:') and string-length(substring-after(@ref, 'per:')) > 0">
-                        <span class="persons entity {substring-after(@rendition, '#')}" data-bs-toggle="modal" data-bs-target="{concat('#', substring-after(@ref, 'per:'))}">
-                            <xsl:attribute name="id" select="@xml:id"/>
-                            <xsl:apply-templates/>
-                        </span>
-                    </xsl:when>
-                    <xsl:when test="@type='person' and @ref and starts-with(@ref, '#') and string-length(substring-after(@ref, '#')) > 0">
+                    <xsl:when test="@type='person' and string-length(substring-after(@ref, '#')) > 0">
                         <span class="persons entity {substring-after(@rendition, '#')}" data-bs-toggle="modal" data-bs-target="{@ref}">
                             <xsl:attribute name="id" select="@xml:id"/>
                             <xsl:apply-templates/>
                         </span>
                     </xsl:when>
-                    <xsl:when test="@type='place' and @ref and starts-with(@ref, '#') and string-length(substring-after(@ref, '#')) > 0">
+                    <xsl:when test="@type='place' and string-length(substring-after(@ref, '#')) > 0">
                         <span class="places entity {substring-after(@rendition, '#')}" id="{@xml:id}" data-bs-toggle="modal" data-bs-target="{@ref}">
                             <xsl:apply-templates/>
                         </span>
