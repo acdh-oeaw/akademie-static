@@ -7,6 +7,7 @@ from acdh_cfts_pyutils import TYPESENSE_CLIENT as client
 from acdh_cfts_pyutils import CFTS_COLLECTION
 from acdh_tei_pyutils.tei import TeiReader
 from tqdm import tqdm
+from datetime import datetime
 
 
 
@@ -17,7 +18,7 @@ current_schema = {
     "name": "Akademieprotokolle",
     "fields": [
         {"name": "rec_id", "type": "string"},
-        {"name": "title", "type": "string", "sort": True},
+        {"name": "title", "type": "string"},
         {"name": "full_text", "type": "string"},
         {
             "name": "year",
@@ -25,11 +26,11 @@ current_schema = {
             "optional": True,
             "facet": True,
         },
-        {"name": "date", "type": "int64", "optional": True},
+        {"name": "date", "type": "string", "optional": True, "sort": True},
         {"name": "persons", "type": "string[]", "facet": True, "optional": True},
         {"name": "places", "type": "string[]", "facet": True, "optional": True},
     ],
-    "default_sorting_field": "title"
+    "default_sorting_field": "date"
 }
 
 try:
@@ -78,7 +79,7 @@ for xml_file in tqdm(files, total=len(files)):
     cfts_record = {"project": "Akademieprotokolle",}
     record = {}
     #record["id"] = os.path.split(xml_file)[-1].replace(".xml", ".html")
-    record["id"] = os.path.split(xml_file)[-1]
+    record["id"] = os.path.splitext(os.path.split(xml_file)[-1])[0]
     cfts_record["id"] = record["id"]
     cfts_record["resolver"] = (
             f"https://fun-with-editions.github.io/akademie-static/{record['id']}"
@@ -90,17 +91,16 @@ for xml_file in tqdm(files, total=len(files)):
     record["title"] = f"{r_title}"
     cfts_record["title"] = record["title"]
     date_str = doc.any_xpath("//tei:titleStmt/tei:meeting/tei:date/@when")[0]
-    '''
-        if len(date_str) > 3:
-            date_str = date_str
-        else:
-            date_str = "1959"
-    '''
+    # Check if date_str matches the ISO date format
     try:
+        datetime.strptime(date_str, '%Y-%m-%d')
+        record["date"] = date_str
+        cfts_record["date"] = date_str
         record["year"] = int(date_str[:4])
         cfts_record["year"] = int(date_str[:4])
     except ValueError:
-        pass
+        print(xml_file)
+
 
     if len(body) > 0:
         # get unique persons per doc
