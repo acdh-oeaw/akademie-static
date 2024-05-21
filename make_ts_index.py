@@ -15,26 +15,26 @@ files = glob.glob("./data/editions/*.xml")
 
 
 current_schema = {
-    "name": "Akademieprotokolle",
+    "name": "akademie-static",
     "fields": [
         {"name": "rec_id", "type": "string"},
         {"name": "title", "type": "string"},
         {"name": "full_text", "type": "string"},
         {
-            "name": "year",
+            "name": "jahr",
             "type": "int32",
             "optional": True,
             "facet": True,
         },
-        {"name": "date", "type": "string", "optional": True, "sort": True},
-        {"name": "persons", "type": "string[]", "facet": True, "optional": True},
-        {"name": "places", "type": "string[]", "facet": True, "optional": True},
+        {"name": "datum", "type": "string", "sort": True},
+        {"name": "personen", "type": "string[]", "facet": True, "optional": True},
+        {"name": "orte", "type": "string[]", "facet": True, "optional": True},
     ],
-    "default_sorting_field": "date"
+    "default_sorting_field": "datum"
 }
 
 try:
-    client.collections["Akademieprotokolle"].delete()
+    client.collections["akademie-static"].delete()
 except ObjectNotFound:
     pass
 
@@ -76,7 +76,7 @@ for xml_file in tqdm(files, total=len(files)):
     """
     body = doc.any_xpath(".//tei:body")
     # make record for each document, removed indent for the following lines
-    cfts_record = {"project": "Akademieprotokolle",}
+    cfts_record = {"project": "akademie-static",}
     record = {}
     #record["id"] = os.path.split(xml_file)[-1].replace(".xml", ".html")
     record["id"] = os.path.splitext(os.path.split(xml_file)[-1])[0]
@@ -94,10 +94,10 @@ for xml_file in tqdm(files, total=len(files)):
     # Check if date_str matches the ISO date format
     try:
         datetime.strptime(date_str, '%Y-%m-%d')
-        record["date"] = date_str
-        cfts_record["date"] = date_str
-        record["year"] = int(date_str[:4])
-        cfts_record["year"] = int(date_str[:4])
+        record["datum"] = date_str
+        cfts_record["datum"] = date_str
+        record["jahr"] = int(date_str[:4])
+        cfts_record["jahr"] = int(date_str[:4])
     except ValueError:
         print(xml_file)
 
@@ -106,22 +106,22 @@ for xml_file in tqdm(files, total=len(files)):
         # get unique persons per doc
         ent_type = "person"
         ent_name = "persName"
-        record["persons"] = get_entities(
+        record["personen"] = get_entities(
             ent_type=ent_type, ent_node=ent_type, ent_name=ent_name
             )
-        cfts_record["persons"] = record["persons"]
+        cfts_record["personen"] = record["personen"]
         # get unique places per doc
         ent_type = "place"
         ent_name = "placeName"
-        record["places"] = get_entities(ent_type=ent_type, ent_node=ent_type, ent_name=ent_name)
-        cfts_record["places"] = record["places"]
+        record["orte"] = get_entities(ent_type=ent_type, ent_node=ent_type, ent_name=ent_name)
+        cfts_record["orte"] = record["orte"]
         record["full_text"] = "\n".join(" ".join("".join(p.itertext()).split()) for p in body)
         if len(record["full_text"]) > 0:
             records.append(record)
             cfts_record["full_text"] = record["full_text"]
             cfts_records.append(cfts_record)
 
-make_index = client.collections["Akademieprotokolle"].documents.import_(records)
+make_index = client.collections["akademie-static"].documents.import_(records,{"action": "upsert"})
 print(make_index)
 print("done with indexing Akademieprotokolle")
 
