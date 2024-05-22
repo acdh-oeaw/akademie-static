@@ -14,7 +14,8 @@
 }
 
 #refinement-list-person,
-#refinement-list-place {
+#refinement-list-place,
+#refinement-range-year {
     padding: 1em .5em 2em .5em;
     -webkit-box-shadow: -14px 21px 24px -28px rgba(156,156,156,1);
     -moz-box-shadow: -14px 21px 24px -28px rgba(156,156,156,1);

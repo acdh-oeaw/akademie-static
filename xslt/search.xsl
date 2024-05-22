@@ -22,31 +22,34 @@
                 <xsl:call-template name="nav_bar"/>
 
                 <div class="container-fluid">
-                        <div class="search-panel">
-                            <div class="search-panel__results">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div id="stats-container"></div>
-                                        <h4><xsl:value-of select="$doc_title"/></h4>
-                                        <div id="searchbox"></div>
-                                        <div id="clear-refinements"></div>
-                                        <h4>Personen</h4>
+                    <div class="search-panel">
+                        <div class="search-panel__results">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    
+                                    <h4>
+                                        <xsl:value-of select="$doc_title"/>
+                                    </h4>
+                                    <div id="searchbox"></div>
+                                    <div id="stats-container"></div>
+                                    <div id ="facets">
+                                        <h4>Filter</h4>
                                         <div id="refinement-list-person"></div>
-                                        <h4>Orte</h4>
-                                        <div id="refinement-list-place"/>
-                                        <h4>Jahr</h4>
+                                        <div id="refinement-list-place"></div>
                                         <div id="refinement-range-year"></div>
                                     </div>
-                                    <div class="col-md-8">
-                                        <!--<div id="sort-by"></div>-->
-                                        <div id="current-refinements"></div>
-                                        <div id="hits"></div>
-                                        <div id="pagination"></div>
-                                    </div>
+                                    <div id="clear-refinements"></div>
+                                </div>
+                                <div class="col-md-8">
+                                    <!--<div id="sort-by"></div>-->
+                                    <div id="current-refinements"></div>
+                                    <div id="hits"></div>
+                                    <div id="pagination"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
 
 

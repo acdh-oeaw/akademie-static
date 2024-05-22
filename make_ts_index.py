@@ -2,38 +2,42 @@ import glob
 import os
 
 from typesense.api_call import ObjectNotFound
+
 from acdh_cfts_pyutils import TYPESENSE_CLIENT as client
 from acdh_cfts_pyutils import CFTS_COLLECTION
 from acdh_tei_pyutils.tei import TeiReader
 from tqdm import tqdm
+from datetime import datetime
 
 
-files = glob.glob("./data/editions/*/*.xml")
 
+files = glob.glob("./data/editions/*.xml")
 
-try:
-    client.collections["Akademieprotokolle"].delete()
-except ObjectNotFound:
-    pass
 
 current_schema = {
-    "name": "Akademieprotokolle",
+    "name": "akademie-static",
     "fields": [
-        {"name": "id", "type": "string"},
         {"name": "rec_id", "type": "string"},
         {"name": "title", "type": "string"},
         {"name": "full_text", "type": "string"},
         {
-            "name": "year",
+            "name": "jahr",
             "type": "int32",
             "optional": True,
             "facet": True,
         },
-        {"name": "persons", "type": "string[]", "facet": True, "optional": True},
-        {"name": "places", "type": "string[]", "facet": True, "optional": True},
-        {"name": "orgs", "type": "string[]", "facet": True, "optional": True},
+        {"name": "datum", "type": "string", "sort": True},
+        {"name": "personen", "type": "string[]", "facet": True, "optional": True},
+        {"name": "orte", "type": "string[]", "facet": True, "optional": True},
     ],
+    "default_sorting_field": "datum"
 }
+
+try:
+    client.collections["akademie-static"].delete()
+except ObjectNotFound:
+    pass
+
 
 client.collections.create(current_schema)
 
@@ -59,90 +63,73 @@ def get_entities(ent_type, ent_node, ent_name):
 
 records = []
 cfts_records = []
-for x in tqdm(files, total=len(files)):
-    doc = TeiReader(xml=x, xsl="./xslt/preprocess_typesense.xsl")
+for xml_file in tqdm(files, total=len(files)):
+    doc = TeiReader(xml=xml_file)
+    """
     facs = doc.any_xpath(".//tei:body/tei:div/tei:pb/@facs")
     pages = 0
     for v in facs:
-        p_group = f".//tei:body/tei:div/tei:p[preceding-sibling::tei:pb[1]/@facs='{v}']|.//tei:body/tei:div/tei:lg[preceding-sibling::tei:pb[1]/@facs='{v}']"
+        p_group = f".//tei:body/tei:div/tei:div[preceding-sibling::tei:pb[1]/@facs='{v}']"
         body = doc.any_xpath(p_group)
+        print (body)
         pages += 1
-        cfts_record = {
-            "project": "Akademieprotokolle",
-        }
-        record = {}
-        record["id"] = os.path.split(x)[-1].replace(".xml", f".html?tab={str(pages)}")
-        cfts_record["id"] = record["id"]
-        cfts_record["resolver"] = f"https://github.com/fun-with-editions/akademie-static/{record['id']}"
-        record["rec_id"] = os.path.split(x)[-1]
-        cfts_record["rec_id"] = record["rec_id"]
-        r_title = " ".join(
-            " ".join(
-                doc.any_xpath('.//tei:titleStmt/tei:title[@level="a"]/text()')
-            ).split()
+    """
+    body = doc.any_xpath(".//tei:body")[0]
+    # make record for each document, removed indent for the following lines
+    cfts_record = {"project": "akademie-static",}
+    record = {}
+    #record["id"] = os.path.split(xml_file)[-1].replace(".xml", ".html")
+    record["id"] = os.path.splitext(os.path.split(xml_file)[-1])[0]
+    cfts_record["id"] = record["id"]
+    cfts_record["resolver"] = (
+            f"https://fun-with-editions.github.io/akademie-static/{record['id']}"
         )
-        record["title"] = f"{r_title} Page {str(pages)}"
-        cfts_record["title"] = record["title"]
-        try:
-            date_str = doc.any_xpath("//tei:origin/tei:origDate/@notBefore")[0]
-        except IndexError:
-            date_str = doc.any_xpath("//tei:origin/tei:origDate/text()")[0]
-            data_str = date_str.split("--")[0]
-            if len(date_str) > 3:
-                date_str = date_str
-            else:
-                date_str = "1959"
+    record["rec_id"] = os.path.split(xml_file)[-1]
+    cfts_record["rec_id"] = record["rec_id"]
+    r_title = " ".join(" ".join(doc.any_xpath('.//tei:titleStmt/tei:meeting//text()')).split())
+    #record["title"] = f"{r_title} Page {str(pages)}"
+    record["title"] = f"{r_title}"
+    cfts_record["title"] = record["title"]
+    date_str = doc.any_xpath("//tei:titleStmt/tei:meeting/tei:date/@when")[0]
+    # Check if date_str matches the ISO date format
+    try:
+        datetime.strptime(date_str, '%Y-%m-%d')
+        record["datum"] = date_str
+        cfts_record["datum"] = date_str
+        record["jahr"] = int(date_str[:4])
+        cfts_record["jahr"] = int(date_str[:4])
+    except ValueError:
+        print(xml_file)
 
-        try:
-            record["year"] = int(date_str[:4])
-            cfts_record["year"] = int(date_str[:4])
-        except ValueError:
-            pass
 
-        if len(body) > 0:
-            # get unique persons per page
-            ent_type = "person"
-            ent_name = "persName"
-            record["persons"] = get_entities(
-                ent_type=ent_type, ent_node=ent_type, ent_name=ent_name
+    if len(body) > 0:
+        # get unique persons per doc
+        ent_type = "person"
+        ent_name = "persName"
+        record["personen"] = get_entities(
+            ent_type=ent_type, ent_node=ent_type, ent_name=ent_name
             )
-            cfts_record["persons"] = record["persons"]
-            # get unique places per page
-            ent_type = "place"
-            ent_name = "placeName"
-            record["places"] = get_entities(
-                ent_type=ent_type, ent_node=ent_type, ent_name=ent_name
-            )
-            cfts_record["places"] = record["places"]
-            # get unique orgs per page
-            ent_type = "org"
-            ent_name = "orgName"
-            record["orgs"] = get_entities(
-                ent_type=ent_type, ent_node=ent_type, ent_name=ent_name
-            )
-            cfts_record["orgs"] = record["orgs"]
-            # get unique bibls per page
-            ent_type = "lit_work"
-            ent_name = "title"
-            ent_node = "bibl"
-            record["works"] = get_entities(
-                ent_type=ent_type, ent_node=ent_node, ent_name=ent_name
-            )
-            cfts_record["works"] = record["works"]
-            record["full_text"] = "\n".join(
-                " ".join("".join(p.itertext()).split()) for p in body
-            )
-            if len(record["full_text"]) > 0:
-                records.append(record)
-                cfts_record["full_text"] = record["full_text"]
-                cfts_records.append(cfts_record)
+        cfts_record["personen"] = record["personen"]
+        # get unique places per doc
+        ent_type = "place"
+        ent_name = "placeName"
+        record["orte"] = get_entities(ent_type=ent_type, ent_node=ent_type, ent_name=ent_name)
+        cfts_record["orte"] = record["orte"]
+        
+        #extract full text, excluding lb hyphens and abbreviations
+        text_nodes = body.xpath('.//text()[not(ancestor::tei:abbr) and not(self::text()[contains(.,"-") and following-sibling::tei:lb[1]])]', namespaces={"tei": "http://www.tei-c.org/ns/1.0"})
+        record["full_text"] = ' '.join(node for node in text_nodes)
+        #record["full_text"] = "\n".join(" ".join("".join(p.itertext()).split()) for p in body)
+        if len(record["full_text"]) > 0:
+            records.append(record)
+            cfts_record["full_text"] = record["full_text"]
+            cfts_records.append(cfts_record)
 
-make_index = client.collections[
-    "Akademieprotokolle"
-].documents.import_(records)
+make_index = client.collections["akademie-static"].documents.import_(records,{"action": "upsert"})
 print(make_index)
 print("done with indexing Akademieprotokolle")
 
-make_index = CFTS_COLLECTION.documents.import_(cfts_records, {"action": "upsert"})
-print(make_index)
-print("done with cfts-index Akademieprotokolle")
+#make_index = CFTS_COLLECTION.documents.import_(cfts_records, {"action": "upsert"})
+#print(make_index)
+#print("done with cfts-index Akademieprotokolle")
+

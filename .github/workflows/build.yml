@@ -26,6 +26,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ANT_OPTS: -Xmx5g
+      TYPESENSE_API_KEY: ${{secrets.TYPESENSE_API_KEY}}
+      TYPESENSE_HOST: ${{vars.TYPESENSE_HOST}}
+      TYPESENSE_PORT: ${{vars.TYPESENSE_PORT}}
+      TYPESENSE_PROTOCOL: ${{vars.TYPESENSE_PROTOCOL}}
     steps:
     - name: Perform Checkout
       uses: actions/checkout@v4
@@ -55,3 +59,6 @@ jobs:
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v4
+    - name: Setup Typesense
+      run: |
+        python ./make_ts_index.py

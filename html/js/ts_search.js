@@ -24,10 +24,17 @@ const search = instantsearch({
     indexName: project_collection_name,
 });
 
-search.addWidgets([
+const  refinementListWithPanel =   instantsearch.widgets.panel({
+    templates: {
+      header: ({ attribute }) => `${attribute}`,
+    },
+  })(instantsearch.widgets.refinementList)
+
+  search.addWidgets([
     instantsearch.widgets.searchBox({
         container: "#searchbox",
         autofocus: true,
+        placeholder: 'Suchen',
         cssClasses: {
             form: "form-inline",
             input: "form-control col-md-11",
@@ -92,13 +99,24 @@ search.addWidgets([
           `,
         },
     }),
-
-    instantsearch.widgets.refinementList({
+    instantsearch.widgets.panel({
+        collapsed: ({ state }) => {
+            return state.query.length === 0;
+          },
+        templates: {
+          header: 'Orte',
+        },
+      })(instantsearch.widgets.refinementList)({
         container: "#refinement-list-place",
-        attribute: "places",
+        attribute: "orte",
+        templates: {
+            showMoreText(data, { html }) {
+                return html`<span>${data.isShowingMore ? 'Weniger anzeigen' : 'Mehr anzeigen'}</span>`;
+              },
+        },
         searchable: true,
         showMore: true,
-        searchablePlaceholder: "Suchen",
+        searchablePlaceholder: "Nach Ort suchen",
         cssClasses: {
             searchableInput: "form-control form-control-sm m-2 border-light-2",
             searchableSubmit: "d-none",
@@ -109,14 +127,26 @@ search.addWidgets([
             label: "d-flex align-items-center text-capitalize",
             checkbox: "m-2",
         },
-    }),
-
-    instantsearch.widgets.refinementList({
+      }),
+    
+     instantsearch.widgets.panel({
+        collapsed: ({ state }) => {
+            return state.query.length === 0;
+          },
+        templates: {
+          header: 'Personen',
+        },
+      })(instantsearch.widgets.refinementList)({
         container: "#refinement-list-person",
-        attribute: "persons",
+        attribute: "personen",
+        templates: {
+            showMoreText(data, { html }) {
+                return html`<span>${data.isShowingMore ? 'Weniger anzeigen' : 'Mehr anzeigen'}</span>`;
+              },
+        },
         searchable: true,
         showMore: true,
-        searchablePlaceholder: "Suchen",
+        searchablePlaceholder: "Nach Person suchen",
         cssClasses: {
             searchableInput: "form-control form-control-sm m-2 border-light-2",
             searchableSubmit: "d-none",
@@ -128,12 +158,15 @@ search.addWidgets([
             checkbox: "m-2",
         },
     }),
-
-    instantsearch.widgets.rangeInput({
-        container: "#refinement-range-year",
-        attribute: "year",
+    instantsearch.widgets.panel({
         templates: {
-          separatorText: "to",
+          header: 'Jahr',
+        },
+      })(instantsearch.widgets.rangeInput)({
+        container: "#refinement-range-year",
+        attribute: "jahr",
+        templates: {
+          separatorText: "bis",
           submitText: "Suchen",
         },
         cssClasses: {
