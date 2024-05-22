@@ -34,6 +34,7 @@ search.addWidgets([
     instantsearch.widgets.searchBox({
         container: "#searchbox",
         autofocus: true,
+        placeholder: 'Suchen',
         cssClasses: {
             form: "form-inline",
             input: "form-control col-md-11",
@@ -102,9 +103,14 @@ search.addWidgets([
     instantsearch.widgets.refinementList({
         container: "#refinement-list-place",
         attribute: "orte",
+        templates: {
+            showMoreText(data, { html }) {
+                return html`<span>${data.isShowingMore ? 'Weniger anzeigen' : 'Mehr anzeigen'}</span>`;
+              },
+        },
         searchable: true,
         showMore: true,
-        searchablePlaceholder: "Suchen",
+        searchablePlaceholder: "Nach Ort suchen",
         cssClasses: {
             searchableInput: "form-control form-control-sm m-2 border-light-2",
             searchableSubmit: "d-none",
@@ -120,9 +126,14 @@ search.addWidgets([
     instantsearch.widgets.refinementList({
         container: "#refinement-list-person",
         attribute: "personen",
+        templates: {
+            showMoreText(data, { html }) {
+                return html`<span>${data.isShowingMore ? 'Weniger anzeigen' : 'Mehr anzeigen'}</span>`;
+              },
+        },
         searchable: true,
         showMore: true,
-        searchablePlaceholder: "Suchen",
+        searchablePlaceholder: "Nach Person suchen",
         cssClasses: {
             searchableInput: "form-control form-control-sm m-2 border-light-2",
             searchableSubmit: "d-none",
