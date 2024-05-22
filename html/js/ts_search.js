@@ -1,21 +1,15 @@
 const project_collection_name = "akademie-static"
 const main_search_field = "full_text"
-//const search_api_key = "mP7O7YJGYQ5GxMPkvFUV6XI90meuLg8U"  // custom search only key
-const search_api_key = "Ipn4by1kgvv4XfmLH7IR0kXj7d6UIrqB"
+const search_api_key = "mP7O7YJGYQ5GxMPkvFUV6XI90meuLg8U"  // custom search only key
 
 const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
     server: {
         apiKey: search_api_key,
         nodes: [
-            /*{
+            {
                 host: "typesense.acdh-dev.oeaw.ac.at",
                 port: "443",
                 protocol: "https",
-            },*/
-            {
-                host: "localhost",
-                port: "8108",
-                protocol: "http",
             },
         ],
     },
