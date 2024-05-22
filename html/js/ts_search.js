@@ -1,15 +1,21 @@
 const project_collection_name = "akademie-static"
 const main_search_field = "full_text"
-const search_api_key = "mP7O7YJGYQ5GxMPkvFUV6XI90meuLg8U"  // custom search only key
+//const search_api_key = "mP7O7YJGYQ5GxMPkvFUV6XI90meuLg8U"  // custom search only key
+const search_api_key = "Ipn4by1kgvv4XfmLH7IR0kXj7d6UIrqB"
 
 const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
     server: {
         apiKey: search_api_key,
         nodes: [
-            {
+            /*{
                 host: "typesense.acdh-dev.oeaw.ac.at",
                 port: "443",
                 protocol: "https",
+            },*/
+            {
+                host: "localhost",
+                port: "8108",
+                protocol: "http",
             },
         ],
     },
@@ -95,7 +101,7 @@ search.addWidgets([
 
     instantsearch.widgets.refinementList({
         container: "#refinement-list-place",
-        attribute: "places",
+        attribute: "orte",
         searchable: true,
         showMore: true,
         searchablePlaceholder: "Suchen",
@@ -113,7 +119,7 @@ search.addWidgets([
 
     instantsearch.widgets.refinementList({
         container: "#refinement-list-person",
-        attribute: "persons",
+        attribute: "personen",
         searchable: true,
         showMore: true,
         searchablePlaceholder: "Suchen",
@@ -131,9 +137,9 @@ search.addWidgets([
 
     instantsearch.widgets.rangeInput({
         container: "#refinement-range-year",
-        attribute: "year",
+        attribute: "jahr",
         templates: {
-          separatorText: "to",
+          separatorText: "bis",
           submitText: "Suchen",
         },
         cssClasses: {
