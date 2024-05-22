@@ -30,7 +30,13 @@ const search = instantsearch({
     indexName: project_collection_name,
 });
 
-search.addWidgets([
+const  refinementListWithPanel =   instantsearch.widgets.panel({
+    templates: {
+      header: ({ attribute }) => `${attribute}`,
+    },
+  })(instantsearch.widgets.refinementList)
+
+  search.addWidgets([
     instantsearch.widgets.searchBox({
         container: "#searchbox",
         autofocus: true,
@@ -99,8 +105,14 @@ search.addWidgets([
           `,
         },
     }),
-
-    instantsearch.widgets.refinementList({
+    instantsearch.widgets.panel({
+        collapsed: ({ state }) => {
+            return state.query.length === 0;
+          },
+        templates: {
+          header: 'Orte',
+        },
+      })(instantsearch.widgets.refinementList)({
         container: "#refinement-list-place",
         attribute: "orte",
         templates: {
@@ -121,9 +133,16 @@ search.addWidgets([
             label: "d-flex align-items-center text-capitalize",
             checkbox: "m-2",
         },
-    }),
-
-    instantsearch.widgets.refinementList({
+      }),
+    
+     instantsearch.widgets.panel({
+        collapsed: ({ state }) => {
+            return state.query.length === 0;
+          },
+        templates: {
+          header: 'Personen',
+        },
+      })(instantsearch.widgets.refinementList)({
         container: "#refinement-list-person",
         attribute: "personen",
         templates: {
@@ -145,8 +164,11 @@ search.addWidgets([
             checkbox: "m-2",
         },
     }),
-
-    instantsearch.widgets.rangeInput({
+    instantsearch.widgets.panel({
+        templates: {
+          header: 'Jahr',
+        },
+      })(instantsearch.widgets.rangeInput)({
         container: "#refinement-range-year",
         attribute: "jahr",
         templates: {
