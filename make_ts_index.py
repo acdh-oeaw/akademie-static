@@ -74,7 +74,7 @@ for xml_file in tqdm(files, total=len(files)):
         print (body)
         pages += 1
     """
-    body = doc.any_xpath(".//tei:body")
+    body = doc.any_xpath(".//tei:body")[0]
     # make record for each document, removed indent for the following lines
     cfts_record = {"project": "akademie-static",}
     record = {}
@@ -115,7 +115,11 @@ for xml_file in tqdm(files, total=len(files)):
         ent_name = "placeName"
         record["orte"] = get_entities(ent_type=ent_type, ent_node=ent_type, ent_name=ent_name)
         cfts_record["orte"] = record["orte"]
-        record["full_text"] = "\n".join(" ".join("".join(p.itertext()).split()) for p in body)
+        
+        #extract full text, excluding lb hyphens and abbreviations
+        text_nodes = body.xpath('.//text()[not(ancestor::tei:abbr) and not(self::text()[contains(.,"-") and following-sibling::tei:lb[1]])]', namespaces={"tei": "http://www.tei-c.org/ns/1.0"})
+        record["full_text"] = ' '.join(node for node in text_nodes)
+        #record["full_text"] = "\n".join(" ".join("".join(p.itertext()).split()) for p in body)
         if len(record["full_text"]) > 0:
             records.append(record)
             cfts_record["full_text"] = record["full_text"]
