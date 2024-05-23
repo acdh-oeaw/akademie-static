@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    exclude-result-prefixes="xs"
-    version="2.0">
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" version="2.0">
     <xsl:template match="/" name="tabulator_js">
         <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator.min.css" rel="stylesheet"></link>
         <link href="https://unpkg.com/tabulator-tables@5.5.0/dist/css/tabulator_bootstrap5.min.css" rel="stylesheet"></link>
@@ -23,6 +21,16 @@
             //trigger download of data.html file
             document.getElementById("download-html").addEventListener("click", function(){
             table.download("html", "data.html", {style:true});
+            });
+            table.on("rowClick", function(e, row){
+            var data = row.getData();
+            if (data.signatur != null) {
+                var url = "/" + data.signatur + ".html";
+            }
+            if (data.id != null) {
+                var url = "/" + data.id + ".html";
+            }
+            window.location.href = url;
             });
         </script>
     </xsl:template>
