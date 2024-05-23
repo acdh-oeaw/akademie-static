@@ -33,6 +33,7 @@ const columns = [
     title: "Ortsname",
     field: "Ortsname",
     formatter: "plaintext",
+    minWidth: 100,
     resizable: false,
   },
   {
@@ -40,6 +41,7 @@ const columns = [
     title: "Erwähnungen",
     field: "mentions",
     formatter: "plaintext",
+    minWidth: 100,
     resizable: true,
   },
   {
@@ -47,6 +49,7 @@ const columns = [
     title: "ID",
     field: "ID",
     formatter: "html",
+    minWidth: 100,
     resizable: true,
   },
   /* the following fields are necessary, 

@@ -1,3 +1,4 @@
+/* Landing page styles*/
 #index-background {
     background-image: url('/akademie-static/images/header-logo.png');
     background-repeat: no-repeat;
@@ -8,29 +9,17 @@
 #index-content {
     background-color: transparent;
     background-color: rgba(255, 255, 255, 0.8);
-    margin-top: 4rem;
+    margin-top: 2rem;
     max-width: 85ch;
     overflow-wrap: break-word;
 }
 
-#container-resize {
-    justify-content: center;
+/*Footer styles*/
+.logo {
+    width: 100%;
+    max-width: 200px; /* Adjust this value to suit your needs */
 }
 
-div.make-box-for-page {
-    border-bottom: 1pt black solid;
-}
-
-p.paragraph-for-page-break {
-    text-align: right;
-}
-
-p.paragraph-main-text {
-    margin: 1rem;
-}
-p.fc {
-    text-align: center;
-}
 a.helpdesk-button {
     display: block;
     background-color: #fff;
@@ -50,6 +39,29 @@ p.link-in-footer a:link {
     text-decoration: none;
 }
 
+/*Edition page styles*/
+
+#container-resize {
+    justify-content: center;
+}
+
+div.make-box-for-page {
+    border-bottom: 1pt black solid;
+}
+
+p.paragraph-for-page-break {
+    text-align: right;
+}
+
+p.paragraph-main-text {
+    margin: 1rem;
+}
+p.fc {
+    text-align: center;
+}
+.underline {
+    text-decoration: underline;
+}
 #viewer {
     position: sticky;
     top: 10%;
@@ -60,7 +72,7 @@ p.link-in-footer a:link {
     margin-left: auto;
 }
 
-/*display abbreviation when slider is off, expansion when slider is on*/
+/*display abbreviation when slider is off*/
 .choice:not(.choice-on)>.abbr {
     display: inline;
 }
@@ -68,7 +80,7 @@ p.link-in-footer a:link {
 .choice-on>.abbr {
     display: none;
 }
-
+/* expansion when slider is on */
 .choice-on>.expan {
     display: inline;
 }
@@ -77,9 +89,6 @@ p.link-in-footer a:link {
     display: none;
 }
 
-.underline {
-    text-decoration: underline;
-}
 
 /* needed for interactive map in listplace.xsl */
 div#map {
