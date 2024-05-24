@@ -44,8 +44,10 @@ function zoom_to_point_from_row_data(
 ) {
   let coordinate_key = get_coordinate_key_from_row_data(row_data);
   let marker = existing_markers_by_coordinates[coordinate_key];
-  marker.openPopup();
   map.flyTo([row_data.lat, row_data.lng], zoom);
+  map.once('moveend', function() {
+    marker.openPopup();
+    });
 }
 
 function get_coordinate_key_from_row_data(row_data) {
@@ -59,8 +61,9 @@ function init_map_from_rows(rows, markers) {
   rows.forEach((row) => {
     let row_data = row.getData();
     let coordinate_key = get_coordinate_key_from_row_data(row_data);
-    var marker = L.marker(new L.LatLng(row_data.lat, row_data.lng), { title: get_popup_label_string_html(row_data) });
-    marker.bindPopup(get_popup_label_string_html(row_data));
+    let label = get_popup_label_string_html(row_data)
+    var marker = L.marker(new L.LatLng(row_data.lat, row_data.lng), { title: label.replace(/<[^>]+>/g, '') });
+    marker.bindPopup(label);
     markers.addLayer(marker);
     existing_icons_by_coordinates[coordinate_key] = marker;
   });
