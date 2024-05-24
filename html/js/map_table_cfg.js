@@ -32,7 +32,7 @@ const columns = [
     headerFilter: "input",
     title: "Ortsname",
     field: "Ortsname",
-    formatter: "plaintext",
+    formatter: "html",
     minWidth: 100,
     resizable: false,
   },
@@ -44,14 +44,15 @@ const columns = [
     minWidth: 100,
     resizable: true,
   },
+  /*
   {
     headerFilter: "input",
     title: "ID",
     field: "ID",
-    formatter: "html",
+    formatter: "plaintext",
     minWidth: 100,
     resizable: true,
-  },
+  },*/
   /* the following fields are necessary, 
     provide a string val each in your html-table,
     (longitude and latitude)*/
@@ -69,13 +70,14 @@ const columns = [
     resizable: false,
     visible: false,
   },
+  /*
   {
     title: "linkToEntity",
     field: "linkToEntity",
     formatter: "plaintext",
     resizable: false,
     visible: false,
-  },
+  },*/
   /* for the following, provide a list of related Objects, 
   eg. documents referencing the place represented by the row.
   place a ul-item with one li-children for each entity in your html-table*/
@@ -155,7 +157,7 @@ let tms_cfg = {
 /* some functions to influence the visualization*/
 //////////////////////////////////////////////////
 
-/*define the way you want to created an popup lable on the map
+/*define the way you want to create a popup label on the map
 you have full acces to row data via row.getData() and can write html as in example below*/
 function get_bold_name(row) {
   let label_string = `<a href="${row.linkToEntity}.html">${row.Ortsname}</a>`;
