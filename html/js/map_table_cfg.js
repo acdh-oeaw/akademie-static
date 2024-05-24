@@ -160,7 +160,7 @@ let tms_cfg = {
 /*define the way you want to create a popup label on the map
 you have full acces to row data via row.getData() and can write html as in example below*/
 function get_bold_name(row) {
-  let label_string = `<a href="${row.linkToEntity}.html">${row.Ortsname}</a>`;
+  let label_string = `${row.Ortsname}`;
   return label_string;
 }
 
