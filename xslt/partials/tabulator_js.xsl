@@ -25,12 +25,12 @@
             table.on("rowClick", function(e, row){
             var data = row.getData();
             if (data.signatur != null) {
-                var url = "/" + data.signatur + ".html";
+                var url = data.signatur + ".html";
             }
             else if (data.id != null) {
-                var url = "/" + data.id + ".html";
+                var url = data.id + ".html";
             }
-            window.location.href = url;
+            window.location.href = "/akademie-static/" + url;
             });
         </script>
     </xsl:template>
