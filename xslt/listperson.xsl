@@ -41,7 +41,7 @@
                                 <tr>
                                     <th scope="col" tabulator-headerFilter="input" tabulator-minWidth="120">Nachname</th>
                                     <th scope="col" tabulator-headerFilter="input" tabulator-minWidth="120">Vorname</th>
-                                    <th scope="col" tabulator-headerFilter="input" tabulator-minWidth="120">ID</th>
+                                    <th scope="col" tabulator-headerFilter="input" tabulator-visible="false">ID</th>
                                 </tr>
                             </thead>
                             <tbody>

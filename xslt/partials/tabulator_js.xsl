@@ -27,7 +27,7 @@
             if (data.signatur != null) {
                 var url = "/" + data.signatur + ".html";
             }
-            if (data.id != null) {
+            else if (data.id != null) {
                 var url = "/" + data.id + ".html";
             }
             window.location.href = url;
