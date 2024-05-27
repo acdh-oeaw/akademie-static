@@ -30,7 +30,7 @@ current_schema = {
         {"name": "personen", "type": "string[]", "facet": True, "optional": True},
         {"name": "orte", "type": "string[]", "facet": True, "optional": True},
     ],
-    "default_sorting_field": "datum"
+    "default_sorting_field": "datum",
 }
 
 try:
@@ -52,7 +52,27 @@ def get_entities(ent_type, ent_node, ent_name):
             p_path = f'.//tei:{ent_node}[@xml:id="{r}"]//tei:{ent_name}[1]'
             en = doc.any_xpath(p_path)
             if en:
-                entity = " ".join(" ".join(en[0].xpath(".//text()")).split())
+                if ent_name == 'persName':
+                    # get forename(s) and surname
+                    forenames = [forename.text for forename in en[0].xpath(".//tei:forename", namespaces={"tei": "http://www.tei-c.org/ns/1.0"}) if forename.text is not None]
+                    surnames = en[0].xpath(".//tei:surname", namespaces={"tei": "http://www.tei-c.org/ns/1.0"})
+                    surname = surnames[0].text if surnames and surnames[0].text is not None else ''
+                    if forenames:
+                        if len(forenames) > 1:
+                            if 'de' in forenames:
+                                forenames = [forename for forename in forenames if forename != 'de']
+                                forenames.append('de')
+                            elif 'le' in forenames:
+                                forenames = [forename for forename in forenames if forename != 'le']
+                                forenames.append('le')
+                            else:
+                                print(forenames)
+                        entity = " ".join(" ".join(forenames + [surname]).split())
+                    else:
+                        entity = surname
+                else:
+                    entity = " ".join(" ".join(en[0].xpath(".//text()")).split())
+                
                 if len(entity) != 0:
                     entities.append(entity)
                 else:
