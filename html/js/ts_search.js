@@ -136,7 +136,7 @@ const search = instantsearch({
         },
       }),
     
-     instantsearch.widgets.panel({
+      instantsearch.widgets.panel({
         collapsed: ({ state }) => {
             return state.query.length === 0;
           },

@@ -20,7 +20,7 @@
             <a title="Annotationen" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" role="button">
                 <i class="bi bi-gear" title="Menü zur Anpassung der Anzeige"></i>
             </a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu" style="min-width: 260px;"> 
                 <li class="dropdown-item">
                     <image-switch opt="es"></image-switch>
                 </li>
@@ -39,7 +39,7 @@
                 <li class="dropdown-item">
                     <annotation-slider opt="plc"></annotation-slider>
                 </li>
-                <li class="dropdown-item">
+                <li class="dropdown-item" style="border-top: 5px dashed lightgrey !important;">
                     <annotation-slider opt="abbr"></annotation-slider>
                 </li>
             </ul>

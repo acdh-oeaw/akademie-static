@@ -17,7 +17,7 @@
 
 /* Hide default HTML checkbox */
 .switch input {
-  /* opacity: 0; */
+  opacity: 0;
   width: 0;
   height: 0;
 }
@@ -47,13 +47,14 @@
   transition: 0.4s;
 }
 
-input:checked+.i-slider {}
+input:checked + .i-slider {
+}
 
-input:focus+.i-slider {
+input:focus + .i-slider {
   box-shadow: 0 0 1px #f1f1f1;
 }
 
-input:checked+.i-slider:before {
+input:checked + .i-slider:before {
   -webkit-transform: translateX(20px);
   -ms-transform: translateX(20px);
   transform: translateX(20px);
@@ -77,15 +78,12 @@ input:checked+.i-slider:before {
   margin-left: 3em;
 }
 
-.bi-pencil-square {
-  color: #fff;
-}
-
 .strikethrough {
   text-decoration: line-through;
 }
 
-.whitespace {}
+.whitespace {
+}
 
 .underline {
   text-decoration: underline;
@@ -115,14 +113,6 @@ input:checked+.i-slider:before {
   background-color: #c9ffcf;
 }
 
-.yellow {
-  background-color: #FBFF9F;
-}
-
-.lila {
-  background-color: #EF9FFF;
-}
-
 .badge-item {
   border-radius: 0.25rem;
 }
@@ -141,9 +131,8 @@ input:checked+.i-slider:before {
   position: absolute;
   top: 10%;
   left: 50%;
-  border: 8px solid #f1f1f1;
-  /* Light grey */
-  border-top: 8px solid #88dbdf;
+  border: 8px solid #f1f1f1; /* Light grey */
+  border-top: 8px solid #b59890; /* Blue */
   border-radius: 50%;
   width: 50px;
   height: 50px;
@@ -157,7 +146,6 @@ input:checked+.i-slider:before {
 .times-new-roman {
   font-family: "Times New Roman", serif !important;
 }
-
 .courier-new {
   font-family: "Courier New", monospace !important;
 }
@@ -185,26 +173,39 @@ input:checked+.i-slider:before {
 /* Fullsize mode */
 
 .nav-link {
-  background-color: transparent !important;
+  background-color: transparent;
 }
 
 .nav-link.active {
-  background-color: #fff !important;
+  background-color: #f1f1f1;
 }
 
 .nav-link.btn.active {
-  background-color: #88dbdf !important;
+  background-color: #99cad1;
 }
 
 .nav-link.btn {
-  background-color: transparent !important;
+  background-color: transparent;
 }
 
 .nav-link.btn-backlink {
-  background-color: transparent !important;
+  background-color: transparent;
 }
 
+.nav-link.lang_active {
+  background-color: aquamarine;
+}
 
+.multi-lang {
+  padding: 0.5em;
+  border-radius: 0.5rem;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+/* Custom CSS */
 #editor-widget {
   position: fixed;
   right: 5%;
