@@ -23,8 +23,13 @@
     background-color: var(--bv-main-bg-color);
     border-radius: .10rem;
 
+
 }
 
+.ais-RefinementList-list {
+    overflow:auto;
+    height:10em;
+}
 .col-md-4 h4 {
     margin-top: 1em;
 }

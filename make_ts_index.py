@@ -30,7 +30,7 @@ current_schema = {
         {"name": "personen", "type": "string[]", "facet": True, "optional": True},
         {"name": "orte", "type": "string[]", "facet": True, "optional": True},
     ],
-    "default_sorting_field": "datum"
+    "default_sorting_field": "datum",
 }
 
 try:
@@ -52,7 +52,27 @@ def get_entities(ent_type, ent_node, ent_name):
             p_path = f'.//tei:{ent_node}[@xml:id="{r}"]//tei:{ent_name}[1]'
             en = doc.any_xpath(p_path)
             if en:
-                entity = " ".join(" ".join(en[0].xpath(".//text()")).split())
+                if ent_name == 'persName':
+                    # get forename(s) and surname
+                    forenames = [" ".join(forename.text.split()) for forename in en[0].xpath(".//tei:forename", namespaces={"tei": "http://www.tei-c.org/ns/1.0"}) if forename.text is not None]
+                    surnames = en[0].xpath(".//tei:surname", namespaces={"tei": "http://www.tei-c.org/ns/1.0"})
+                    surname = surnames[0].text if surnames and surnames[0].text is not None else ''
+                    if forenames:
+                        if len(forenames) > 1:
+                            if 'de' in forenames:
+                                forenames = [forename for forename in forenames if forename != 'de']
+                                forenames.append('de')
+                            elif 'le' in forenames:
+                                forenames = [forename for forename in forenames if forename != 'le']
+                                forenames.append('le')
+                            else:
+                                print(forenames)
+                        entity = surname + ', ' + ' '.join(forenames)
+                    else:
+                        entity = surname
+                else:
+                    entity = " ".join(" ".join(en[0].xpath(".//text()")).split())
+                
                 if len(entity) != 0:
                     entities.append(entity)
                 else:
@@ -63,7 +83,11 @@ def get_entities(ent_type, ent_node, ent_name):
 
 records = []
 cfts_records = []
-for xml_file in tqdm(files, total=len(files)):
+
+#files to exclude
+exclude_files = ["./data/editions/A_0150.xml"]
+
+for xml_file in tqdm([f for f in files if f not in exclude_files], total=len(files)):
     doc = TeiReader(xml=xml_file)
     """
     facs = doc.any_xpath(".//tei:body/tei:div/tei:pb/@facs")
@@ -126,7 +150,12 @@ for xml_file in tqdm(files, total=len(files)):
             cfts_records.append(cfts_record)
 
 make_index = client.collections["akademie-static"].documents.import_(records,{"action": "upsert"})
-print(make_index)
+errors = [msg for msg in make_index if (msg != '"{\\"success\\":true}"' and msg != '""')]
+if errors:
+    for err in errors:
+        print(err)
+else:
+    print("\nno errors")
 print("done with indexing Akademieprotokolle")
 
 #make_index = CFTS_COLLECTION.documents.import_(cfts_records, {"action": "upsert"})

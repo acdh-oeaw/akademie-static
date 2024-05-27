@@ -24,12 +24,6 @@ const search = instantsearch({
     indexName: project_collection_name,
 });
 
-const  refinementListWithPanel =   instantsearch.widgets.panel({
-    templates: {
-      header: ({ attribute }) => `${attribute}`,
-    },
-  })(instantsearch.widgets.refinementList)
-
   search.addWidgets([
     instantsearch.widgets.searchBox({
         container: "#searchbox",
@@ -49,12 +43,23 @@ const  refinementListWithPanel =   instantsearch.widgets.panel({
             item: "w-100"
         },
         templates: {
-            empty: "Keine Resultate für <q>{{ query }}</q>",
+          empty: "Keine Resultate für <q>{{ query }}</q>",
             item: `
-              <h5><a href="{{id}}.html">{{#helpers.snippet}}{ "attribute": "title", "highlightedTagName": "mark" }{{/helpers.snippet}}</a></h5>
-              <p style="overflow:hidden;max-height:210px;">{{#helpers.snippet}}{ "attribute": "full_text", "highlightedTagName": "mark" }{{/helpers.snippet}}</p>
+            <h5><a href="{{id}}.html">{{#helpers.snippet}}{ "attribute": "title", "highlightedTagName": "mark" }{{/helpers.snippet}}</a></h5>
+            {{#full_text}}
+            <p style="overflow:hidden;max-height:210px;">{{#helpers.snippet}}{ "attribute": "full_text", "highlightedTagName": "mark" }{{/helpers.snippet}}</p>
+            {{/full_text}}
           `,
         },
+        transformItems(items) {
+          return items.map(item => {
+              if (search.helper.state.query) {
+                  return item;
+              } else {
+                  return {...item, full_text: null};
+              }
+          });
+      },
     }),
 
     instantsearch.widgets.pagination({
@@ -116,6 +121,8 @@ const  refinementListWithPanel =   instantsearch.widgets.panel({
         },
         searchable: true,
         showMore: true,
+        showMoreLimit: 1000,
+        limit: 5,
         searchablePlaceholder: "Nach Ort suchen",
         cssClasses: {
             searchableInput: "form-control form-control-sm m-2 border-light-2",
@@ -145,7 +152,9 @@ const  refinementListWithPanel =   instantsearch.widgets.panel({
               },
         },
         searchable: true,
+        limit: 5,
         showMore: true,
+        showMoreLimit: 1000,
         searchablePlaceholder: "Nach Person suchen",
         cssClasses: {
             searchableInput: "form-control form-control-sm m-2 border-light-2",
