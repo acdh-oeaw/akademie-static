@@ -13,7 +13,7 @@
                         <!-- ACDH Logo and Link -->
                         <div class="col-lg-2 col-md-4 col-sm-6 text-center my-2">
                             <a href="https://www.oeaw.ac.at/acdh">
-                                <img src="https://fundament.acdh.oeaw.ac.at/common-assets/images/acdh_logo.svg" class="img-fluid" alt="ACDH Logo" title="ACDH Logo"/>
+                                <img src="/akademie-static/images/ACDHCH_logo.png" class="img-fluid" alt="ACDH Logo" title="ACDH Logo"/>
                             </a>
                         </div>
 
