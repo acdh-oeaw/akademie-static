@@ -121,6 +121,8 @@ const search = instantsearch({
         },
         searchable: true,
         showMore: true,
+        showMoreLimit: 1000,
+        limit: 5,
         searchablePlaceholder: "Nach Ort suchen",
         cssClasses: {
             searchableInput: "form-control form-control-sm m-2 border-light-2",
@@ -150,7 +152,9 @@ const search = instantsearch({
               },
         },
         searchable: true,
+        limit: 5,
         showMore: true,
+        showMoreLimit: 1000,
         searchablePlaceholder: "Nach Person suchen",
         cssClasses: {
             searchableInput: "form-control form-control-sm m-2 border-light-2",
