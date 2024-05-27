@@ -54,7 +54,7 @@ def get_entities(ent_type, ent_node, ent_name):
             if en:
                 if ent_name == 'persName':
                     # get forename(s) and surname
-                    forenames = [forename.text for forename in en[0].xpath(".//tei:forename", namespaces={"tei": "http://www.tei-c.org/ns/1.0"}) if forename.text is not None]
+                    forenames = [" ".join(forename.text.split()) for forename in en[0].xpath(".//tei:forename", namespaces={"tei": "http://www.tei-c.org/ns/1.0"}) if forename.text is not None]
                     surnames = en[0].xpath(".//tei:surname", namespaces={"tei": "http://www.tei-c.org/ns/1.0"})
                     surname = surnames[0].text if surnames and surnames[0].text is not None else ''
                     if forenames:
@@ -67,7 +67,7 @@ def get_entities(ent_type, ent_node, ent_name):
                                 forenames.append('le')
                             else:
                                 print(forenames)
-                        entity = " ".join(" ".join(forenames + [surname]).split())
+                        entity = surname + ', ' + ' '.join(forenames)
                     else:
                         entity = surname
                 else:
@@ -83,7 +83,11 @@ def get_entities(ent_type, ent_node, ent_name):
 
 records = []
 cfts_records = []
-for xml_file in tqdm(files, total=len(files)):
+
+#files to exclude
+exclude_files = ["./data/editions/A_0150.xml"]
+
+for xml_file in tqdm([f for f in files if f not in exclude_files], total=len(files)):
     doc = TeiReader(xml=xml_file)
     """
     facs = doc.any_xpath(".//tei:body/tei:div/tei:pb/@facs")
@@ -146,7 +150,12 @@ for xml_file in tqdm(files, total=len(files)):
             cfts_records.append(cfts_record)
 
 make_index = client.collections["akademie-static"].documents.import_(records,{"action": "upsert"})
-print(make_index)
+errors = [msg for msg in make_index if (msg != '"{\\"success\\":true}"' and msg != '""')]
+if errors:
+    for err in errors:
+        print(err)
+else:
+    print("\nno errors")
 print("done with indexing Akademieprotokolle")
 
 #make_index = CFTS_COLLECTION.documents.import_(cfts_records, {"action": "upsert"})
