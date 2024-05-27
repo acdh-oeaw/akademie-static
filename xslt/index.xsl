@@ -35,6 +35,10 @@
                         <h2>
                             <xsl:value-of select="$project_title"/>
                         </h2>
+                        <div class="alert alert-warning" role="alert">
+                            <h3>Die Website wird derzeit technisch überarbeitet und ist daher nur teilweise funktionsfähig</h3>
+                        </div>
+                        
                     </div>
                     <div class="container" id="index-content">
                         <xsl:apply-templates select="tei:TEI/tei:teiHeader/tei:fileDesc/tei:publicationStmt/tei:p"/>
