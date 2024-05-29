@@ -85,3 +85,8 @@ p.link-in-footer a:link {
 div#map {
     height: 50vh;
 }
+
+mark{
+    background: orange;
+    color: black;
+}
