@@ -22,14 +22,14 @@ function updateHeaderUrl() {
 
     urlToUpdate.forEach((el) => {
       var urlToUpdateHref = el.getAttribute("href");
-      if (urlToUpdateHref.includes("&mark=")) {
+      if (urlToUpdateHref.includes("?mark=")) {
         var newUrl = urlToUpdateHref.replace(
           /&mark=\.+$/,
           `&mark=${tsInputVal}`
         );
         el.setAttribute("href", newUrl);
       } else {
-        var newUrl = `${urlToUpdateHref}&mark=${tsInputVal}`;
+        var newUrl = `${urlToUpdateHref}?mark=${tsInputVal}`;
         el.setAttribute("href", newUrl);
       }
     });

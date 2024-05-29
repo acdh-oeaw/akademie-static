@@ -103,6 +103,11 @@ div#map {
     height: 50vh;
 }
 
+mark{
+    background: orange;
+    color: black;
+}
+
 /*offset for jumping to page*/
 :target {
     scroll-margin-top: 60px;
