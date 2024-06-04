@@ -85,7 +85,7 @@
                                         <xsl:call-template name="annotation-options"></xsl:call-template>
                                     </div>
                                     <a href="{$teiSource}">
-                                        <i class="bi bi-download" title="TEI/XML"/>
+                                        <i class="bi bi-filetype-xml" title="TEI/XML"/>
                                     </a>
                                 </h3>
                             </div>
