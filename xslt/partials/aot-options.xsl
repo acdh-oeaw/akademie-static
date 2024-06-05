@@ -20,7 +20,7 @@
             <a title="Annotationen" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" role="button">
                 <i class="bi bi-gear" title="Menü zur Anpassung der Anzeige"></i>
             </a>
-            <ul class="dropdown-menu" style="min-width: 260px;"> 
+            <ul class="dropdown-menu" style="min-width: 240px;"> 
                 <li class="dropdown-item">
                     <image-switch opt="es"></image-switch>
                 </li>
