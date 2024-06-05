@@ -72,23 +72,22 @@ p.fc {
     margin-left: auto;
 }
 
-/*display abbreviation when slider is off*/
+/*display expansion when slider is off*/
 .choice:not(.choice-on)>.abbr {
-    display: inline;
+    display: none;
 }
 
 .choice-on>.abbr {
-    display: none;
-}
-/* expansion when slider is on */
-.choice-on>.expan {
     display: inline;
+}
+/* abbreviation when slider is on */
+.choice-on>.expan {
+    display: none;
 }
 
 .choice:not(.choice-on)>.expan {
-    display: none;
+    display: inline;
 }
-
 
 /* needed for interactive map in listplace.xsl */
 div#map {

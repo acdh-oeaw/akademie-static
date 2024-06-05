@@ -1,3 +1,13 @@
+// add param for facsimile to url
+let url = new URL(location.href);
+let params = new URLSearchParams(url.search);
+// Check if 'img' parameter is already set
+if (!params.has('img')) {
+  params.append('img', 'on');
+}
+url.search = params.toString();
+history.pushState({}, '', url.toString());
+
 var editor = new LoadEditor({
   aot: {
     title: "Text Annotations",
@@ -25,6 +35,7 @@ var editor = new LoadEditor({
         title: "Personen",
         html_class: "persons",
         css_class: "pers",
+        default: true,
         hide: {
           hidden: false,
           class: "persons .entity",
@@ -41,6 +52,7 @@ var editor = new LoadEditor({
         title: "Orte",
         html_class: "places",
         css_class: "plc",
+        default: true,
         hide: {
           hidden: false,
           class: "places .entity",
@@ -54,7 +66,7 @@ var editor = new LoadEditor({
       {
         opt: "abbr",
         color: "none",
-        title: "Abkürzungen auflösen",
+        title: "Vorlageform anzeigen",
         html_class: "choice",
         css_class: "choice-on",
         chg_citation: "citation-url",
@@ -146,27 +158,27 @@ var editor = new LoadEditor({
     variants: [
       {
         opt: "es",
-        title: "Faksimile An/Aus",
+        title: "Faksimile an/aus",
         urlparam: "img",
         chg_citation: "citation-url",
         fade: "fade",
         column_small: {
           class: "col-md-6",
-          percent: "50",
+          percent: "50%"
         },
         column_full: {
           class: "col-md-12",
-          percent: "100",
+          percent: "100%"
         },
         hide: {
           hidden: true,
           class_to_hide: "facsimiles",
           class_to_show: "text",
           class_parent: "transcript",
-          resize: "resize-hide",
+          resize: "resize-hide"
         },
-        image_size: "400px",
-      },
+        image_size: "1000px"
+      }
     ],
     active_class: "active",
     rendered_element: {
@@ -176,5 +188,5 @@ var editor = new LoadEditor({
   },
 
   wr: false,
-  up: false,
+  up: true,
 });
