@@ -47,7 +47,7 @@
                 </style>
                 -->
             </head>
-            <body class="d-flex flex-column h-100">
+            <body class="d-flex flex-column">
                 <xsl:call-template name="nav_bar"/>
                 <main class="flex-shrink-0">
                     <div class="container">
@@ -212,8 +212,9 @@
     <xsl:template match="tei:pb">
         <xsl:variable name="oldUrl" select="key('surface-by-id', substring-after(@facs, '#'))//tei:graphic/@url" />
         <xsl:variable name="tokens" select="tokenize($oldUrl, '/')" />
-        <xsl:variable name="lastPart" select="$tokens[last()]" />
-        <xsl:variable name="newUrl" select="concat('https://iiif.acdh.oeaw.ac.at/iiif/images/akademieprotokolle/ph/', $lastPart, '.jp2/full/max/0/default.jpg')" />
+        <xsl:variable name="series" select="$tokens[4]" />
+        <xsl:variable name="fileName" select="$tokens[last()]" />
+        <xsl:variable name="newUrl" select="concat('https://iiif.acdh.oeaw.ac.at/iiif/images/akademieprotokolle/', $series, '/', $fileName, '.jp2/full/max/0/default.jpg')" />
         <span class="pb" source="{$newUrl}"></span>
         <xsl:element name="p">
             <xsl:attribute name="class" select="'paragraph-for-page-break'"/>
