@@ -17,7 +17,7 @@
 /*Footer styles*/
 .logo {
     width: 100%;
-    max-width: 200px; /* Adjust this value to suit your needs */
+    max-width: 200px;
 }
 
 a.helpdesk-button {
@@ -70,6 +70,10 @@ p.fc {
     padding-bottom: 0rem;
     max-width: 900px;
     margin-left: auto;
+}
+/*approximate navbar height off-set for scrolling*/
+.pb {
+    scroll-margin-top: 50px;
 }
 
 /*display expansion when slider is off*/
