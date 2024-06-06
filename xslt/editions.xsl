@@ -210,8 +210,11 @@
     </xsl:template>
 
     <xsl:template match="tei:pb">
-        <!-- add /full/full/0/default.jpg to each image url based on Bundesverfassung Österreich -->
-        <span class="pb" source="{concat(key('surface-by-id', substring-after(@facs, '#'))//tei:graphic/@url, '/full/full/0/default.jpg')}"></span>
+        <xsl:variable name="oldUrl" select="key('surface-by-id', substring-after(@facs, '#'))//tei:graphic/@url" />
+        <xsl:variable name="tokens" select="tokenize($oldUrl, '/')" />
+        <xsl:variable name="lastPart" select="$tokens[last()]" />
+        <xsl:variable name="newUrl" select="concat('https://iiif.acdh.oeaw.ac.at/iiif/images/akademieprotokolle/ph/', $lastPart, '.jp2/full/max/0/default.jpg')" />
+        <span class="pb" source="{$newUrl}"></span>
         <xsl:element name="p">
             <xsl:attribute name="class" select="'paragraph-for-page-break'"/>
             <xsl:text>Seite </xsl:text>
