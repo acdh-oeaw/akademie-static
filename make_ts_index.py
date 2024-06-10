@@ -29,6 +29,7 @@ current_schema = {
         {"name": "datum", "type": "string", "sort": True},
         {"name": "personen", "type": "string[]", "facet": True, "optional": True},
         {"name": "orte", "type": "string[]", "facet": True, "optional": True},
+        {"name": "sitzungsrahmen", "type": "string", "facet": True, "optional": True},
     ],
     "default_sorting_field": "datum",
 }
@@ -102,6 +103,12 @@ for xml_file in tqdm([f for f in files if f not in exclude_files], total=len(fil
     # make record for each document, removed indent for the following lines
     cfts_record = {"project": "akademie-static",}
     record = {}
+    
+    if os.path.basename(xml_file).startswith("A"):
+        record["sitzungsrahmen"] = "Gesamtakademie"
+    elif os.path.basename(xml_file).startswith("C"):
+        record["sitzungsrahmen"] = "philosophisch-historische Klasse"
+        
     #record["id"] = os.path.split(xml_file)[-1].replace(".xml", ".html")
     record["id"] = os.path.splitext(os.path.split(xml_file)[-1])[0]
     cfts_record["id"] = record["id"]
