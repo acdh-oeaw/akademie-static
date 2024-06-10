@@ -90,71 +90,76 @@ exclude_files = ["./data/editions/A_0150.xml"]
 
 for xml_file in tqdm([f for f in files if f not in exclude_files], total=len(files)):
     doc = TeiReader(xml=xml_file)
-    """
+
+    # information on document level
+    
+    r_title = " ".join(" ".join(doc.any_xpath('.//tei:titleStmt/tei:meeting//text()')).split())
+    if os.path.basename(xml_file).startswith("A"):
+        series = "Gesamtakademie"
+    elif os.path.basename(xml_file).startswith("C"):
+        series = "philosophisch-historische Klasse"
+    
+    date_str = doc.any_xpath("//tei:titleStmt/tei:meeting/tei:date/@when")[0]
+    # Check if date_str matches the ISO date format
+    iso_date = None
+    try:
+        datetime.strptime(date_str, '%Y-%m-%d')
+        iso_date = date_str
+    except ValueError:
+        print(xml_file)
+            
     facs = doc.any_xpath(".//tei:body/tei:div/tei:pb/@facs")
     pages = 0
     for v in facs:
-        p_group = f".//tei:body/tei:div/tei:div[preceding-sibling::tei:pb[1]/@facs='{v}']"
+        p_group = f".//tei:body/tei:div/tei:div[preceding-sibling::tei:pb[1]/@facs='{v}']/tei:p|.//tei:body/tei:div/tei:div[preceding-sibling::tei:pb[1]/@facs='{v}']/tei:lg"
         body = doc.any_xpath(p_group)
-        print (body)
         pages += 1
-    """
-    body = doc.any_xpath(".//tei:body")[0]
-    # make record for each document, removed indent for the following lines
-    cfts_record = {"project": "akademie-static",}
-    record = {}
-    
-    if os.path.basename(xml_file).startswith("A"):
-        record["sitzungsrahmen"] = "Gesamtakademie"
-    elif os.path.basename(xml_file).startswith("C"):
-        record["sitzungsrahmen"] = "philosophisch-historische Klasse"
-        
-    #record["id"] = os.path.split(xml_file)[-1].replace(".xml", ".html")
-    record["id"] = os.path.splitext(os.path.split(xml_file)[-1])[0]
-    cfts_record["id"] = record["id"]
-    cfts_record["resolver"] = (
-            f"https://fun-with-editions.github.io/akademie-static/{record['id']}"
-        )
-    record["rec_id"] = os.path.split(xml_file)[-1]
-    cfts_record["rec_id"] = record["rec_id"]
-    r_title = " ".join(" ".join(doc.any_xpath('.//tei:titleStmt/tei:meeting//text()')).split())
-    #record["title"] = f"{r_title} Page {str(pages)}"
-    record["title"] = f"{r_title}"
-    cfts_record["title"] = record["title"]
-    date_str = doc.any_xpath("//tei:titleStmt/tei:meeting/tei:date/@when")[0]
-    # Check if date_str matches the ISO date format
-    try:
-        datetime.strptime(date_str, '%Y-%m-%d')
-        record["datum"] = date_str
-        cfts_record["datum"] = date_str
-        record["jahr"] = int(date_str[:4])
-        cfts_record["jahr"] = int(date_str[:4])
-    except ValueError:
-        print(xml_file)
-
-
-    if len(body) > 0:
-        # get unique persons per doc
-        ent_type = "person"
-        ent_name = "persName"
-        record["personen"] = get_entities(
-            ent_type=ent_type, ent_node=ent_type, ent_name=ent_name
+        cfts_record = {"project": "akademie-static",}
+        record = {}
+        #record["id"] = os.path.split(xml_file)[-1].replace(".xml", ".html")
+        record["id"] = os.path.split(xml_file)[-1].replace(".xml", f".html#pag{str(pages)}")
+        #record["id"] = os.path.splitext(os.path.split(xml_file)[-1])[0]
+        cfts_record["id"] = record["id"]
+        cfts_record["resolver"] = (
+                f"https://fun-with-editions.github.io/akademie-static/{record['id']}"
             )
-        cfts_record["personen"] = record["personen"]
-        # get unique places per doc
-        ent_type = "place"
-        ent_name = "placeName"
-        record["orte"] = get_entities(ent_type=ent_type, ent_node=ent_type, ent_name=ent_name)
-        cfts_record["orte"] = record["orte"]
+        record["rec_id"] = os.path.split(xml_file)[-1]
+        cfts_record["rec_id"] = record["rec_id"]
+
+        record["title"] = f"{r_title} Seite {str(pages)}"
+        cfts_record["title"] = record["title"]
         
-        #extract full text, excluding lb hyphens and abbreviations
-        text_nodes = body.xpath('.//text()[not(ancestor::tei:abbr) and not(self::text()[contains(.,"-") and following-sibling::tei:lb[1]])]', namespaces={"tei": "http://www.tei-c.org/ns/1.0"})
-        record["full_text"] = ' '.join(node for node in text_nodes)
-        #record["full_text"] = "\n".join(" ".join("".join(p.itertext()).split()) for p in body)
-        if len(record["full_text"]) > 0:
-            records.append(record)
-            cfts_record["full_text"] = record["full_text"]
-            cfts_records.append(cfts_record)
+        if iso_date is not None:
+            record["datum"] = iso_date
+            record["jahr"] = int(iso_date[:4])
+            cfts_record["jahr"] = record["jahr"]
+        
+        record["sitzungsrahmen"] = series
+
+        if len(body) > 0:
+            # get unique persons per doc
+            ent_type = "person"
+            ent_name = "persName"
+            record["personen"] = get_entities(
+                ent_type=ent_type, ent_node=ent_type, ent_name=ent_name
+                )
+            cfts_record["personen"] = record["personen"]
+            # get unique places per doc
+            ent_type = "place"
+            ent_name = "placeName"
+            record["orte"] = get_entities(ent_type=ent_type, ent_node=ent_type, ent_name=ent_name)
+            cfts_record["orte"] = record["orte"]
+            
+            #extract full text, excluding lb hyphens and abbreviations
+            text_nodes = []
+            for p in body:
+                text_nodes.extend(p.xpath('.//text()[not(ancestor::abbr) and not(self::text()[contains(.,"-") and following-sibling::lb[1]])]', namespaces={"tei": "http://www.tei-c.org/ns/1.0"}))
+            record["full_text"] = ' '.join(node for node in text_nodes)
+            #record["full_text"] = "\n".join(" ".join("".join(p.itertext()).split()) for p in body)
+            if len(record["full_text"]) > 0:
+                records.append(record)
+                cfts_record["full_text"] = record["full_text"]
+                cfts_records.append(cfts_record)
 
 make_index = client.collections["akademie-static"].documents.import_(records,{"action": "upsert"})
 errors = [msg for msg in make_index if (msg != '"{\\"success\\":true}"' and msg != '""')]
