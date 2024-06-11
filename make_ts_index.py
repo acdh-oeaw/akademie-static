@@ -81,6 +81,14 @@ def get_entities(ent_type, ent_node, ent_name):
                         f.write(f"{r} in {record['id']}\n")
     return [ent for ent in sorted(set(entities))]
 
+# recursively process lb hyphens
+def join_without_hyphens(text_list):
+    if len(text_list) < 2:
+        return ' '.join(text_list)
+    elif text_list[0].endswith('-') and text_list[1][0].islower():
+        return join_without_hyphens([text_list[0][:-1] + text_list[1]] + text_list[2:])
+    else:
+        return text_list[0] + ' ' + join_without_hyphens(text_list[1:])
 
 records = []
 cfts_records = []
@@ -92,7 +100,6 @@ for xml_file in tqdm([f for f in files if f not in exclude_files], total=len(fil
     doc = TeiReader(xml=xml_file)
 
     # information on document level
-    
     r_title = " ".join(" ".join(doc.any_xpath('.//tei:titleStmt/tei:meeting//text()')).split())
     if os.path.basename(xml_file).startswith("A"):
         series = "Gesamtakademie"
@@ -107,12 +114,15 @@ for xml_file in tqdm([f for f in files if f not in exclude_files], total=len(fil
         iso_date = date_str
     except ValueError:
         print(xml_file)
-            
+    outer_body = doc.any_xpath(".//tei:body")[0]
+    text_nodes = outer_body.xpath('.//text()[not(ancestor::tei:abbr) and not(self::text()[contains(.,"-") and following-sibling::tei:lb[1]])]', namespaces={"tei": "http://www.tei-c.org/ns/1.0"})
+    #print (text_nodes)
     facs = doc.any_xpath(".//tei:body/tei:div/tei:pb/@facs")
     pages = 0
     for v in facs:
         p_group = f".//tei:body/tei:div/tei:div[preceding-sibling::tei:pb[1]/@facs='{v}']/tei:p|.//tei:body/tei:div/tei:div[preceding-sibling::tei:pb[1]/@facs='{v}']/tei:lg"
         body = doc.any_xpath(p_group)
+        
         pages += 1
         cfts_record = {"project": "akademie-static",}
         record = {}
@@ -149,13 +159,19 @@ for xml_file in tqdm([f for f in files if f not in exclude_files], total=len(fil
             ent_name = "placeName"
             record["orte"] = get_entities(ent_type=ent_type, ent_node=ent_type, ent_name=ent_name)
             cfts_record["orte"] = record["orte"]
-            
+
             #extract full text, excluding lb hyphens and abbreviations
-            text_nodes = []
+            full_text = []
             for p in body:
-                text_nodes.extend(p.xpath('.//text()[not(ancestor::abbr) and not(self::text()[contains(.,"-") and following-sibling::lb[1]])]', namespaces={"tei": "http://www.tei-c.org/ns/1.0"}))
-            record["full_text"] = ' '.join(node for node in text_nodes)
-            #record["full_text"] = "\n".join(" ".join("".join(p.itertext()).split()) for p in body)
+                # Iterate through all text nodes within the <p> element excluding those within <abbr>
+                for node in p.xpath('.//text()[not(ancestor::tei:abbr)]', namespaces={"tei": "http://www.tei-c.org/ns/1.0"}):
+                    full_text.append(node)
+            node = ' '.join(node.replace('\n', ' ').split())
+            if node:  # Only append non-empty strings
+                full_text.append(node)
+            finaltext = join_without_hyphens(full_text)
+            print (finaltext)
+            record["full_text"] = finaltext
             if len(record["full_text"]) > 0:
                 records.append(record)
                 cfts_record["full_text"] = record["full_text"]
@@ -173,4 +189,3 @@ print("done with indexing Akademieprotokolle")
 #make_index = CFTS_COLLECTION.documents.import_(cfts_records, {"action": "upsert"})
 #print(make_index)
 #print("done with cfts-index Akademieprotokolle")
-
