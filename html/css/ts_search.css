@@ -15,7 +15,8 @@
 
 #refinement-list-person,
 #refinement-list-place,
-#refinement-range-year {
+#refinement-range-year,
+#refinement-list-series {
     padding: 1em .5em 2em .5em;
     -webkit-box-shadow: -14px 21px 24px -28px rgba(156,156,156,1);
     -moz-box-shadow: -14px 21px 24px -28px rgba(156,156,156,1);
@@ -30,6 +31,11 @@
     overflow:auto;
     height:10em;
 }
+#refinement-list-series .ais-RefinementList-list {
+    overflow: initial;
+    height: initial;
+}
+
 .col-md-4 h4 {
     margin-top: 1em;
 }

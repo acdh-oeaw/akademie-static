@@ -34,9 +34,12 @@
                                     <div id="stats-container"></div>
                                     <div id ="facets">
                                         <h4>Filter</h4>
+                                        <div id="refinement-list-series"></div>
                                         <div id="refinement-list-person"></div>
                                         <div id="refinement-list-place"></div>
                                         <div id="refinement-range-year"></div>
+                                        
+                                        
                                     </div>
                                     <div id="clear-refinements"></div>
                                 </div>
