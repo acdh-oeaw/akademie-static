@@ -71,7 +71,7 @@ p.fc {
     max-width: 900px;
     margin-left: auto;
 }
-/*approximate navbar height off-set for scrolling*/
+/*approximate navbar height offset for scrolling*/
 .pb {
     scroll-margin-top: 50px;
 }
@@ -96,4 +96,9 @@ p.fc {
 /* needed for interactive map in listplace.xsl */
 div#map {
     height: 50vh;
+}
+
+/*offset for jumping to page*/
+:target{
+    scroll-margin-top: 60px; 
 }

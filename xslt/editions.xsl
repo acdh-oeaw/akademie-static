@@ -214,6 +214,7 @@
     <xsl:template match="tei:div[@type = 'page']">
         <xsl:element name="div">
             <xsl:attribute name="class" select="'make-box-for-page'"/>
+            <xsl:attribute name="id" select="tei:pb/@xml:id"/>
             <xsl:apply-templates select="child::tei:pb"/>
             <xsl:apply-templates select="child::tei:div"/>
         </xsl:element>
