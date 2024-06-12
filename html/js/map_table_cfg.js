@@ -37,9 +37,16 @@ const columns = [
     resizable: false,
   },
   {
-    headerFilter: "input",
+    headerFilter: 'number',
+    headerFilterPlaceholder: 'mindestens...',
+    headerFilterFunc: function (headerValue, rowValue, rowData, filterParams) {
+      // Convert headerValue to a number before comparing
+      // For some reason headerFilterFunc:"<=" was treating the values as strings
+      return Number(rowValue) >= Number(headerValue);
+    },
     title: "Erwähnungen",
     field: "mentions",
+    sorter: "number",
     formatter: "plaintext",
     minWidth: 100,
     resizable: true,
@@ -116,6 +123,7 @@ const tabulator_cfg = {
   responsiveLayout: "collapse",
   langs: langs,
   columns: columns,
+  initialSort: [{ column: "mentions", dir: "desc" }],
 };
 
 /*this is just an extra capsule to pass cfg trough the functions*/
@@ -150,7 +158,7 @@ let wms_cfg = {
 let tms_cfg = {
   label: "Europa um 1700",
   tms_url: "https://emt-project.github.io/mapserver/map_01/{z}/{x}/{y}.png",
-  layerOptions: {tms: 1, opacity: 0.8, minZoom: 2, maxZoom: 12, attribution: "Austrian National Library (ÖNB)"},
+  layerOptions: { tms: 1, opacity: 0.8, minZoom: 2, maxZoom: 12, attribution: "Austrian National Library (ÖNB)" },
 }
 
 //////////////////////////////////////////////////
