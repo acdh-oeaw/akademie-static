@@ -103,6 +103,7 @@
                         Erwähnt in
                         </th>
                         <td>
+                        <div style="max-height: 200px; overflow-y: auto;">
                             <ul>
                                 <xsl:for-each select="./tei:noteGrp/tei:note">
                                     <li>
@@ -112,6 +113,7 @@
                                     </li>
                                 </xsl:for-each>
                             </ul>
+                            </div>
                         </td>
                     </tr>
                 </xsl:if>
