@@ -116,7 +116,6 @@ for xml_file in tqdm([f for f in files if f not in exclude_files], total=len(fil
         print(xml_file)
     outer_body = doc.any_xpath(".//tei:body")[0]
     text_nodes = outer_body.xpath('.//text()[not(ancestor::tei:abbr) and not(self::text()[contains(.,"-") and following-sibling::tei:lb[1]])]', namespaces={"tei": "http://www.tei-c.org/ns/1.0"})
-    #print (text_nodes)
     facs = doc.any_xpath(".//tei:body/tei:div/tei:pb/@facs")
     pages = 0
     for v in facs:
@@ -167,9 +166,7 @@ for xml_file in tqdm([f for f in files if f not in exclude_files], total=len(fil
             node = ' '.join(node.replace('\n', ' ').split())
             if node:  # Only append non-empty strings
                 full_text.append(node)
-            finaltext = join_without_hyphens(full_text)
-            print (finaltext)
-            record["full_text"] = finaltext
+            record["full_text"] = join_without_hyphens(full_text)
             if len(record["full_text"]) > 0:
                 records.append(record)
                 cfts_record["full_text"] = record["full_text"]
