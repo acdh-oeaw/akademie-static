@@ -67,7 +67,9 @@
                     </div>
                 </main>
                 <xsl:call-template name="html_footer"/>
-                <xsl:call-template name="tabulator_js"/>
+                <xsl:call-template name="tabulator_js">
+                <xsl:with-param name="sortColumn" select="'nachname'"/>
+</xsl:call-template>
             </body>
         </html>
 
