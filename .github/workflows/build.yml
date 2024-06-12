@@ -35,7 +35,7 @@ jobs:
       uses: actions/checkout@v4
     - name: Fetch Data
       run: | 
-        ./fetch_data.sh
+        ./shellscripts/fetch_data.sh
     - name: Install Saxon, Ant and Python
       run: |
         sudo apt-get update && sudo apt-get install openjdk-11-jre-headless ant -y --no-install-recommends
@@ -48,7 +48,7 @@ jobs:
       run: |
         ant
     - name: Update Favicons
-      run: python update_favicons.py
+      run: python ./pyscripts/update_favicons.py
     - name: Setup Pages
       uses: actions/configure-pages@v5
     - name: Upload artifact
@@ -61,4 +61,4 @@ jobs:
       uses: actions/deploy-pages@v4
     - name: Setup Typesense
       run: |
-        python ./make_ts_index.py
+        python ./pyscripts/make_ts_index.py

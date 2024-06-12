@@ -321,9 +321,6 @@
                                 <field name="headerURL">
                                     <String></String>
                                 </field>
-                                <field name="inputXSLURL">
-                                    <String>${pdu}/xslt/listbibl.xsl</String>
-                                </field>
                                 <field name="inputXMLURL">
                                     <String>${currentFileURL}</String>
                                 </field>
