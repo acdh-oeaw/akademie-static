@@ -151,24 +151,29 @@
         </xsl:element>
     </xsl:template>
     <xsl:template match="tei:rs">
-        <xsl:if test="starts-with(//tei:titleStmt/tei:title[1]/text(), 'C')">
-            <xsl:choose>
-                <xsl:when test="@type='person' and string-length(substring-after(@ref, '#')) > 0">
-                    <span class="persons entity {substring-after(@rendition, '#')}" data-bs-toggle="modal" data-bs-target="{@ref}">
-                        <xsl:attribute name="id" select="@xml:id"/>
+        <xsl:choose>
+            <xsl:when test="starts-with(//tei:titleStmt/tei:title[1]/text(), 'C')">
+                <xsl:choose>
+                    <xsl:when test="@type='person' and string-length(substring-after(@ref, '#')) > 0">
+                        <span class="persons entity {substring-after(@rendition, '#')}" data-bs-toggle="modal" data-bs-target="{@ref}">
+                            <xsl:attribute name="id" select="@xml:id"/>
+                            <xsl:apply-templates/>
+                        </span>
+                    </xsl:when>
+                    <xsl:when test="@type='place' and string-length(substring-after(@ref, '#')) > 0">
+                        <span class="places entity {substring-after(@rendition, '#')}" id="{@xml:id}" data-bs-toggle="modal" data-bs-target="{@ref}">
+                            <xsl:apply-templates/>
+                        </span>
+                    </xsl:when>
+                    <xsl:otherwise>
                         <xsl:apply-templates/>
-                    </span>
-                </xsl:when>
-                <xsl:when test="@type='place' and string-length(substring-after(@ref, '#')) > 0">
-                    <span class="places entity {substring-after(@rendition, '#')}" id="{@xml:id}" data-bs-toggle="modal" data-bs-target="{@ref}">
-                        <xsl:apply-templates/>
-                    </span>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:apply-templates/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:if>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates/>
+            </xsl:otherwise>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="tei:listPerson">
