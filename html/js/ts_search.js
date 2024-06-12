@@ -45,7 +45,7 @@ search.addWidgets([
     templates: {
       empty: "Keine Resultate für <q>{{ query }}</q>",
       item: `
-            <h5><a href="{{id}}.html">{{#helpers.snippet}}{ "attribute": "title", "highlightedTagName": "mark" }{{/helpers.snippet}}</a></h5>
+            <h5><a href="{{id}}">{{#helpers.snippet}}{ "attribute": "title", "highlightedTagName": "mark" }{{/helpers.snippet}}</a></h5>
             {{#full_text}}
             <p style="overflow:hidden;max-height:210px;">{{#helpers.snippet}}{ "attribute": "full_text", "highlightedTagName": "mark" }{{/helpers.snippet}}</p>
             {{/full_text}}
