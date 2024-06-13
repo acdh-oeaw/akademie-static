@@ -113,10 +113,16 @@
                                 <h1>
                                     <xsl:value-of select="$name"/>
                                 </h1>
+                                <div class="row">
+                                <div class="col-6">
                                 <xsl:call-template name="place_detail"/>
+                                </div>
+                                <div class="col-6">
                                 <xsl:if test="./tei:location/tei:geo">
                                     <div id="map_detail"/>
                                 </xsl:if>
+                                </div>
+                                </div>
                             </div>
                         </main>
                         <xsl:call-template name="html_footer"/>
