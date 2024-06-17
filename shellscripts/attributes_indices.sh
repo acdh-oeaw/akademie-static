@@ -7,3 +7,6 @@ add-attributes -g "./data/indices/*.xml" -b "https://id.acdh.oeaw.ac.at/akademie
 
 echo "denormalize indices"
 denormalize-indices -f "./data/editions/*.xml" -i "./data/indices/*.xml" -x ".//tei:title[@type='num']/text()"
+
+echo "remove noteGrps from index entries in editions"
+python pyscripts/rm_notegrps.py

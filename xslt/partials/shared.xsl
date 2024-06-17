@@ -181,7 +181,6 @@
     </xsl:template>
 
     <xsl:template match="tei:person">
-        <xsl:param name="showNumberOfMentions" as="xs:integer" select="5" />
         <xsl:variable name="selfLink">
             <xsl:value-of select="concat(data(@xml:id), '.html')"/>
         </xsl:variable>
@@ -190,9 +189,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                            <xsl:value-of select="concat(./tei:persName[1]/tei:surname[1], ', ', ./tei:persName[1]/tei:forename[1])"/>
+                            <a href="{$selfLink}"><xsl:value-of select="concat(./tei:persName[1]/tei:surname[1], ', ', ./tei:persName[1]/tei:forename[1])"/></a>
                         </h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
                     </div>
                     <div class="modal-body">
                         <table class="table">
@@ -233,34 +231,6 @@
                                         </td>
                                     </tr>
                                 </xsl:if>
-                                <xsl:if test="./tei:noteGrp">
-                                    <tr>
-                                        <th>
-                                        Erwähnungen
-                                        </th>
-                                        <td>
-                                            <ul>
-                                                <xsl:for-each select=".//tei:note">
-                                                    <xsl:choose>
-                                                        <xsl:when test="position() lt $showNumberOfMentions + 1">
-                                                            <li>
-                                                                <a href="{replace(@target, '.xml', '.html')}">
-                                                                    <xsl:value-of select="./text()"/>
-                                                                </a>
-                                                            </li>
-                                                        </xsl:when>
-                                                    </xsl:choose>
-                                                </xsl:for-each>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                </xsl:if>
-                                <tr>
-                                    <th></th>
-                                    <td>
-                                        Anzahl der Erwähnungen limitiert, klicke <a href="{$selfLink}">hier</a> für eine vollständige Auflistung
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -277,7 +247,6 @@
     </xsl:template>
 
     <xsl:template match="tei:place">
-        <xsl:param name="showNumberOfMentions" as="xs:integer" select="5" />
         <xsl:variable name="selfLink">
             <xsl:value-of select="concat(data(@xml:id), '.html')"/>
         </xsl:variable>
@@ -286,9 +255,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                            <xsl:value-of select="./tei:placeName[1]"/>
+                            <a href="{$selfLink}"><xsl:value-of select="./tei:placeName[1]"/></a>
                         </h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Schließen"></button>
                     </div>
                     <div class="modal-body">
                         <table>
@@ -350,34 +318,6 @@
                                         </td>
                                     </tr>
                                 </xsl:if>
-                                <xsl:if test="./tei:noteGrp">
-                                    <tr>
-                                        <th>
-                                        Erwähnungen
-                                        </th>
-                                        <td>
-                                            <ul>
-                                                <xsl:for-each select=".//tei:note">
-                                                    <xsl:choose>
-                                                        <xsl:when test="position() lt $showNumberOfMentions + 1">
-                                                            <li>
-                                                                <a href="{replace(@target, '.xml', '.html')}">
-                                                                    <xsl:value-of select="./text()"/>
-                                                                </a>
-                                                            </li>
-                                                        </xsl:when>
-                                                    </xsl:choose>
-                                                </xsl:for-each>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                </xsl:if>
-                                <tr>
-                                    <th></th>
-                                    <td>
-                                        Anzahl der Erwähnungen limitiert, klicke <a href="{$selfLink}">hier</a> für eine vollständige Auflistung
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
