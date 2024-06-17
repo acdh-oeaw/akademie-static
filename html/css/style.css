@@ -56,12 +56,15 @@ p.paragraph-for-page-break {
 p.paragraph-main-text {
     margin: 1rem;
 }
+
 p.fc {
     text-align: center;
 }
+
 .underline {
     text-decoration: underline;
 }
+
 #viewer {
     position: sticky;
     top: 10%;
@@ -71,6 +74,7 @@ p.fc {
     max-width: 900px;
     margin-left: auto;
 }
+
 /*approximate navbar height offset for scrolling*/
 .pb {
     scroll-margin-top: 50px;
@@ -84,6 +88,7 @@ p.fc {
 .choice-on>.abbr {
     display: inline;
 }
+
 /* abbreviation when slider is on */
 .choice-on>.expan {
     display: none;
@@ -99,6 +104,36 @@ div#map {
 }
 
 /*offset for jumping to page*/
-:target{
-    scroll-margin-top: 60px; 
+:target {
+    scroll-margin-top: 60px;
+}
+
+
+
+/* Small devices */
+@media (max-width: 576px) {
+    .badge {
+        font-size: 1rem;
+    }
+}
+
+/* Medium devices*/
+
+@media (max-width: 768px) {
+    .badge {
+        font-size: 1.2rem;
+    }
+
+    /*override max-width set by de-micro-editor for smaller screens*/
+    #img-resize,
+    #text-resize {
+        max-width: 100% !important;
+    }
+}
+
+/* Large devices */
+@media (min-width: 769px) {
+    .badge {
+        font-size: 1.4rem;
+    }
 }
