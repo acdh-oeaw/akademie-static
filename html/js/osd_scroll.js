@@ -7,7 +7,7 @@ get container wrapper of osd viewer
 */
 // var container = document.getElementById("container_facs_2");
 // container.style.display = "none";
-var height = screen.height;
+
 var container = document.getElementById("container_facs_1");
 var wrapper = document.getElementsByClassName("facsimiles")[0];
 
@@ -19,26 +19,35 @@ if false get with from sibling container divided by half
 height is always the screen height minus some offset
 ##################################################################
 */
+//set osd container height
+setContainerHeight(container);
+
+// set osd container width
+var sectionContainer = document.getElementById("section");
+var viewerContainer = document.getElementById("viewer");
+
 if (!wrapper.classList.contains("fade")) {
-    container.style.height = `${String(height * 0.8)}px`;
-    // set osd wrapper container width
-    var container = document.getElementById("section");
-    if (container !== null) {
-        var width = container.clientWidth;
+    if (sectionContainer !== null) {
+        var width = sectionContainer.clientWidth;
     }
-    var container = document.getElementById("viewer");
-    container.style.width = `${String(width - 25)}px`;
+    viewerContainer.style.width = `${String(width - 25)}px`;
 } else {
-    container.style.height = `${String(height * 0.8)}px`;
-    // set osd wrapper container width
-    var container = document.getElementById("section");
-    if (container !== null) {
-        var width = container.clientWidth;
+    if (sectionContainer !== null) {
+        var width = sectionContainer.clientWidth;
     }
-    var container = document.getElementById("viewer");
-    container.style.width = `${String(width / 2)}px`;
+    viewerContainer.style.width = `${String(width / 2)}px`;
 }
 
+/* change size of facs container */
+function setContainerHeight(container){
+    let height = Math.floor(window.innerHeight * 0.9);
+    if (height != container.clientHeight) {
+    container.style.height = `${String(height)}px`;
+    return true;} else {
+        return false;
+    }
+};
+ 
 /*
 ##################################################################
 get all image urls stored in span el class tei-xml-images
@@ -241,3 +250,12 @@ window.onload = function() {
     var container = document.querySelector('#text-resize');
     container.appendChild(space);
 };
+
+window.addEventListener("resize", function (event) {
+    let resized = setContainerHeight(container);
+    console.log(resized)
+    if (resized) {
+        viewer.forceResize();
+    };
+  }
+);

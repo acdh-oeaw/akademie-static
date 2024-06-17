@@ -105,11 +105,9 @@
                         <!-- badge for A protocols-->
                         <xsl:if test="starts-with(.//tei:titleStmt/tei:title[1]/text(), 'A_')">
                             <div class="row">
-                             <div class="col-2"/>
-                             <div class="col-8 text-center fs-4">
-                               <span class="badge text-bg-warning">Hinweis: Diese Transkription wurde maschinell erstellt und nicht überprüft.</span>
+                             <div class="col-12 text-center">
+                               <span class="badge text-bg-warning text-wrap">Hinweis: Diese Transkription wurde maschinell erstellt und nicht überprüft.</span>
                             </div>
-                            <div class="col-2"/>
                             </div>
                         </xsl:if>
                         <div id="container-resize" class="row transcript">
