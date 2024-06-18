@@ -107,8 +107,10 @@
                             <ul>
                                 <xsl:for-each select="./tei:noteGrp/tei:note">
                                     <li>
+                                     <xsl:variable name="targetDoc" select="document(concat('../../data/editions/', @target))"/>
                                         <a href="{replace(@target, '.xml', '.html')}">
-                                            <xsl:value-of select="./text()"/>
+                                            <xsl:value-of select="$targetDoc//tei:titleStmt/tei:meeting/text()"/>
+                                            <xsl:value-of select="$targetDoc//tei:titleStmt/tei:meeting/tei:date/text()"/>
                                         </a>
                                     </li>
                                 </xsl:for-each>
