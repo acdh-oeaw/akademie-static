@@ -142,3 +142,9 @@ mark{
         font-size: 1.4rem;
     }
 }
+
+
+mark{
+    background: orange;
+    color: black;
+}
