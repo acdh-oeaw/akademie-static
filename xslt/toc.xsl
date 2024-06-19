@@ -29,6 +29,7 @@
                                     <th scope="col" tabulator-headerFilter="input" tabulator-minWidth="110">Signatur</th>
                                     <th scope="col" tabulator-headerFilter="input" tabulator-minWidth="110">Sitzung</th>
                                     <th scope="col" tabulator-headerFilter="input" tabulator-minWidth="110">Datum</th>
+                                    <th scope="col" tabulator-visible="false">Sitzungsrahmen</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -48,6 +49,20 @@
                                         <td>
                                             <xsl:value-of select=".//tei:titleStmt/tei:meeting/tei:date/@when" />
                                         </td>
+                                        <td>
+                                            <xsl:choose>
+                                                <xsl:when test="starts-with(.//tei:titleStmt/tei:title[1]/text(), 'A')">
+                                                    <xsl:text>Gesamtakademie</xsl:text>
+                                                </xsl:when>
+                                                <xsl:when test="starts-with(.//tei:titleStmt/tei:title[1]/text(), 'C')">
+                                                    <xsl:text>phil.-hist. Klasse</xsl:text>
+                                                </xsl:when>
+                                                <!-- placeholder for other cases-->
+                                                <xsl:otherwise>
+                                                    <xsl:text>Unbekannt</xsl:text>
+                                                </xsl:otherwise>
+                                            </xsl:choose>
+                                        </td>
                                     </tr>
                                 </xsl:for-each>
                             </tbody>
@@ -58,6 +73,7 @@
                 <xsl:call-template name="html_footer" />
                 <xsl:call-template name="tabulator_js">
                     <xsl:with-param name="sortColumn" select="'signatur'"/>
+                    <xsl:with-param name="groupConfig" select="'true'"/>
                 </xsl:call-template>
             </body>
         </html>
