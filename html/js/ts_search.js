@@ -28,27 +28,33 @@ function updateHeaderUrl() {
   var urlToUpdate = document.querySelectorAll(".ais-Hits-item h5 a");
   var tsInputVal = document.querySelector("input[type='search']").value;
 
-  urlToUpdate.forEach((el) => {
-    var urlToUpdateHref = el.getAttribute("href");
-    var url = new URL(urlToUpdateHref, window.location.origin);
-    var params = new URLSearchParams(url.search);
-    // !! Hash (for pages) has to be at the end of the URL !!
-    // Remove hash (if any)
-    var hash = url.hash;
-    url.hash = '';
+  // If search is not empty, update the URL
+  if (tsInputVal.trim() !== '') { 
+    urlToUpdate.forEach((el) => {
+      var urlToUpdateHref = el.getAttribute("href");
+      var url = new URL(urlToUpdateHref, window.location.origin);
+      var params = new URLSearchParams(url.search);
+      // !! Hash (for pages) has to be at the end of the URL !!
+      // Remove hash (if any)
+      var hash = url.hash;
+      url.hash = '';
 
-    // Update 'mark' parameter
-    params.set('mark', tsInputVal);
+      // Update 'mark' parameter
+      params.set('mark', tsInputVal);
 
-    // Set the new search parameters
-    url.search = params.toString();
+      // Set the new search parameters
+      url.search = params.toString();
 
-    // Add the hash back to the end of the URL
-    url.hash = hash;
+      // Add the hash back to the end of the URL
+      url.hash = hash;
 
-    // Update the href attribute with the relative URL
-    el.setAttribute("href", url.pathname + url.search + url.hash);
-  });
+      // Update the href attribute with the relative URL
+      // Remove leading slash (if present)
+      var newPathname = url.pathname.startsWith('/') ? url.pathname.slice(1) : url.pathname;
+      el.setAttribute("href", newPathname + url.search + url.hash);
+
+    });
+  }
 }
 
 // Add all widgets
