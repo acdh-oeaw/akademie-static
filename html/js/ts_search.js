@@ -24,6 +24,34 @@ const search = instantsearch({
   indexName: project_collection_name,
 });
 
+function updateHeaderUrl() {
+  var urlToUpdate = document.querySelectorAll(".ais-Hits-item h5 a");
+  var tsInputVal = document.querySelector("input[type='search']").value;
+
+  urlToUpdate.forEach((el) => {
+    var urlToUpdateHref = el.getAttribute("href");
+    var url = new URL(urlToUpdateHref, window.location.origin);
+    var params = new URLSearchParams(url.search);
+    // !! Hash (for pages) has to be at the end of the URL !!
+    // Remove hash (if any)
+    var hash = url.hash;
+    url.hash = '';
+
+    // Update 'mark' parameter
+    params.set('mark', tsInputVal);
+
+    // Set the new search parameters
+    url.search = params.toString();
+
+    // Add the hash back to the end of the URL
+    url.hash = hash;
+
+    // Update the href attribute with the relative URL
+    el.setAttribute("href", url.pathname + url.search + url.hash);
+  });
+}
+
+// Add all widgets
 search.addWidgets([
   instantsearch.widgets.searchBox({
     container: "#searchbox",
@@ -210,5 +238,8 @@ search.addWidgets([
   }),
 
 ]);
+
+// Add event listener to update the URL
+search.on('render', updateHeaderUrl);
 
 search.start();

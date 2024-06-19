@@ -64,6 +64,5 @@
         <script src="https://cdn.jsdelivr.net/npm/typesense-instantsearch-adapter@2/dist/typesense-instantsearch-adapter.min.js"></script>
         <script src="js/ts_search.js"></script>
         <link rel="stylesheet" href="css/ts_search.css"/>
-        <script type="text/javascript" src="js/ts_update_url.js"></script>
     </xsl:template>
 </xsl:stylesheet>
