@@ -15,6 +15,7 @@ const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
   },
   additionalSearchParameters: {
     query_by: main_search_field,
+    sort_by: '_text_match:desc, datum:asc, seite:asc',
   },
 });
 
