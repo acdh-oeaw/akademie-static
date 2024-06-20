@@ -25,9 +25,9 @@
                     <xsl:with-param name="html_title" select="$doc_title"></xsl:with-param>
                 </xsl:call-template>
             </head>
-            <body class="d-flex flex-column h-100">
+            <body class="d-flex flex-column h-100" id="index-background">
                 <xsl:call-template name="nav_bar"/>
-                <main class="flex-shrink-0" id="index-background">
+                <main class="flex-shrink-0">
                     <div class="container text-center">
                         <h1 >
                             <xsl:value-of select="$project_short_title"/>
