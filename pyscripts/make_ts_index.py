@@ -20,16 +20,12 @@ current_schema = {
         {"name": "rec_id", "type": "string"},
         {"name": "title", "type": "string"},
         {"name": "full_text", "type": "string"},
-        {
-            "name": "jahr",
-            "type": "int32",
-            "optional": True,
-            "facet": True,
-        },
+        {"name": "jahr", "type": "int32", "optional": True, "facet": True,},
         {"name": "datum", "type": "string", "sort": True},
         {"name": "personen", "type": "string[]", "facet": True, "optional": True},
         {"name": "orte", "type": "string[]", "facet": True, "optional": True},
         {"name": "sitzungsrahmen", "type": "string", "facet": True, "optional": True},
+        {"name": "seite", "type": "int32"},
     ],
     "default_sorting_field": "datum",
 }
@@ -135,6 +131,7 @@ for xml_file in tqdm([f for f in files if f not in exclude_files], total=len(fil
 
         record["title"] = f"{r_title} Seite {str(pages)}"
         cfts_record["title"] = record["title"]
+        record["seite"] = pages
         
         if iso_date is not None:
             record["datum"] = iso_date
