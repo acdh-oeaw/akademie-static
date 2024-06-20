@@ -253,7 +253,6 @@ window.onload = function() {
 
 window.addEventListener("resize", function (event) {
     let resized = setContainerHeight(container);
-    console.log(resized)
     if (resized) {
         viewer.forceResize();
     };
