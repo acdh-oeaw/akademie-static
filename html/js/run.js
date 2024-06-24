@@ -8,78 +8,89 @@ if (!params.has('img')) {
 url.search = params.toString();
 history.pushState({}, '', url.toString());
 
+let isCProtocol = document.title.startsWith('C');
+// common aot variants for all protocols
+let variants = [
+  {
+    opt: "abbr",
+    color: "none",
+    title: "Vorlageform anzeigen",
+    html_class: "choice",
+    css_class: "choice-on",
+    chg_citation: "citation-url",
+    hide: {
+      hidden: false,
+      class: "choice",
+    },
+    features: {
+      all: false,
+      class: "features-2",
+    },
+  },
+]
+
+// If the edition page is of type C, add the 'prs' and 'plc' options + their common slider
+if (isCProtocol) {
+  variants.push(
+    {
+      opt: "ef",
+      opt_slider: "entities-features-slider",
+      title: "Alle Entitäten",
+      color: "red",
+      html_class: "undefined",
+      css_class: "undefined",
+      chg_citation: "citation-url",
+      hide: {
+        hidden: false,
+        class: "undefined",
+      },
+      features: {
+        all: true,
+        class: "features-1",
+      },
+    }
+    ,
+    {
+      opt: "prs",
+      color: "blue",
+      title: "Personen",
+      html_class: "persons",
+      css_class: "pers",
+      default: true,
+      hide: {
+        hidden: false,
+        class: "persons .entity",
+      },
+      chg_citation: "citation-url",
+      features: {
+        all: false,
+        class: "features-1",
+      },
+    },
+    {
+      opt: "plc",
+      color: "green",
+      title: "Orte",
+      html_class: "places",
+      css_class: "plc",
+      default: true,
+      hide: {
+        hidden: false,
+        class: "places .entity",
+      },
+      chg_citation: "citation-url",
+      features: {
+        all: false,
+        class: "features-1",
+      },
+    }
+  );
+}
+
 var editor = new LoadEditor({
   aot: {
     title: "Text Annotations",
-    variants: [
-      {
-        opt: "ef",
-        opt_slider: "entities-features-slider",
-        title: "Alle Entitäten",
-        color: "red",
-        html_class: "undefined",
-        css_class: "undefined",
-        chg_citation: "citation-url",
-        hide: {
-          hidden: false,
-          class: "undefined",
-        },
-        features: {
-          all: true,
-          class: "features-1",
-        },
-      },
-      {
-        opt: "prs",
-        color: "blue",
-        title: "Personen",
-        html_class: "persons",
-        css_class: "pers",
-        default: true,
-        hide: {
-          hidden: false,
-          class: "persons .entity",
-        },
-        chg_citation: "citation-url",
-        features: {
-          all: false,
-          class: "features-1",
-        },
-      },
-      {
-        opt: "plc",
-        color: "green",
-        title: "Orte",
-        html_class: "places",
-        css_class: "plc",
-        default: true,
-        hide: {
-          hidden: false,
-          class: "places .entity",
-        },
-        chg_citation: "citation-url",
-        features: {
-          all: false,
-          class: "features-1",
-        },
-      },
-      {
-        opt: "abbr",
-        color: "none",
-        title: "Vorlageform anzeigen",
-        html_class: "choice",
-        css_class: "choice-on",
-        chg_citation: "citation-url",
-        hide: {
-          hidden: false,
-          class: "choice",
-        },
-        features: {
-          all: false,
-          class: "features-2",
-        },
-      },
-    ],
+    variants: variants,
     span_element: {
       css_class: "badge-item",
     },
