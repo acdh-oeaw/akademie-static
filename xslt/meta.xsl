@@ -27,10 +27,10 @@
                 </xsl:call-template>
             </head>
             
-            <body class="d-flex flex-column h-100">
+            <body class="d-flex flex-column h-100" id="index-background">
             <xsl:call-template name="nav_bar"/>
                 <main>
-                    <div class="container">                        
+                    <div class="container" id="index-content">                        
                         <h1><xsl:value-of select="$doc_title"/></h1>    
                         <xsl:apply-templates select=".//tei:body"></xsl:apply-templates>
                     </div>
@@ -54,5 +54,20 @@
     </xsl:template>
     <xsl:template match="tei:del">
         <del><xsl:apply-templates/></del>
-    </xsl:template>    
+    </xsl:template>
+    <xsl:template match="tei:ref">
+        <xsl:choose>
+            <xsl:when test="starts-with(data(@target), 'http')">
+                <a>
+                    <xsl:attribute name="href">
+                        <xsl:value-of select="@target"/>
+                    </xsl:attribute>
+                    <xsl:value-of select="."/>
+                </a>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
 </xsl:stylesheet>
