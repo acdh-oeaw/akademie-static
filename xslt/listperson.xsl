@@ -94,7 +94,37 @@
                                 <h1>
                                     <xsl:value-of select="$name"/>
                                 </h1>
-                                <xsl:call-template name="person_detail"/>  
+                                <xsl:call-template name="person_detail"/> 
+                                <link href="https://unpkg.com/tabulator-tables@6.2.1/dist/css/tabulator_bootstrap5.min.css" rel="stylesheet"></link>
+                                <script type="text/javascript" src="https://unpkg.com/tabulator-tables@6.2.1/dist/js/tabulator.min.js"/>
+                                <script>
+
+
+                                function linkToDetailView (cell) {
+                                var cellData = cell.getData()
+                                console.log(cellData)
+                                var theLink = `<a href="${{cellData.target}}">${cellData.protocol}</a>`
+                                
+                                return theLink
+                                }
+
+                                var table = new Tabulator("#mentions", {
+                                    data:mentions,
+                                    layout:"fitColumns",
+                                    responsiveLayout:"collapse",
+                                    tooltips:true,
+                                    pagination:true,
+                                    paginationSize:10,
+                                    initialSort:[
+                                        {column:"target", dir:"asc"},
+                                    ],
+                                    columns:[
+                                        {field: "protocol", formatter: linkToDetailView, formatterParams:{target:"_blank"}, headerFilter: "input"},
+                                        {field:"target", visible: false},
+                                    ],
+                                });
+
+                                </script> 
                             </div>
                         </main>
                         <xsl:call-template name="html_footer"/>

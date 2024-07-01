@@ -96,25 +96,29 @@
                         </td>
                     </tr>
                 </xsl:if>
-
                 <xsl:if test="./tei:noteGrp">
                     <tr>
                         <th>
-                        Erwähnt in
+        Erwähnt in
                         </th>
                         <td>
-                        <div style="max-height: 200px; overflow-y: auto;">
-                            <ul>
+                            <div id="mentions">
+                                <xsl:text disable-output-escaping='yes'>&lt;script&gt;</xsl:text>
+            var mentions = [
                                 <xsl:for-each select="./tei:noteGrp/tei:note">
-                                    <li>
-                                     <xsl:variable name="targetDoc" select="document(concat('../../data/editions/', @target))"/>
-                                        <a href="{replace(@target, '.xml', '.html')}">
-                                            <xsl:value-of select="$targetDoc//tei:titleStmt/tei:meeting/text()"/>
-                                            <xsl:value-of select="$targetDoc//tei:titleStmt/tei:meeting/tei:date/text()"/>
-                                        </a>
-                                    </li>
+                                    <xsl:variable name="targetDoc" select="document(concat('../../data/editions/', @target))"/>
+                                    <xsl:text>{</xsl:text>
+                                    <xsl:text>"protocol": "</xsl:text>
+                                    <xsl:value-of select="concat(normalize-space(($targetDoc//tei:titleStmt/tei:meeting/text())[1]), ' ', $targetDoc//tei:titleStmt/tei:meeting/tei:date/text())"/>
+                                    <xsl:text>",</xsl:text>
+                                    <xsl:text>"target": "</xsl:text>
+                                    <xsl:value-of select="replace(@target, '.xml', '.html')"/>
+                                    <xsl:text>",</xsl:text>
+                                    <xsl:text>}</xsl:text>
+                                    <xsl:if test="position() != last()">,</xsl:if>
                                 </xsl:for-each>
-                            </ul>
+            ];
+                                <xsl:text disable-output-escaping='yes'>&lt;/script&gt;</xsl:text>
                             </div>
                         </td>
                     </tr>
