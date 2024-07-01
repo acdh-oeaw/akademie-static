@@ -11,6 +11,7 @@
     <xsl:import href="partials/html_footer.xsl"/>
     <xsl:import href="partials/tabulator_dl_buttons.xsl"/>
     <xsl:import href="partials/tabulator_js.xsl"/>
+        <xsl:import href="partials/tabulator_mentions.xsl"/>
     <xsl:import href="partials/place.xsl"/>
 
     <xsl:template match="/">
@@ -114,14 +115,14 @@
                                     <xsl:value-of select="$name"/>
                                 </h1>
                                 <div class="row">
-                                <div class="col-6">
-                                <xsl:call-template name="place_detail"/>
-                                </div>
-                                <div class="col-6">
-                                <xsl:if test="./tei:location/tei:geo">
-                                    <div id="map_detail"/>
-                                </xsl:if>
-                                </div>
+                                    <div class="col-6">
+                                        <xsl:call-template name="place_detail"/>
+                                    </div>
+                                    <div class="col-6">
+                                        <xsl:if test="./tei:location/tei:geo">
+                                            <div id="map_detail"/>
+                                        </xsl:if>
+                                    </div>
                                 </div>
                             </div>
                         </main>
@@ -143,6 +144,7 @@
                                 var marker = L.marker([Number(lat), Number(long)]).addTo(map);
                     </script>
                 </xsl:if>
+                <xsl:call-template name="tabulator_mentions"/>
             </body>
         </html>
     </xsl:result-document>
