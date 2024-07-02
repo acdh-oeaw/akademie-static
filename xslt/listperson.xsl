@@ -12,6 +12,7 @@
     <xsl:import href="./partials/html_footer.xsl"/>
     <xsl:import href="partials/tabulator_dl_buttons.xsl"/>
     <xsl:import href="partials/tabulator_js.xsl"/>
+    <xsl:import href="partials/tabulator_mentions.xsl"/>
     <xsl:import href="./partials/person.xsl"/>
 
     <xsl:template match="/">
@@ -94,7 +95,8 @@
                                 <h1>
                                     <xsl:value-of select="$name"/>
                                 </h1>
-                                <xsl:call-template name="person_detail"/>  
+                                <xsl:call-template name="person_detail"/> 
+                                <xsl:call-template name="tabulator_mentions"/>
                             </div>
                         </main>
                         <xsl:call-template name="html_footer"/>
