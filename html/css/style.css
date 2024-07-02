@@ -80,6 +80,8 @@ p.fc {
     scroll-margin-top: 50px;
 }
 
+
+
 /*display expansion when slider is off*/
 .choice:not(.choice-on)>.abbr {
     display: none;
@@ -98,9 +100,9 @@ p.fc {
     display: inline;
 }
 
-/* needed for interactive map in listplace.xsl */
-div#map {
-    height: 50vh;
+/*offset for jumping to page*/
+:target {
+    scroll-margin-top: 60px;
 }
 
 mark{
@@ -108,13 +110,23 @@ mark{
     color: black;
 }
 
-/*offset for jumping to page*/
-:target {
-    scroll-margin-top: 60px;
+/* needed for interactive map in listplace.xsl */
+div#map {
+    height: 50vh;
 }
 
+/*mentions table styles*/
+
+.place-table #mentions{
+    max-width: 600px;
+}
+/* hide first and last button for tabulator pagination*/
+.tabulator-page[data-page='first'], .tabulator-page[data-page='last'] {
+    display: none !important;
+  }
 
 
+/*responsive styles*/
 /* Small devices */
 @media (max-width: 576px) {
     .badge {
@@ -141,10 +153,4 @@ mark{
     .badge {
         font-size: 1.4rem;
     }
-}
-
-
-mark{
-    background: orange;
-    color: black;
 }

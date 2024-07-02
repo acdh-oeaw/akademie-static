@@ -4,7 +4,7 @@
     xmlns:tei="http://www.tei-c.org/ns/1.0" version="2.0" exclude-result-prefixes="xsl tei xs">
 
     <xsl:template match="tei:person" name="person_detail">
-        <table class="table entity-table">
+        <table class="table person-table">
             <tbody>
                 <xsl:if test ="./tei:persName/tei:addName/text()">
                     <tr>
