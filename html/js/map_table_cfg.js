@@ -123,7 +123,7 @@ const tabulator_cfg = {
   responsiveLayout: "collapse",
   langs: langs,
   columns: columns,
-  initialSort: [{ column: "mentions", dir: "desc" }],
+  initialSort: [{column:"Ortsname", dir:"asc"},{ column: "mentions", dir: "desc" }],
 };
 
 /*this is just an extra capsule to pass cfg trough the functions*/

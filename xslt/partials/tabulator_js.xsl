@@ -2,20 +2,28 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" version="2.0">
     <xsl:template match="/" name="tabulator_js">
-        <xsl:param name="sortColumn"/>
+        <xsl:param name="sortConfig"/>
         <xsl:param name="groupConfig"/>
         <link href="https://unpkg.com/tabulator-tables@6.2.1/dist/css/tabulator.min.css" rel="stylesheet"></link>
         <link href="https://unpkg.com/tabulator-tables@6.2.1/dist/css/tabulator_bootstrap5.min.css" rel="stylesheet"></link>
         <script type="text/javascript" src="https://unpkg.com/tabulator-tables@6.2.1/dist/js/tabulator.min.js"></script>
         <script src="tabulator-js/config.js"></script>
         <script>
-            config.initialSort = [{column:"<xsl:value-of select="$sortColumn"/>", dir:"asc"},];
-            <xsl:if test="$groupConfig = 'true'">
+            Tabulator.extendModule("mutator", "mutators", {
+                stringToNum:function(value, data, type, mutatorParams){
+                    return parseInt(value);
+                },
+            });
+        </script>
+        <script>
+            config.initialSort = <xsl:value-of select="$sortConfig"/>
+;
+        <xsl:if test="$groupConfig = 'true'">
                 config.groupBy = "sitzungsrahmen";
                 config.groupHeader = function(value, count, data, group){
                     return "Sitzungen der " + value + " (" + count + " Protokolle)";
                 };
-            </xsl:if>
+        </xsl:if>
             var table = new Tabulator("#myTable", config);
             //trigger download of data.csv file
             document.getElementById("download-csv").addEventListener("click", function(){
