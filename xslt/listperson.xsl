@@ -40,8 +40,9 @@
                         <table class="table" id="myTable">
                             <thead>
                                 <tr>
-                                    <th scope="col" tabulator-headerFilter="input" tabulator-minWidth="120">Nachname</th>
-                                    <th scope="col" tabulator-headerFilter="input" tabulator-minWidth="120">Vorname</th>
+                                    <th scope="col" tabulator-headerFilter="input" tabulator-minWidth="110">Nachname</th>
+                                    <th scope="col" tabulator-headerFilter="input" tabulator-minWidth="110">Vorname</th>
+                                    <th scope="col" tabulator-headerFilter="number" tabulator-sorter="number" tabulator-headerFilterFunc="&gt;=" tabulator-minWidth="110" tabulator-mutator="stringToNum" tabulator-headerFilterPlaceholder="mindestens...">Erwähnungen (# Protokolle)</th>
                                     <th scope="col" tabulator-headerFilter="input" tabulator-visible="false">ID</th>
                                 </tr>
                             </thead>
@@ -58,6 +59,9 @@
                                             <xsl:value-of select=".//tei:forename/text()"/>
                                         </td>
                                         <td>
+                                            <xsl:value-of select="count(.//tei:note[@type='mentions'])"/>
+                                        </td>
+                                        <td>
                                             <xsl:value-of select="$id"/>
                                         </td>
                                     </tr>
@@ -69,7 +73,7 @@
                 </main>
                 <xsl:call-template name="html_footer"/>
                 <xsl:call-template name="tabulator_js">
-                <xsl:with-param name="sortColumn" select="'nachname'"/>
+                <xsl:with-param name="sortConfig" select="'[{&quot;column&quot;: &quot;nachname&quot;, &quot;dir&quot;: &quot;asc&quot;}, {&quot;column&quot;: &quot;erwähnungen_(#_protokolle)&quot;, &quot;dir&quot;: &quot;desc&quot;}]'"/>
 </xsl:call-template>
             </body>
         </html>

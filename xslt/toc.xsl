@@ -72,7 +72,7 @@
                 </main>
                 <xsl:call-template name="html_footer" />
                 <xsl:call-template name="tabulator_js">
-                    <xsl:with-param name="sortColumn" select="'signatur'"/>
+                   <xsl:with-param name="sortConfig" select="'[{&quot;column&quot;: &quot;signatur&quot;, &quot;dir&quot;: &quot;asc&quot;}]'"/>
                     <xsl:with-param name="groupConfig" select="'true'"/>
                 </xsl:call-template>
             </body>
