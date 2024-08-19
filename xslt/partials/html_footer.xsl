@@ -13,7 +13,7 @@
                         <!-- ACDH Logo and Link -->
                         <div class="col-lg-2 col-md-4 col-sm-6 text-center my-2">
                             <a href="https://www.oeaw.ac.at/acdh">
-                                <img src="/akademie-static/images/ACDHCH_logo.png" class="img-fluid" alt="ACDH Logo" title="ACDH Logo"/>
+                                <img src="images/ACDHCH_logo.png" class="img-fluid" alt="ACDH Logo" title="ACDH Logo"/>
                             </a>
                         </div>
 
@@ -30,8 +30,8 @@
 
                 <!-- OEAW and Wien Kultur Logos -->
                 <div class="col-lg-3 col-md-4 col-sm-6 my-2">
-                    <img src="/akademie-static/images/oaw.png" class="img-fluid mb-2" alt="OEAW Logo"/>
-                        <img src="/akademie-static/images/wienkultur.png" class="img-fluid" alt="Wien Kultur Logo"/>
+                    <img src="images/oaw.png" class="img-fluid mb-2" alt="OEAW Logo"/>
+                        <img src="images/wienkultur.png" class="img-fluid" alt="Wien Kultur Logo"/>
                         </div>
 
                         <!-- Helpdesk Info -->

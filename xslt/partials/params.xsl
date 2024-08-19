@@ -6,9 +6,9 @@
     <xsl:param name="project_title">Sitzungsprotokolle der Österreichischen Akademie der Wissenschaften</xsl:param>
     <xsl:param name="redmine_id">18716</xsl:param>
     <xsl:param name="project_short_title">Akademieprotokolle</xsl:param>
-    <xsl:param name="github_url">https://github.com/fun-with-editions/akademie-static</xsl:param>
+    <xsl:param name="github_url">https://github.com/acdh-oeaw/akademie-static</xsl:param>
     <xsl:param name="html_title">Akademieprotokolle</xsl:param>
     <xsl:param name="project_logo">images/logo.png</xsl:param>
-    <xsl:param name="base_url">http://fun-with-editions.github.io/akademie-static</xsl:param>
-    <xsl:param name="data_repo">https://github.com/fun-with-editions/akademie-data</xsl:param>
+    <xsl:param name="base_url">http://acdh-oeaw.github.io/akademie-static</xsl:param>
+    <xsl:param name="data_repo">https://github.com/acdh-oeaw/akademie-data</xsl:param>
 </xsl:stylesheet>

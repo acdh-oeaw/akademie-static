@@ -124,7 +124,7 @@ for xml_file in tqdm([f for f in files if f not in exclude_files], total=len(fil
         record["id"] = os.path.split(xml_file)[-1].replace(".xml", f".html#pag{str(pages)}")
         cfts_record["id"] = record["id"]
         cfts_record["resolver"] = (
-                f"https://fun-with-editions.github.io/akademie-static/{record['id']}"
+                f"https://acdh-oeaw.github.io/akademie-static/{record['id']}"
             )
         record["rec_id"] = os.path.split(xml_file)[-1]
         cfts_record["rec_id"] = record["rec_id"]

@@ -47,7 +47,7 @@
             else if (data.id != null) {
                 var url = data.id + ".html";
             }
-            window.location.href = "/akademie-static/" + url;
+            window.location.href = url;
             });
     </script>
 </xsl:template>

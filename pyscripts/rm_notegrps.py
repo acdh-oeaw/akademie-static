@@ -1,4 +1,4 @@
-# by @csae8092, https://github.com/fun-with-editions/staribacher-static/blob/main/pyscripts/rm_notegrps.py
+# by @csae8092, https://github.com/acdh-oeaw/staribacher-static/blob/main/pyscripts/rm_notegrps.py
 import glob
 from tqdm import tqdm
 from acdh_tei_pyutils.tei import TeiReader

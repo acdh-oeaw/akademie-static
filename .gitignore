@@ -144,6 +144,5 @@ desktop.ini
 
 # MacOS
 .DS_Store
-favicons/
 data/meta/about.xml
 data/meta/arche_constants.rdf

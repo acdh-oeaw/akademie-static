@@ -2,7 +2,7 @@
 
 echo "fetching transkriptions from data_repo"
 rm -rf data/ && mkdir data
-curl -LO https://github.com/fun-with-editions/akademie-data/archive/refs/heads/main.zip
+curl -LO https://github.com/acdh-oeaw/akademie-data/archive/refs/heads/main.zip
 unzip main
 
 mv ./akademie-data-main/data/editions/ ./data
