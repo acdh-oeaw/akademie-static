@@ -130,13 +130,12 @@ function build_map_table(table_cfg) {
 /////////////////////
 function build_map_and_table(map_cfg, table_cfg, wms_cfg = null, tms_cfg = null) {
   console.log("loading map");
-  let map = L.map(map_cfg.div_id).setView(
+  let map = L.map(map_cfg.div_id,{maxZoom: map_cfg.max_zoom,
+    minZoom: map_cfg.min_zoom,}).setView(
     map_cfg.initial_coordinates,
     map_cfg.initial_zoom
   );
   let tile_layer = L.tileLayer(map_cfg.base_map_url, {
-    maxZoom: map_cfg.max_zoom,
-    minZoom: map_cfg.min_zoom,
     attribution: map_cfg.attribution,
   });
   var markers = L.markerClusterGroup();
