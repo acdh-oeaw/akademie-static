@@ -20,28 +20,52 @@ const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
 });
 
 const searchClient = typesenseInstantsearchAdapter.searchClient;
+
+const indexName = project_collection_name;
 const search = instantsearch({
   searchClient,
-  indexName: project_collection_name,
+  indexName,
+  routing: {
+    // The stateMapping defines how to map the URL state to the search state and vice-versa
+    // currently, only the query parameter is synced
+    stateMapping: {
+      stateToRoute(uiState) {
+        return {
+          query: uiState[indexName].query,
+        };
+      },
+      routeToState(routeState) {
+        return {
+          [indexName]: {
+            query: routeState.query
+          }
+        };
+      },
+    },
+  }
 });
 
-function updateHeaderUrl() {
-  var urlToUpdate = document.querySelectorAll(".ais-Hits-item h5 a");
-  var tsInputVal = document.querySelector("input[type='search']").value;
 
+function updateHeaderUrl() {
+  const searchResult = document.querySelectorAll(".ais-Hits-item");
+  const urlParams = new URLSearchParams(window.location.search);
+  const queryVal = urlParams.get('query');
   // If search is not empty, update the URL
-  if (tsInputVal.trim() !== '') { 
-    urlToUpdate.forEach((el) => {
-      var urlToUpdateHref = el.getAttribute("href");
-      var url = new URL(urlToUpdateHref, window.location.origin);
-      var params = new URLSearchParams(url.search);
+  if (queryVal.trim() !== '') {
+    searchResult.forEach((el) => {
+      const urlToUpdate = el.querySelector("h5 a")
+      const urlToUpdateHREF = urlToUpdate.getAttribute("href");
+      const termToMark = el.querySelector(".ais-Snippet-highlighted").textContent;
+      console.log(termToMark);
+      let url = new URL(urlToUpdateHREF, window.location.origin);
+      let params = new URLSearchParams(url.search);
       // !! Hash (for pages) has to be at the end of the URL !!
       // Remove hash (if any)
-      var hash = url.hash;
+      let hash = url.hash;
       url.hash = '';
 
       // Update 'mark' parameter
-      params.set('mark', tsInputVal);
+      params.set('mark', termToMark);
 
       // Set the new search parameters
       url.search = params.toString();
@@ -51,9 +75,8 @@ function updateHeaderUrl() {
 
       // Update the href attribute with the relative URL
       // Remove leading slash (if present)
-      var newPathname = url.pathname.startsWith('/') ? url.pathname.slice(1) : url.pathname;
-      el.setAttribute("href", newPathname + url.search + url.hash);
-
+      const newPathname = url.pathname.startsWith('/') ? url.pathname.slice(1) : url.pathname;
+      urlToUpdate.setAttribute("href", newPathname + url.search + url.hash);
     });
   }
 }
