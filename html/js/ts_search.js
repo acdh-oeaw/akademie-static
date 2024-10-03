@@ -23,12 +23,16 @@ const searchClient = typesenseInstantsearchAdapter.searchClient;
 const search = instantsearch({
   searchClient,
   indexName: project_collection_name,
+  routing: {
+    router: instantsearch.routers.history(),
+    stateMapping: instantsearch.stateMappings.simple(),
+  },
 });
 
 function updateHeaderUrl() {
   var urlToUpdate = document.querySelectorAll(".ais-Hits-item h5 a");
   var tsInputVal = document.querySelector("input[type='search']").value;
-
+console.log(tsInputVal);
   // If search is not empty, update the URL
   if (tsInputVal.trim() !== '') { 
     urlToUpdate.forEach((el) => {
