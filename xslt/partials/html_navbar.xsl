@@ -45,7 +45,7 @@
                         </ul>
                         <ul class="navbar-nav me-2 mb-2 mb-lg-0">
                             <form class="d-flex" role="search" method="GET" action="search.html">
-                                <input class="form-control me-2" type="search" placeholder="Protokolle durchsuchen" aria-label="Suchen" name="akademie-static[query]"></input>
+                                <input class="form-control me-2" type="search" placeholder="Protokolle durchsuchen" aria-label="Suchen" name="query"></input>
                                     <button class="btn btn-outline-primary" type="submit">Suche</button>
                                 </form>
                             </ul>
