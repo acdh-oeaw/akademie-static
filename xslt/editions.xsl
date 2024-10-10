@@ -70,8 +70,8 @@
                                             <xsl:attribute name="href">
                                                 <xsl:value-of select="$prev"/>
                                             </xsl:attribute>
-                                            <i class="bi bi-chevron-left" title="zurück"/>
-                                        </a>
+                                            <i class="bi bi-chevron-left" title="zurück" aria-hidden="true"/>
+                                        <span class="visually-hidden">zurück zum vorherigen Protokoll</span></a>
                                     </h1>
                                 </xsl:if>
                             </div>
@@ -96,7 +96,8 @@
                                             <xsl:attribute name="href">
                                                 <xsl:value-of select="$next"/>
                                             </xsl:attribute>
-                                            <i class="bi bi-chevron-right" title="weiter"/>
+                                            <i class="bi bi-chevron-right" title="weiter" aria-hidden="true"/>
+                                            <span class="visually-hidden">weiter zum nächsten Protokoll</span>
                                         </a>
                                     </h1>
                                 </xsl:if>

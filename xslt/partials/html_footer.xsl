@@ -48,11 +48,7 @@
     <div class="float-end me-3">
         <a href="{$github_url}">
             <i class="bi bi-github" aria-hidden="true"></i>
-            <span class="visually-hidden">Link to GitHub Repository</span>
-        </a>
-        <a href="https://github.com/grocerist/grocerist-app">
-            <i class="bi bi-github" aria-hidden="true"></i>
-            <span class="visually-hidden">Link to GitHub Repository</span>
+            <span class="visually-hidden">GitHub Repository</span>
         </a>
     </div>
 </footer>
