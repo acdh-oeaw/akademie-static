@@ -33,7 +33,7 @@
     <xsl:template match="/">
 
 
-        <html class="h-100">
+        <html class="h-100" lang="de">
 
             <head>
                 <xsl:call-template name="html_head">

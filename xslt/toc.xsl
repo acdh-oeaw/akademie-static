@@ -12,7 +12,7 @@
     <xsl:import href="partials/tabulator_js.xsl" />
     <xsl:template match="/">
         <xsl:variable name="doc_title" select="'Inhaltsverzeichnis'" />
-        <html class="h-100">
+        <html class="h-100" lang="de">
             <head>
                 <xsl:call-template name="html_head">
                     <xsl:with-param name="html_title" select="$doc_title" />
