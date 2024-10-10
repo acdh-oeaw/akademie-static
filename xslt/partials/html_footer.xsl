@@ -31,27 +31,32 @@
                 <!-- OEAW and Wien Kultur Logos -->
                 <div class="col-lg-3 col-md-4 col-sm-6 my-2">
                     <img src="images/oaw.png" class="img-fluid mb-2" alt="OEAW Logo"/>
-                        <img src="images/wienkultur.png" class="img-fluid" alt="Wien Kultur Logo"/>
-                        </div>
+                    <img src="images/wienkultur.png" class="img-fluid" alt="Wien Kultur Logo"/>
+                </div>
 
-                        <!-- Helpdesk Info -->
-                        <div class="col-lg-3 col-md-4 col-sm-6 my-2">
-                            <h6 class="font-weight-bold">HELPDESK</h6>
-                            <p>ACDH-CH betreibt einen Helpdesk, an den Sie gerne Ihre Fragen zu Digitalen Geisteswissenschaften stellen dürfen.</p>
-                            <p>
-                                <a class="helpdesk-button" href="mailto:acdh-ch-helpdesk@oeaw.ac.at">FRAGEN SIE UNS!</a>
-                            </p>
-                        </div>
-                    </div>
+                <!-- Helpdesk Info -->
+                <div class="col-lg-3 col-md-4 col-sm-6 my-2">
+                    <h6 class="font-weight-bold">HELPDESK</h6>
+                    <p>ACDH-CH betreibt einen Helpdesk, an den Sie gerne Ihre Fragen zu Digitalen Geisteswissenschaften stellen dürfen.</p>
+                    <p>
+                        <a class="helpdesk-button" href="mailto:acdh-ch-helpdesk@oeaw.ac.at">FRAGEN SIE UNS!</a>
+                    </p>
                 </div>
             </div>
-        <div class="float-end me-3">
-            <a href="{$github_url}">
-                <i class="bi bi-github"></i>
-            </a>
         </div>
-    </footer>
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    </div>
+    <div class="float-end me-3">
+        <a href="{$github_url}">
+            <i class="bi bi-github" aria-hidden="true"></i>
+            <span class="visually-hidden">Link to GitHub Repository</span>
+        </a>
+        <a href="https://github.com/grocerist/grocerist-app">
+            <i class="bi bi-github" aria-hidden="true"></i>
+            <span class="visually-hidden">Link to GitHub Repository</span>
+        </a>
+    </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </xsl:template>
 </xsl:stylesheet>
