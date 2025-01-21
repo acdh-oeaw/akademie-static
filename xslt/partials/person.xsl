@@ -8,6 +8,10 @@
                   name="person_detail">
         <table class="table person-table">
             <tbody>
+                <xsl:variable name="birth"
+                              select="./tei:birth" />
+                <xsl:variable name="death"
+                              select="./tei:death" />
                 <xsl:if test="./tei:persName/tei:addName/text()">
                     <tr>
                         <th>                            
