@@ -8,7 +8,7 @@ if (!params.has('img')) {
 url.search = params.toString();
 history.pushState({}, '', url.toString());
 
-let isCProtocol = document.title.startsWith('C');
+
 // common aot variants for all protocols
 let variants = [
   {
@@ -29,8 +29,7 @@ let variants = [
   },
 ]
 
-// If the edition page is of type C, add the 'prs' and 'plc' options + their common slider
-if (isCProtocol) {
+
   variants.push(
     {
       opt: "ef",
@@ -85,8 +84,6 @@ if (isCProtocol) {
       },
     }
   );
-}
-
 var editor = new LoadEditor({
   aot: {
     title: "Text Annotations",
