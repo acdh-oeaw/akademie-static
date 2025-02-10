@@ -30,7 +30,6 @@
                 <li class="dropdown-item">
                     <font-family opt="ff"></font-family>
                 </li>
-                <xsl:if test="starts-with(.//tei:titleStmt/tei:title[1]/text(), 'C_')">
                 <li class="dropdown-item" style="border-top: 5px dashed lightgrey !important;">
                     <annotation-slider opt="ef"></annotation-slider>
                 </li>
@@ -40,7 +39,6 @@
                 <li class="dropdown-item">
                     <annotation-slider opt="plc"></annotation-slider>
                 </li>
-                </xsl:if>
                 <li class="dropdown-item" style="border-top: 5px dashed lightgrey !important;">
                     <annotation-slider opt="abbr"></annotation-slider>
                 </li>
