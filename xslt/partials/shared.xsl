@@ -151,8 +151,6 @@
         </xsl:element>
     </xsl:template>
     <xsl:template match="tei:rs">
-        <xsl:choose>
-            <xsl:when test="starts-with(//tei:titleStmt/tei:title[1]/text(), 'C')">
                 <xsl:choose>
                     <xsl:when test="@type='person' and string-length(substring-after(@ref, '#')) > 0">
                         <span class="persons entity {substring-after(@rendition, '#')}" data-bs-toggle="modal" data-bs-target="{@ref}">
@@ -169,11 +167,6 @@
                         <xsl:apply-templates/>
                     </xsl:otherwise>
                 </xsl:choose>
-            </xsl:when>
-            <xsl:otherwise>
-                <xsl:apply-templates/>
-            </xsl:otherwise>
-        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="tei:listPerson">
