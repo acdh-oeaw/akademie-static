@@ -1,6 +1,8 @@
 name: Build and publish
 
-on: 
+on:
+  schedule:
+    - cron: "40 23 * * *" 
   workflow_dispatch:
   push:
     branches:
