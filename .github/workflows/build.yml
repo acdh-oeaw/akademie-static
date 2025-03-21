@@ -46,6 +46,8 @@ jobs:
     - name: Add attributes to root node and denormalize indices
       run: |
        ./shellscripts/attributes_indices.sh
+    - name: OAI-PMH
+      run: python oai-pmh/make_files.py
     - name: Build
       run: |
         ant
