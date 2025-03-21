@@ -9,6 +9,6 @@
     <xsl:param name="github_url">https://github.com/acdh-oeaw/akademie-static</xsl:param>
     <xsl:param name="html_title">Akademieprotokolle</xsl:param>
     <xsl:param name="project_logo">images/logo.png</xsl:param>
-    <xsl:param name="base_url">http://acdh-oeaw.github.io/akademie-static</xsl:param>
+    <xsl:param name="base_url">https://akademieprotokolle.acdh.oeaw.ac.at</xsl:param>
     <xsl:param name="data_repo">https://github.com/acdh-oeaw/akademie-data</xsl:param>
 </xsl:stylesheet>
