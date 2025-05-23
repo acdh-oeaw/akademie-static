@@ -45,9 +45,10 @@
                     </div>
                 </div>
             </div>
-        <div class="float-end me-3">
+        <div class="text-center">
             <a href="{$github_url}">
-                <i class="bi bi-github"></i>
+                <i class="bi bi-github fs-2" aria-hidden="true"></i>
+                <span class="visually-hidden">Link zum GitHub Repository</span>
             </a>
         </div>
     </footer>
