@@ -105,9 +105,9 @@
                         <!-- badge for A protocols-->
                         <xsl:if test="starts-with(.//tei:titleStmt/tei:title[1]/text(), 'A_')">
                             <div class="row">
-                             <div class="col-12 text-center">
-                               <span class="badge text-bg-warning text-wrap">Hinweis: Diese Transkription wurde maschinell erstellt und nicht überprüft.</span>
-                            </div>
+                                <div class="col-12 text-center">
+                                    <span class="badge text-bg-warning text-wrap">Hinweis: Diese Transkription wurde maschinell erstellt und nicht überprüft.</span>
+                                </div>
                             </div>
                         </xsl:if>
                         <div id="container-resize" class="row transcript">
@@ -171,9 +171,45 @@
         <xsl:choose>
             <!-- add additional class for p elements that should be centered-->
             <xsl:when test="@rendition='#fc'">
-                <p id="{local:makeId(.)}" class="fc yes-index paragraph-main-text">
+                <p id="{local:makeId(.)}" class="text-center yes-index paragraph-main-text">
                     <xsl:apply-templates/>
                 </p>
+            </xsl:when>
+            <!-- two-column layout, e.g. for name lists-->
+            <xsl:when test="@rendition='#ll'">
+                <div class="row">
+                    <div class="col-6">
+                        <p id="{local:makeId(.)}" class="text-start yes-index paragraph-main-text">
+                            <xsl:apply-templates/>
+                        </p>
+                    </div>
+                    <div class="col-6">
+                        <xsl:if test="following-sibling::*[1][self::tei:p][@rendition='#rl']">
+                            <p id="{local:makeId(following-sibling::*[1])}" class="text-start yes-index paragraph-main-text">
+                                <xsl:apply-templates select="following-sibling::*[1]/node()"/>
+                            </p>
+                        </xsl:if>
+                    </div>
+                </div>
+            </xsl:when>
+            <xsl:when test="@rendition='#rl'">
+                <!-- Only process #rl paragraphs that don't immediately follow an #ll paragraph -->
+                <xsl:if test="not(preceding-sibling::*[1][self::tei:p][@rendition='#ll'])">
+                    <!-- Report the issue -->
+                    <xsl:message terminate="no">
+                    WARNING: Found #rl paragraph without preceding #ll paragraph. XML:id: <xsl:value-of select="@xml:id"/>
+                    </xsl:message>
+                    <div class="row">
+                        <div class="col-6">
+                            <!-- Empty left column -->
+                        </div>
+                        <div class="col-6">
+                            <p id="{local:makeId(.)}" class="text-start yes-index paragraph-main-text">
+                                <xsl:apply-templates/>
+                            </p>
+                        </div>
+                    </div>
+                </xsl:if>
             </xsl:when>
             <xsl:otherwise>
                 <p id="{local:makeId(.)}" class="yes-index paragraph-main-text">
