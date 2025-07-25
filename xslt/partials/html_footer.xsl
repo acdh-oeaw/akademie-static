@@ -19,12 +19,12 @@
 
                         <!-- Address and Contact Info -->
                         <div class="col-lg-4 col-md-4 col-sm-6 my-2">
-                            <p>ACDH-CH OEAW <br/>
-                Austrian Centre for Digital Humanities and Cultural Heritage<br/>
+                            <p>ACDH OEAW <br/>
+                Austrian Centre for Digital Humanities<br/>
                 Österreichische Akademie der Wissenschaften </p>
                         <p>Bäckerstraße 13, 1010 Wien</p>
                         <p>T: +43 1 51581-2200 <br/>
-                E: <a href="mailto:acdh-ch-helpdesk@oeaw.ac.at">acdh-ch-helpdesk@oeaw.ac.at</a>
+                E: <a href="mailto:acdh-helpdesk@oeaw.ac.at">acdh-helpdesk@oeaw.ac.at</a>
                     </p>
                 </div>
 
@@ -37,9 +37,9 @@
                         <!-- Helpdesk Info -->
                         <div class="col-lg-3 col-md-4 col-sm-6 my-2">
                             <h6 class="font-weight-bold">HELPDESK</h6>
-                            <p>ACDH-CH betreibt einen Helpdesk, an den Sie gerne Ihre Fragen zu Digitalen Geisteswissenschaften stellen dürfen.</p>
+                            <p>ACDH betreibt einen Helpdesk, an den Sie gerne Ihre Fragen zu Digitalen Geisteswissenschaften stellen dürfen.</p>
                             <p>
-                                <a class="helpdesk-button" href="mailto:acdh-ch-helpdesk@oeaw.ac.at">FRAGEN SIE UNS!</a>
+                                <a class="helpdesk-button" href="mailto:acdh-helpdesk@oeaw.ac.at">FRAGEN SIE UNS!</a>
                             </p>
                         </div>
                     </div>
