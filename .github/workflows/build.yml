@@ -34,23 +34,19 @@ jobs:
       TYPESENSE_PROTOCOL: ${{vars.TYPESENSE_PROTOCOL}}
     steps:
     - name: Perform Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
+    - name: install python things
+      run: pip install -r requirements.txt
     - name: Fetch Data
       run: | 
         ./shellscripts/fetch_data.sh
-    - name: Install Saxon, Ant and Python
-      run: |
-        sudo apt-get update && sudo apt-get install openjdk-11-jre-headless ant -y --no-install-recommends
-        ./shellscripts/script.sh
-        pip install -r requirements.txt
     - name: Add attributes to root node and denormalize indices
       run: |
        ./shellscripts/attributes_indices.sh
     - name: OAI-PMH
       run: python oai-pmh/make_files.py
     - name: Build
-      run: |
-        ant
+      run: ant
     - name: Setup Pages
       uses: actions/configure-pages@v5
     - name: Upload artifact

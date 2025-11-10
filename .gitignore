@@ -2,7 +2,6 @@
 *.html
 !search.html
 /html/oai-pmh
-/saxon
 data/imprint.xml
 /static-search
 html/static-search
