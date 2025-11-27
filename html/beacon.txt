@@ -1,2 +1,0 @@
-#FORMAT: BEACON
-#NAME:Sitzungsprotokolle der Österreichischen Akademie der Wissenschaften
