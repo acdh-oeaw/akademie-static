@@ -16,6 +16,11 @@ files = glob.glob("./data/editions/*.xml")
 
 current_schema = {
     "name": "akademie-static",
+    "metadata": {
+        "owners": ["Peter Andorfer", "Kinga Sramó"],
+        "description": "https://github.com/acdh-oeaw/akademie-static",
+        "service_ids": [18716],
+    },
     "fields": [
         {"name": "rec_id", "type": "string"},
         {"name": "title", "type": "string"},
