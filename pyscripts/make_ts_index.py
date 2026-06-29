@@ -175,12 +175,7 @@ for xml_file in tqdm([f for f in files if f not in exclude_files], total=len(fil
                 cfts_records.append(cfts_record)
 
 make_index = client.collections["akademie-static"].documents.import_(records,{"action": "upsert"})
-errors = [msg for msg in make_index if (msg != '"{\\"success\\":true}"' and msg != '""')]
-if errors:
-    for err in errors:
-        print(err)
-else:
-    print("\nno errors")
+print(make_index)
 print("done with indexing Akademieprotokolle")
 
 make_index = CFTS_COLLECTION.documents.import_(cfts_records, {"action": "upsert"})
