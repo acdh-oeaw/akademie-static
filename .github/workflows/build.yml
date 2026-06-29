@@ -34,9 +34,9 @@ jobs:
       TYPESENSE_PROTOCOL: ${{vars.TYPESENSE_PROTOCOL}}
     steps:
     - name: Perform Checkout
-      uses: actions/checkout@v5
-    - name: install python things
-      run: pip install -r requirements.txt
+      uses: actions/checkout@v7
+    - name: set up uv
+      uses: astral-sh/setup-uv@v8.2.0
     - name: Fetch Data
       run: | 
         ./shellscripts/fetch_data.sh
@@ -44,19 +44,20 @@ jobs:
       run: |
        ./shellscripts/attributes_indices.sh
     - name: OAI-PMH
-      run: python oai-pmh/make_files.py
+      run: uv run oai-pmh/make_files.py
+    - name: Setup Typesense
+      run: |
+        uv run ./pyscripts/make_ts_index.py
     - name: Build
       run: ant
     - name: Setup Pages
-      uses: actions/configure-pages@v5
+      uses: actions/configure-pages@v6
     - name: Upload artifact
-      uses: actions/upload-pages-artifact@v3
+      uses: actions/upload-pages-artifact@v5
       with:
         # Upload entire repository
         path: './html'
     - name: Deploy to GitHub Pages
       id: deployment
-      uses: actions/deploy-pages@v4
-    - name: Setup Typesense
-      run: |
-        python ./pyscripts/make_ts_index.py
+      uses: actions/deploy-pages@v5
+    
