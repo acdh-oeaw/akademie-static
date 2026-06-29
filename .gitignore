@@ -147,3 +147,4 @@ desktop.ini
 data/meta/about.xml
 data/meta/arche_constants.rdf
 html/beacon.txt
+secret.env

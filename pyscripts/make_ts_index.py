@@ -1,7 +1,7 @@
 import glob
 import os
 
-from typesense.api_call import ObjectNotFound
+from typesense.exceptions import ObjectNotFound
 
 from acdh_cfts_pyutils import TYPESENSE_CLIENT as client
 from acdh_cfts_pyutils import CFTS_COLLECTION
@@ -19,7 +19,7 @@ current_schema = {
     "metadata": {
         "owners": ["Peter Andorfer", "Kinga Sramó"],
         "description": "https://github.com/acdh-oeaw/akademie-static",
-        "service_ids": [18716],
+        "service_ids": [22891],
     },
     "fields": [
         {"name": "rec_id", "type": "string"},
@@ -183,6 +183,6 @@ else:
     print("\nno errors")
 print("done with indexing Akademieprotokolle")
 
-#make_index = CFTS_COLLECTION.documents.import_(cfts_records, {"action": "upsert"})
-#print(make_index)
-#print("done with cfts-index Akademieprotokolle")
+make_index = CFTS_COLLECTION.documents.import_(cfts_records, {"action": "upsert"})
+print(make_index)
+print("done with cfts-index Akademieprotokolle")
