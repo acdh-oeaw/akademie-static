@@ -1,8 +1,6 @@
 # Akademieprotokolle
 
-
-
-* data is fetched from https://github.com/acdh-oeaw/akademie-data
+* data is fetched from <https://github.com/acdh-oeaw/akademie-data>
 * build with [DSE-Static-Cookiecutter](https://github.com/acdh-oeaw/dse-static-cookiecutter)
 
 # Documentation
@@ -11,14 +9,14 @@
 
 ### `actions/checkout@v4`
 
- - Can be found under the following address [actions/checkout](https://github.com/actions/checkout) with documentation.
- - Checks out the repository into ```$GITHUB_WORKSPACE``` for further processing.
- - Important options are: ```repository: '...'```: the repository to check out; ```path: '...'```: the relative path under ```GITHUB_WORKSPACE``` to place the repository.
+* Can be found under the following address [actions/checkout](https://github.com/actions/checkout) with documentation.
+* Checks out the repository into ```$GITHUB_WORKSPACE``` for further processing.
+* Important options are: ```repository: '...'```: the repository to check out; ```path: '...'```: the relative path under ```GITHUB_WORKSPACE``` to place the repository.
 
 ### `peaceiris/actions-gh-pages@v3`
 
- - Can be found under the following address [peaceiris/actions-gh-pages](https://github.com/peaceiris/actions-gh-pages) with further documentation.
- 
+* Can be found under the following address [peaceiris/actions-gh-pages](https://github.com/peaceiris/actions-gh-pages) with further documentation.
+
 ### Errors and Problems
 
 #### Github Action can not access shellscripts
@@ -31,15 +29,14 @@ Solution: Set permissions on shellscripts (requires a Linux bash or something si
 
 Solution: Add ```sudo``` in front of ```apt``` in ```build.yml```.
 
-
 ## legacy app
-https://akademieprotokolle.acdh.oeaw.ac.at/index.html
+
+<https://akademieprotokolle.acdh.oeaw.ac.at/index.html>
 
 ## Licenses
 
 This project is released under the [MIT License](LICENSE)
 
-
 ### SAXON-HE
-The projects also includes Saxon-HE, which is licensed separately under the Mozilla Public License, Version 2.0 (MPL 2.0). See the dedicated [LICENSE.txt](saxon/notices/LICENSE.txt)
 
+The projects also includes Saxon-HE, which is licensed separately under the Mozilla Public License, Version 2.0 (MPL 2.0). See the dedicated [LICENSE.txt](saxon/notices/LICENSE.txt)
